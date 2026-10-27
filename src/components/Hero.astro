@@ -126,91 +126,157 @@ const { personal } = portfolioData;
           </div>
         </div>
 
-      </div>
-
-      <!-- Right Column: Interactive Developer Terminal / Code Craftsmanship Showcase -->
+      </      <!-- Right Column: Interactive Distributed System Architecture Blueprint -->
       <div class="lg:col-span-5">
-        <div class="relative rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl overflow-hidden backdrop-blur-xl group hover:border-slate-700 transition-all duration-300">
+        <div class="relative rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden backdrop-blur-xl group hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
           
-          <!-- Terminal Header Bar -->
-          <div class="px-4 py-3 bg-slate-950/90 border-b border-slate-800/80 flex items-center justify-between">
+          <!-- Blueprint Header Bar -->
+          <div class="px-4 py-3 bg-slate-50 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-              <span class="ml-2 font-mono text-xs text-slate-400 font-medium">liam@production-cluster:~</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 inline-block"></span>
+              <span class="font-mono text-xs text-slate-700 dark:text-slate-300 font-bold tracking-tight">System Architecture Topology</span>
             </div>
-            <div class="flex items-center gap-1.5 font-mono text-[11px] text-slate-500">
-              <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>LIVE</span>
+            <div class="flex items-center gap-1.5 font-mono text-[10px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-2 py-0.5 rounded-full">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>99.98% SLA LIVE</span>
             </div>
           </div>
 
-          <!-- Terminal Tabs -->
-          <div class="flex border-b border-slate-800 bg-slate-950/40 text-xs font-mono">
-            <button class="terminal-tab px-4 py-2 border-r border-slate-800 text-cyan-400 border-b-2 border-b-cyan-400 bg-slate-900/60 flex items-center gap-1.5" data-tab="tab-spec">
-              <span>developer.json</span>
-            </button>
-            <button class="terminal-tab px-4 py-2 border-r border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 flex items-center gap-1.5" data-tab="tab-ci">
-              <span>ci_pipeline.sh</span>
-            </button>
-            <button class="terminal-tab px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 flex items-center gap-1.5" data-tab="tab-metrics">
-              <span>sla_monitor.log</span>
-            </button>
+          <!-- Interactive Topology Diagram Canvas -->
+          <div class="p-5 space-y-3.5">
+            
+            <!-- Stage 1: Edge & Ingress -->
+            <div 
+              class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-indigo-300 dark:border-slate-800 dark:hover:border-indigo-500/50 transition-all cursor-pointer"
+              data-node="edge"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="p-1 rounded bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs">🌐</span>
+                  <div>
+                    <div class="text-xs font-bold text-slate-800 dark:text-slate-200">Cloudflare Edge & WAF</div>
+                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Global Anycast CDN · SSL/TLS 1.3 · Anti-DDoS</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-100/80 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-semibold">&lt; 15ms</span>
+              </div>
+            </div>
+
+            <!-- Flow Connector 1 -->
+            <div class="flex justify-center -my-1">
+              <div class="w-0.5 h-3 bg-gradient-to-b from-indigo-500 to-cyan-500 opacity-60"></div>
+            </div>
+
+            <!-- Stage 2: Gateway & Microservices Grid -->
+            <div class="grid grid-cols-2 gap-2.5">
+              
+              <!-- Microservice A -->
+              <div 
+                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-cyan-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-cyan-300 dark:border-slate-800 dark:hover:border-cyan-500/50 transition-all cursor-pointer ring-2 ring-indigo-500/20"
+                data-node="lending"
+              >
+                <div class="flex items-center gap-1.5 mb-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Lending Engine</span>
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Java · Spring Boot</div>
+                <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold">
+                  <span>8 Pods (K8s)</span>
+                  <span>99.98% Up</span>
+                </div>
+              </div>
+
+              <!-- Microservice B -->
+              <div 
+                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-cyan-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-cyan-300 dark:border-slate-800 dark:hover:border-cyan-500/50 transition-all cursor-pointer"
+                data-node="event"
+              >
+                <div class="flex items-center gap-1.5 mb-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Event Gateway</span>
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Node.js · NestJS</div>
+                <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                  <span>15k req/sec</span>
+                  <span>Async</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Flow Connector 2 -->
+            <div class="flex justify-center -my-1">
+              <div class="w-0.5 h-3 bg-gradient-to-b from-cyan-500 to-emerald-500 opacity-60"></div>
+            </div>
+
+            <!-- Stage 3: Data Tier (Redis & PostgreSQL) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              
+              <!-- Redis Cache -->
+              <div 
+                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-rose-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-rose-300 dark:border-slate-800 dark:hover:border-rose-500/50 transition-all cursor-pointer"
+                data-node="redis"
+              >
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Redis Cache</span>
+                  <span class="text-[9px] font-mono px-1 py-0.2 bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 rounded">In-Memory</span>
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Cache-Aside · Sliding Rate</div>
+                <div class="mt-1 text-[10px] font-mono font-semibold text-rose-600 dark:text-rose-400">94.6% Hit Ratio · 4ms</div>
+              </div>
+
+              <!-- PostgreSQL -->
+              <div 
+                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-blue-300 dark:border-slate-800 dark:hover:border-blue-500/50 transition-all cursor-pointer"
+                data-node="postgres"
+              >
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">PostgreSQL HA</span>
+                  <span class="text-[9px] font-mono px-1 py-0.2 bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded">ACID</span>
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Read Replicas · Multi-AZ</div>
+                <div class="mt-1 text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400">Zero Data Loss · Idempotent</div>
+              </div>
+
+            </div>
+
+            <!-- Stage 4: Apache Kafka Streaming Banner -->
+            <div 
+              class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-amber-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-amber-300 dark:border-slate-800 dark:hover:border-amber-500/50 transition-all cursor-pointer"
+              data-node="kafka"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs">⚡</span>
+                  <div>
+                    <div class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Apache Kafka Event Bus</div>
+                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Decoupled Pub/Sub · Guaranteed At-Least-Once Delivery</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono font-semibold text-amber-600 dark:text-amber-400">15k msg/s</span>
+              </div>
+            </div>
+
+            <!-- Interactive Node Telemetry Inspector -->
+            <div id="arch-inspector" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 text-xs font-mono transition-all">
+              <div class="flex items-center justify-between text-[11px] font-bold text-indigo-600 dark:text-cyan-400 mb-1" id="inspector-title">
+                <span>Selected: Lending Engine (Core Microservice)</span>
+                <span class="text-[9px] font-normal text-slate-400">Click any component</span>
+              </div>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-normal" id="inspector-desc">
+                Architected in Java 17 & Spring Boot with automated loan decision pipelines, idempotent endpoints, and 140+ Cucumber BDD scenarios preventing duplicate disbursements.
+              </p>
+            </div>
+
           </div>
 
-          <!-- Tab 1: developer.json -->
-          <div id="tab-spec" class="terminal-content p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
-            <pre><code><span class="text-slate-500">// Liam's Engineering Profile</span>
-&#123;
-  <span class="text-cyan-300">"candidate"</span>: <span class="text-emerald-300">"{personal.name}"</span>,
-  <span class="text-cyan-300">"title"</span>: <span class="text-emerald-300">"Senior Full-Stack & Systems"</span>,
-  <span class="text-cyan-300">"experienceYears"</span>: <span class="text-amber-300">5</span>,
-  <span class="text-cyan-300">"coreStrengths"</span>: [
-    <span class="text-indigo-300">"High-Throughput Microservices"</span>,
-    <span class="text-indigo-300">"Scalable React/Next.js/Astro UIs"</span>,
-    <span class="text-indigo-300">"End-to-End Automation & CI/CD"</span>,
-    <span class="text-indigo-300">"Database Tuning & Caching"</span>
-  ],
-  <span class="text-cyan-300">"metrics"</span>: &#123;
-    <span class="text-cyan-300">"productionUptime"</span>: <span class="text-emerald-300">"99.98%"</span>,
-    <span class="text-cyan-300">"p99LatencyReduction"</span>: <span class="text-emerald-300">"45%"</span>,
-    <span class="text-cyan-300">"testCoverageGate"</span>: <span class="text-emerald-300">"Strict BDD"</span>
-  &#125;,
-  <span class="text-cyan-300">"status"</span>: <span class="text-emerald-400">"READY_FOR_NEW_CHALLENGES"</span>
-&#125;</code></pre>
-          </div>
-
-          <!-- Tab 2: ci_pipeline.sh -->
-          <div id="tab-ci" class="terminal-content hidden p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
-            <pre><code><span class="text-slate-500"># Automated Continuous Deployment</span>
-$ git push origin main
-<span class="text-emerald-400">✔</span> Lint & Typecheck passed (0 errors)
-<span class="text-emerald-400">✔</span> Running 140+ Cucumber BDD scenarios...
-<span class="text-emerald-400">✔</span> 100% tests passed in 1m 42s
-<span class="text-emerald-400">✔</span> Docker image built & vulnerability scan clean
-<span class="text-emerald-400">✔</span> Zero-downtime rolling update completed!
-<span class="text-cyan-400">Production ready:</span> <span class="text-amber-300">https://cluster.prod/live</span></code></pre>
-          </div>
-
-          <!-- Tab 3: sla_monitor.log -->
-          <div id="tab-metrics" class="terminal-content hidden p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
-            <pre><code><span class="text-slate-500"># Realtime Production Telemetry</span>
-[08:14:02 UTC] Ingress: 14,280 req/sec
-[08:14:02 UTC] Database Pool: 18ms avg query
-[08:14:03 UTC] Redis Cache Hit Ratio: 94.6%
-[08:14:03 UTC] P99 Latency: 38ms (Target: &lt;100ms)
-[08:14:04 UTC] SLA Compliance: 99.98%
-<span class="text-emerald-400">[HEALTH: EXCELLENT] All subsystems nominal</span></code></pre>
-          </div>
-
-          <!-- Terminal Footer Status -->
-          <div class="px-4 py-2.5 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
-            <span class="text-emerald-400 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Docker · K8s · Redis · Spring · React
+          <!-- Bottom Telemetry Status Strip -->
+          <div class="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
+            <span class="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              P99: 38ms (Target &lt;100ms)
             </span>
-            <span class="text-slate-500">UTF-8</span>
+            <span>Docker · K8s · Spring · Redis · Kafka</span>
           </div>
 
         </div>
@@ -262,26 +328,54 @@ $ git push origin main
 
   typeEffect();
 
-  // Terminal tab switching interactivity
-  const tabs = document.querySelectorAll('.terminal-tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetId = tab.getAttribute('data-tab');
-      if (!targetId) return;
+  // Architecture Blueprint interactive node inspector
+  const nodeData = {
+    edge: {
+      title: "Edge CDN & Web Application Firewall",
+      desc: "Cloudflare global network handles TLS termination, DDOS mitigation, and cache routing within 15ms globally before hitting cloud servers."
+    },
+    lending: {
+      title: "Digital Lending Microservice (Core Engine)",
+      desc: "Java 17 & Spring Boot service executing real-time identity checks and loan appraisal algorithms with 99.98% production availability."
+    },
+    event: {
+      title: "Distributed Event Gateway",
+      desc: "Node.js & NestJS gateway handling high-concurrency event ingestion (15,000 req/sec) with sliding-window Redis rate limiting."
+    },
+    redis: {
+      title: "Redis In-Memory Distributed Cache",
+      desc: "Sub-millisecond query cache layer achieving 94.6% hit ratio, reducing upstream database load and cutting peak API latency by 45%."
+    },
+    postgres: {
+      title: "PostgreSQL High-Availability Cluster",
+      desc: "Primary-replica multi-AZ database enforcing ACID compliance, transaction idempotency, and automated point-in-time recovery."
+    },
+    kafka: {
+      title: "Apache Kafka Streaming Event Hub",
+      desc: "Decoupled asynchronous event broker orchestrating loan status webhooks, notification streams, and analytical pipelines with zero message loss."
+    }
+  };
 
-      // Update tab styles
-      tabs.forEach(t => {
-        t.classList.remove('text-cyan-400', 'border-b-2', 'border-b-cyan-400', 'bg-slate-900/60');
-        t.classList.add('text-slate-400');
-      });
-      tab.classList.remove('text-slate-400');
-      tab.classList.add('text-cyan-400', 'border-b-2', 'border-b-cyan-400', 'bg-slate-900/60');
+  const archNodes = document.querySelectorAll('.arch-node');
+  const inspectorTitle = document.getElementById('inspector-title');
+  const inspectorDesc = document.getElementById('inspector-desc');
 
-      // Update tab content
-      document.querySelectorAll('.terminal-content').forEach(content => {
-        content.classList.add('hidden');
-      });
-      document.getElementById(targetId)?.classList.remove('hidden');
+  archNodes.forEach(node => {
+    node.addEventListener('click', () => {
+      const key = node.getAttribute('data-node');
+      if (!key || !nodeData[key as keyof typeof nodeData]) return;
+
+      // Update active ring
+      archNodes.forEach(n => n.classList.remove('ring-2', 'ring-indigo-500'));
+      node.classList.add('ring-2', 'ring-indigo-500');
+
+      // Update inspector text
+      if (inspectorTitle) {
+        inspectorTitle.innerHTML = `<span>Selected: ${nodeData[key as keyof typeof nodeData].title}</span><span class="text-[9px] font-normal text-slate-400">Active</span>`;
+      }
+      if (inspectorDesc) {
+        inspectorDesc.textContent = nodeData[key as keyof typeof nodeData].desc;
+      }
     });
   });
 </script>
