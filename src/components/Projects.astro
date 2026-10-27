@@ -1,0 +1,190 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { projects } = portfolioData;
+const categories = ['All', 'Full-Stack', 'Backend & Cloud', 'Frontend', 'Architecture & Testing'];
+---
+
+<section id="projects" class="py-20 relative bg-slate-950/60 border-t border-slate-800/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono font-medium text-cyan-400">
+          <span>Production Workloads</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 dark:text-slate-100 tracking-tight">
+          Featured <span class="text-gradient">Architectures & Projects</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 dark:text-slate-400 max-w-xl">
+          Real-world systems delivering high availability, low latency, and tangible ROI across banking, distributed systems, and modern SaaS.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 self-start md:self-auto">
+        {categories.map((cat, idx) => (
+          <button 
+            class={`project-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              idx === 0 
+                ? 'bg-indigo-600 text-white shadow-sm active-filter' 
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            }`}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+      {projects.map((project) => (
+        <article 
+          class="project-card rounded-2xl bg-slate-900/80 border border-slate-800/90 overflow-hidden shadow-xl hover:border-slate-700 transition-all duration-300 flex flex-col group"
+          data-category={project.category}
+        >
+          <!-- Project Visual Banner -->
+          <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-950">
+            {project.image ? (
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-full h-full bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 flex items-center justify-center">
+                <span class="font-mono text-slate-700 text-4xl">System Architecture</span>
+              </div>
+            )}
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+
+            <!-- Top Overlay: Category Badge & Impact Metric -->
+            <div class="absolute top-4 left-4 right-4 flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-slate-950/80 backdrop-blur-md text-cyan-300 border border-cyan-500/30 shadow-md">
+                {project.category}
+              </span>
+              
+              <span class="px-3 py-1 rounded-full text-xs font-bold font-mono bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 backdrop-blur-md shadow-lg shadow-amber-500/10 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                </svg>
+                <span>{project.impactMetric}</span>
+              </span>
+            </div>
+
+            <!-- Bottom Overlay: Title -->
+            <div class="absolute bottom-4 left-4 right-4">
+              <h3 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors drop-shadow-md">
+                {project.title}
+              </h3>
+              <p class="text-xs text-slate-300 line-clamp-1 mt-0.5">
+                {project.subtitle}
+              </p>
+            </div>
+          </div>
+
+          <!-- Project Body -->
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6">
+            
+            <!-- Description -->
+            <p class="text-sm text-slate-300 leading-relaxed">
+              {project.description}
+            </p>
+
+            <!-- Key Architectural Highlights (Star format) -->
+            <div class="space-y-2 pt-2 border-t border-slate-800/80">
+              <div class="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
+                Key Accomplishments & Architecture:
+              </div>
+              <ul class="space-y-1.5">
+                {project.highlights.map(hl => (
+                  <li class="flex items-start gap-2 text-xs text-slate-300">
+                    <span class="text-emerald-400 mt-0.5 font-bold">✓</span>
+                    <span>{hl}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Tech Stack Chips -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              {project.technologies.map(tech => (
+                <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800/80 text-slate-300 border border-slate-700/60">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <!-- Action Links -->
+            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              {project.githubUrl && (
+                <a 
+                  href={project.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+                >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                  <span>Repository</span>
+                </a>
+              )}
+
+              {project.liveUrl && (
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-300 hover:text-white bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 transition-all ml-auto"
+                >
+                  <span>Architecture Details</span>
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
+            </div>
+
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Project category interactive filtering
+  const filterBtns = document.querySelectorAll('.project-filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedCategory = btn.getAttribute('data-category');
+
+      // Update button styling
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm', 'active-filter');
+        b.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+      });
+      btn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+      btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm', 'active-filter');
+
+      // Filter cards
+      projectCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'All' || cardCategory === selectedCategory) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

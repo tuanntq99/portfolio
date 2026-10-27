@@ -1,0 +1,100 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { personal } = portfolioData;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-800/80 bg-slate-950 py-12 text-slate-400 text-xs font-mono relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <!-- Left: Identity & Tech -->
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <div class="flex items-center gap-2 text-slate-200 font-bold text-sm">
+          <span>{personal.name}</span>
+          <span class="text-slate-600">/</span>
+          <span class="text-indigo-400 text-xs">{personal.role}</span>
+        </div>
+        <p class="text-slate-500 text-[11px]">
+          Designed with Astro, TypeScript & Tailwind CSS. Hosted statically on GitHub Pages.
+        </p>
+      </div>
+
+      <!-- Center: Social Links -->
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">
+          GitHub
+        </a>
+        <span class="text-slate-700">•</span>
+        <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">
+          LinkedIn
+        </a>
+        {personal.socials.telegram && (
+          <>
+            <span class="text-slate-700">•</span>
+            <a href={personal.socials.telegram} target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">
+              Telegram
+            </a>
+          </>
+        )}
+        <span class="text-slate-700">•</span>
+        <a href={`mailto:${personal.email}`} class="hover:text-cyan-400 transition-colors">
+          Email
+        </a>
+      </div>
+
+      <!-- Right: Back to Top & Time -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-1.5 text-slate-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span id="footer-time">Hanoi (UTC+7)</span>
+        </div>
+
+        <button 
+          id="back-to-top"
+          aria-label="Back to top"
+          class="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all hover:-translate-y-0.5"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-8 pt-6 border-t border-slate-900 text-center text-slate-600 text-[11px]">
+      © {currentYear} {personal.name}. All rights reserved. Open-source architecture.
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll back to top
+  const backToTopBtn = document.getElementById('back-to-top');
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Display current local time in Hanoi (UTC+7)
+  const timeEl = document.getElementById('footer-time');
+  if (timeEl) {
+    const updateTime = () => {
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      };
+      const formatter = new Intl.DateTimeFormat([], options);
+      timeEl.textContent = `Hanoi ${formatter.format(new Date())}`;
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+// Theme script loaded inline in <head> to prevent FOUC (Flash of Unstyled Content)
+---
+
+<script is:inline>
+  const applyTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Default to dark mode if not specified, because developer aesthetics shine best in dark
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark) || !savedTheme) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
+  applyTheme();
+
+  // Re-run on Astro view transitions / page swaps if enabled
+  document.addEventListener('astro:after-swap', applyTheme);
+</script>

@@ -1,0 +1,69 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { testimonials } = portfolioData;
+---
+
+<section id="testimonials" class="py-20 relative bg-slate-900/30 border-y border-slate-800/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-mono font-medium text-violet-400">
+        <span>Social Proof</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 dark:text-slate-100 tracking-tight">
+        Peer & Leadership <span class="text-gradient-purple">Endorsements</span>
+      </h2>
+      <p class="text-sm sm:text-base text-slate-400 dark:text-slate-400">
+        Feedback from engineering directors and product leads who have evaluated my code, architecture, and delivery speed.
+      </p>
+    </div>
+
+    <!-- Testimonials 2-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {testimonials.map((t) => (
+        <div class="relative rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 shadow-xl backdrop-blur-md flex flex-col justify-between hover:border-slate-700 transition-all duration-300 group">
+          
+          <!-- Large Decorative Quote Symbol -->
+          <div class="text-4xl font-serif text-indigo-500/30 font-bold mb-4">“</div>
+
+          <!-- Quote Content -->
+          <p class="text-sm sm:text-base text-slate-200 dark:text-slate-200 leading-relaxed italic mb-8">
+            "{t.quote}"
+          </p>
+
+          <!-- Author Info -->
+          <div class="flex items-center gap-4 pt-4 border-t border-slate-800/80">
+            {t.avatar ? (
+              <img 
+                src={t.avatar} 
+                alt={t.name} 
+                class="w-12 h-12 rounded-full object-cover border-2 border-indigo-500/40"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-12 h-12 rounded-full bg-indigo-950 border border-indigo-500/30 flex items-center justify-center font-bold text-indigo-400 font-mono text-sm">
+                {t.name.split(' ').map(n => n[0]).join('')}
+              </div>
+            )}
+            
+            <div>
+              <div class="text-base font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">
+                {t.name}
+              </div>
+              <div class="text-xs text-slate-400">
+                {t.role} · <span class="text-indigo-400">{t.company}</span>
+              </div>
+              <div class="text-[11px] font-mono text-slate-500 mt-0.5">
+                {t.relationship}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

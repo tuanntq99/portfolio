@@ -1,0 +1,64 @@
+---
+import { portfolioData } from '../data/portfolio';
+import ThemeScript from '../components/ThemeScript.astro';
+import { withBase } from '../utils/path';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { siteMetadata, personal } = portfolioData;
+
+const { 
+  title = siteMetadata.title, 
+  description = siteMetadata.description, 
+  ogImage = siteMetadata.ogImage 
+} = Astro.props;
+
+const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(withBase(ogImage), Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content={personal.name} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullOgImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>" />
+
+    <title>{title}</title>
+
+    <!-- Theme Initialization Script -->
+    <ThemeScript />
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen relative selection:bg-indigo-500 selection:text-white">
+    <!-- Cybernetic grid background -->
+    <div class="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <slot />
+    </div>
+  </body>
+</html>

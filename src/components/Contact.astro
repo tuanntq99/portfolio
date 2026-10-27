@@ -1,0 +1,110 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { personal } = portfolioData;
+---
+
+<section id="contact" class="py-24 relative overflow-hidden">
+  <!-- Ambient background glow -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Big Headline CTA Card -->
+    <div class="rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800 p-8 sm:p-12 md:p-16 text-center space-y-8 shadow-2xl backdrop-blur-xl relative">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono font-medium text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Let's Build Something High-Impact</span>
+      </div>
+
+      <!-- Main Heading -->
+      <div class="space-y-4 max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-100 dark:text-slate-100 tracking-tight leading-tight">
+          Ready to elevate your <span class="text-gradient">engineering velocity</span>?
+        </h2>
+        <p class="text-sm sm:text-base text-slate-300 dark:text-slate-300 leading-relaxed">
+          I am currently open to senior full-stack, distributed backend, or technical lead opportunities. Whether you have a specific role in mind or just want to discuss system architecture, let's connect.
+        </p>
+      </div>
+
+      <!-- Email Action Strip -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
+        
+        <!-- Interactive Copy Email Button -->
+        <button 
+          id="copy-email-btn"
+          data-email={personal.email}
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-200 bg-slate-950/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all duration-200 flex items-center justify-center gap-2 shadow-inner group"
+        >
+          <svg class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copy-text">{personal.email}</span>
+        </button>
+
+        <!-- Direct Email Link -->
+        <a 
+          href={`mailto:${personal.email}?subject=Exciting%20Opportunity%20at%20[Company]%20for%20Liam`}
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:scale-[1.02] flex items-center justify-center gap-2"
+        >
+          <span>Send Direct Message</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+
+      </div>
+
+      <!-- Copied Feedback Toast -->
+      <div id="copy-toast" class="hidden font-mono text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg inline-block animate-fade-in">
+        ✓ Email copied to clipboard!
+      </div>
+
+      <!-- Quick Metrics Strip for Recruiters -->
+      <div class="pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-slate-400">
+        <div>
+          <span class="text-slate-500">Location:</span> {personal.location}
+        </div>
+        <div>
+          <span class="text-slate-500">Notice Period:</span> Available Immediately / 2 Weeks
+        </div>
+        <div>
+          <span class="text-slate-500">Average Response:</span> &lt; 12 Hours
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Copy email to clipboard with instant feedback
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyToast = document.getElementById('copy-toast');
+  const copyText = document.getElementById('copy-text');
+
+  copyBtn?.addEventListener('click', async () => {
+    const email = copyBtn.getAttribute('data-email') || '';
+    try {
+      await navigator.clipboard.writeText(email);
+      if (copyToast) {
+        copyToast.classList.remove('hidden');
+        setTimeout(() => {
+          copyToast.classList.add('hidden');
+        }, 3000);
+      }
+      if (copyText) {
+        const originalText = copyText.textContent;
+        copyText.textContent = "Copied! ✓";
+        setTimeout(() => {
+          copyText.textContent = originalText;
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
+  });
+</script>

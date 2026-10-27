@@ -1,0 +1,287 @@
+---
+import { portfolioData } from '../data/portfolio';
+import { withBase } from '../utils/path';
+
+const { personal } = portfolioData;
+---
+
+<section id="overview" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+  <!-- Ambient background glow spots -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Elevator Pitch & CTAs -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Developer Avatar & Seniority Pill -->
+        <div class="flex items-center gap-4">
+          <div class="relative group shrink-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 p-[2px] shadow-lg shadow-indigo-500/25 group-hover:shadow-indigo-500/40 transition-all duration-300">
+              <img 
+                src={withBase(personal.avatarUrl)} 
+                alt={personal.name} 
+                class="w-full h-full object-cover rounded-[14px]"
+                loading="eager"
+              />
+            </div>
+            <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-slate-950"></span>
+            </span>
+          </div>
+          
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 dark:bg-slate-900/90 border border-indigo-500/30 text-xs font-medium text-slate-300 shadow-sm shadow-indigo-500/10">
+              <span class="text-emerald-400 font-semibold">{personal.availabilityText}</span>
+              <span class="text-slate-600">|</span>
+              <span class="text-slate-400">{personal.location}</span>
+            </div>
+            <div class="text-xs font-mono text-slate-400">
+              Direct: <a href={`mailto:${personal.email}`} class="text-cyan-400 hover:underline">{personal.email}</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Title & Typographic Hook -->
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 dark:text-slate-100 leading-[1.15]">
+            Architecting <span class="text-gradient">resilient systems</span> & high-impact products.
+          </h1>
+          <div class="h-8 sm:h-9 flex items-center">
+            <span class="text-lg sm:text-xl font-mono text-cyan-400 font-semibold" id="typewriter-text">
+              Senior Full-Stack Software Engineer
+            </span>
+            <span class="inline-block w-2 h-5 ml-1 bg-cyan-400 animate-pulse"></span>
+          </div>
+        </div>
+
+        <!-- Elevator Pitch / Bio -->
+        <p class="text-base sm:text-lg text-slate-300 dark:text-slate-300 leading-relaxed max-w-2xl">
+          {personal.bio}
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="pt-2 flex flex-wrap items-center gap-4">
+          <a 
+            href="#projects" 
+            class="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-[1.02] flex items-center gap-2"
+          >
+            <span>Explore Featured Projects</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+
+          <a 
+            href="#contact" 
+            class="px-6 py-3 rounded-xl font-semibold text-sm text-slate-200 hover:text-white bg-slate-900/90 dark:bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 transition-all duration-300 hover:border-slate-600 flex items-center gap-2"
+          >
+            <span>Contact Liam</span>
+            <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </a>
+
+          <a 
+            href={personal.socials.github} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="GitHub Profile" 
+            class="p-3 rounded-xl text-slate-400 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-800 transition-colors"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+
+          <a 
+            href={personal.socials.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="LinkedIn Profile" 
+            class="p-3 rounded-xl text-slate-400 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-800 transition-colors"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Recruiter Quick Summary Badges -->
+        <div class="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400 font-mono">
+          <div class="flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span>
+            <span>Clean Architecture & DDD</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-cyan-400">✓</span>
+            <span>99.98% SLA Delivery</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-indigo-400">✓</span>
+            <span>Automated CI/CD Quality Gates</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Developer Terminal / Code Craftsmanship Showcase -->
+      <div class="lg:col-span-5">
+        <div class="relative rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl overflow-hidden backdrop-blur-xl group hover:border-slate-700 transition-all duration-300">
+          
+          <!-- Terminal Header Bar -->
+          <div class="px-4 py-3 bg-slate-950/90 border-b border-slate-800/80 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+              <span class="ml-2 font-mono text-xs text-slate-400 font-medium">liam@production-cluster:~</span>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono text-[11px] text-slate-500">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>LIVE</span>
+            </div>
+          </div>
+
+          <!-- Terminal Tabs -->
+          <div class="flex border-b border-slate-800 bg-slate-950/40 text-xs font-mono">
+            <button class="terminal-tab px-4 py-2 border-r border-slate-800 text-cyan-400 border-b-2 border-b-cyan-400 bg-slate-900/60 flex items-center gap-1.5" data-tab="tab-spec">
+              <span>developer.json</span>
+            </button>
+            <button class="terminal-tab px-4 py-2 border-r border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 flex items-center gap-1.5" data-tab="tab-ci">
+              <span>ci_pipeline.sh</span>
+            </button>
+            <button class="terminal-tab px-4 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 flex items-center gap-1.5" data-tab="tab-metrics">
+              <span>sla_monitor.log</span>
+            </button>
+          </div>
+
+          <!-- Tab 1: developer.json -->
+          <div id="tab-spec" class="terminal-content p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+            <pre><code><span class="text-slate-500">// Liam's Engineering Profile</span>
+&#123;
+  <span class="text-cyan-300">"candidate"</span>: <span class="text-emerald-300">"{personal.name}"</span>,
+  <span class="text-cyan-300">"title"</span>: <span class="text-emerald-300">"Senior Full-Stack & Systems"</span>,
+  <span class="text-cyan-300">"experienceYears"</span>: <span class="text-amber-300">5</span>,
+  <span class="text-cyan-300">"coreStrengths"</span>: [
+    <span class="text-indigo-300">"High-Throughput Microservices"</span>,
+    <span class="text-indigo-300">"Scalable React/Next.js/Astro UIs"</span>,
+    <span class="text-indigo-300">"End-to-End Automation & CI/CD"</span>,
+    <span class="text-indigo-300">"Database Tuning & Caching"</span>
+  ],
+  <span class="text-cyan-300">"metrics"</span>: &#123;
+    <span class="text-cyan-300">"productionUptime"</span>: <span class="text-emerald-300">"99.98%"</span>,
+    <span class="text-cyan-300">"p99LatencyReduction"</span>: <span class="text-emerald-300">"45%"</span>,
+    <span class="text-cyan-300">"testCoverageGate"</span>: <span class="text-emerald-300">"Strict BDD"</span>
+  &#125;,
+  <span class="text-cyan-300">"status"</span>: <span class="text-emerald-400">"READY_FOR_NEW_CHALLENGES"</span>
+&#125;</code></pre>
+          </div>
+
+          <!-- Tab 2: ci_pipeline.sh -->
+          <div id="tab-ci" class="terminal-content hidden p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+            <pre><code><span class="text-slate-500"># Automated Continuous Deployment</span>
+$ git push origin main
+<span class="text-emerald-400">✔</span> Lint & Typecheck passed (0 errors)
+<span class="text-emerald-400">✔</span> Running 140+ Cucumber BDD scenarios...
+<span class="text-emerald-400">✔</span> 100% tests passed in 1m 42s
+<span class="text-emerald-400">✔</span> Docker image built & vulnerability scan clean
+<span class="text-emerald-400">✔</span> Zero-downtime rolling update completed!
+<span class="text-cyan-400">Production ready:</span> <span class="text-amber-300">https://cluster.prod/live</span></code></pre>
+          </div>
+
+          <!-- Tab 3: sla_monitor.log -->
+          <div id="tab-metrics" class="terminal-content hidden p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+            <pre><code><span class="text-slate-500"># Realtime Production Telemetry</span>
+[08:14:02 UTC] Ingress: 14,280 req/sec
+[08:14:02 UTC] Database Pool: 18ms avg query
+[08:14:03 UTC] Redis Cache Hit Ratio: 94.6%
+[08:14:03 UTC] P99 Latency: 38ms (Target: &lt;100ms)
+[08:14:04 UTC] SLA Compliance: 99.98%
+<span class="text-emerald-400">[HEALTH: EXCELLENT] All subsystems nominal</span></code></pre>
+          </div>
+
+          <!-- Terminal Footer Status -->
+          <div class="px-4 py-2.5 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span class="text-emerald-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Docker · K8s · Redis · Spring · React
+            </span>
+            <span class="text-slate-500">UTF-8</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Dynamic typewriter text effect for multiple titles
+  const roles = [
+    "Senior Full-Stack Software Engineer",
+    "Cloud & Distributed Systems Specialist",
+    "Performance & Scalability Enthusiast",
+    "Automated Quality Engineering Champion"
+  ];
+  
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typewriterElement = document.getElementById('typewriter-text');
+
+  function typeEffect() {
+    if (!typewriterElement) return;
+    const currentRole = roles[roleIndex];
+
+    if (isDeleting) {
+      typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? 30 : 65;
+
+    if (!isDeleting && charIndex === currentRole.length) {
+      typeSpeed = 2200; // Pause at end of text
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      typeSpeed = 400; // Short pause before next word
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+  }
+
+  typeEffect();
+
+  // Terminal tab switching interactivity
+  const tabs = document.querySelectorAll('.terminal-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-tab');
+      if (!targetId) return;
+
+      // Update tab styles
+      tabs.forEach(t => {
+        t.classList.remove('text-cyan-400', 'border-b-2', 'border-b-cyan-400', 'bg-slate-900/60');
+        t.classList.add('text-slate-400');
+      });
+      tab.classList.remove('text-slate-400');
+      tab.classList.add('text-cyan-400', 'border-b-2', 'border-b-cyan-400', 'bg-slate-900/60');
+
+      // Update tab content
+      document.querySelectorAll('.terminal-content').forEach(content => {
+        content.classList.add('hidden');
+      });
+      document.getElementById(targetId)?.classList.remove('hidden');
+    });
+  });
+</script>

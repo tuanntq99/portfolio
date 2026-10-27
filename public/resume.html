@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liam Nguyen - Resume / Curriculum Vitae</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 p-4 sm:p-10 font-sans leading-relaxed">
+  <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 shadow-xl rounded-2xl border border-slate-200">
+    
+    <!-- Print / Back Toolbar -->
+    <div class="no-print flex justify-between items-center mb-8 pb-4 border-b border-slate-200">
+      <a href="./" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm flex items-center gap-1">
+        ← Back to Portfolio
+      </a>
+      <button onclick="window.print()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold shadow">
+        Print / Save as PDF 🖨️
+      </button>
+    </div>
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b-2 border-slate-900">
+      <div>
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Liam Nguyen</h1>
+        <p class="text-lg font-semibold text-indigo-600 mt-0.5">Senior Full-Stack Software Engineer</p>
+        <p class="text-xs text-slate-500 mt-1">Hanoi, Vietnam · Remote Worldwide · tuanntq99@gmail.com</p>
+      </div>
+      <div class="text-xs font-mono text-slate-600 sm:text-right space-y-1">
+        <div>GitHub: <a href="https://github.com/tuanntq99" class="text-indigo-600 underline">github.com/tuanntq99</a></div>
+        <div>LinkedIn: <a href="https://linkedin.com/in/tuanntq99" class="text-indigo-600 underline">linkedin.com/in/tuanntq99</a></div>
+        <div>Status: Available for Opportunities</div>
+      </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="my-6">
+      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Executive Summary</h2>
+      <p class="text-sm text-slate-700 leading-normal">
+        Results-driven Senior Software Engineer with 5+ years of full-lifecycle engineering experience spanning high-throughput backend services, distributed systems, responsive modern frontends, and mission-critical automated verification. Proven track record delivering 99.98% uptime in digital banking, cutting API latencies by 45%, and architecting automated BDD CI/CD pipelines.
+      </p>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="my-6">
+      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Technical Skills & Competencies</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        <div><strong class="text-slate-900">Frontend:</strong> TypeScript, React, Next.js, Astro, Tailwind CSS, Vue, Redux/Zustand</div>
+        <div><strong class="text-slate-900">Backend:</strong> Java, Spring Boot, Node.js, Express, NestJS, REST, GraphQL, Microservices</div>
+        <div><strong class="text-slate-900">Databases & Cache:</strong> PostgreSQL, MySQL, Redis, MongoDB, Kafka, ElasticSearch</div>
+        <div><strong class="text-slate-900">Cloud & DevOps:</strong> Docker, Kubernetes, AWS (S3, EC2, Lambda), GitHub Actions, CI/CD, Nginx</div>
+        <div><strong class="text-slate-900">Quality & Testing:</strong> Selenium, Playwright, Cucumber BDD, Serenity BDD, JUnit, Jest</div>
+        <div><strong class="text-slate-900">Methodologies:</strong> Clean Architecture, Domain-Driven Design (DDD), Agile/Scrum, Code Review</div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="my-6 space-y-5">
+      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">Professional Experience</h2>
+
+      <div>
+        <div class="flex justify-between items-baseline">
+          <h3 class="text-base font-bold text-slate-900">Senior Full-Stack & Systems Engineer</h3>
+          <span class="text-xs font-mono text-slate-500">2023 – Present</span>
+        </div>
+        <div class="text-xs font-medium text-indigo-600 mb-1.5">Leading Financial Technology & Banking Group · Hanoi, Vietnam</div>
+        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
+          <li>Architected and shipped core digital lending microservices handling high transaction volumes with 99.98% production uptime.</li>
+          <li>Refactored query execution plans and implemented Redis cache-aside strategies, reducing peak API latency by 45%.</li>
+          <li>Implemented automated BDD test suites covering 140+ critical banking scenarios, reducing manual regression cycles by 70%.</li>
+          <li>Ensured compliance with national banking regulatory requirements and bank security standards.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="flex justify-between items-baseline">
+          <h3 class="text-base font-bold text-slate-900">Full-Stack Software Engineer</h3>
+          <span class="text-xs font-mono text-slate-500">2021 – 2023</span>
+        </div>
+        <div class="text-xs font-medium text-indigo-600 mb-1.5">Digital Solutions & Cloud Innovation Co. · Hanoi, Vietnam</div>
+        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
+          <li>Engineered scalable customer-facing web applications using React, Next.js, and Node.js serving 200,000+ monthly active users.</li>
+          <li>Designed unified design system with Tailwind CSS, reducing frontend development turnaround time by 40%.</li>
+          <li>Containerized deployment environments using Docker and GitHub Actions, lowering release failure rate below 1%.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="flex justify-between items-baseline">
+          <h3 class="text-base font-bold text-slate-900">Software Engineer (Web & Automation)</h3>
+          <span class="text-xs font-mono text-slate-500">2019 – 2021</span>
+        </div>
+        <div class="text-xs font-medium text-indigo-600 mb-1.5">Tech Pioneer Labs · Hanoi, Vietnam</div>
+        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
+          <li>Developed high-traffic e-commerce storefronts and backend REST APIs with payment integrations.</li>
+          <li>Instituted automated unit and integration tests, elevating codebase test coverage from 42% to 88%.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education & Certifications -->
+    <div class="my-6 pt-4 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Education</h2>
+        <div class="text-xs font-bold text-slate-900">Bachelor of Science in Software Engineering</div>
+        <div class="text-xs text-slate-600">Top Technology University · High Honors (Top 5%)</div>
+      </div>
+      <div>
+        <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Certifications</h2>
+        <div class="text-xs text-slate-800 space-y-1">
+          <div>• AWS Certified Solutions Architect – Associate</div>
+          <div>• CKAD: Certified Kubernetes Application Developer</div>
+          <div>• Professional Scrum Master (PSM I)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
