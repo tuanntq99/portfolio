@@ -3,133 +3,269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liam Nguyen - Resume / Curriculum Vitae</title>
+  <title>Ngo Tran Quoc Tuan - Java Backend Developer - CV</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    @page {
+      size: A4;
+      margin: 14mm 16mm;
+    }
     @media print {
-      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-      .no-print { display: none; }
+      body {
+        background: white !important;
+        padding: 0 !important;
+        font-size: 10.5pt;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .cv-container {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .page-break-before {
+        page-break-before: always;
+      }
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 p-4 sm:p-10 font-sans leading-relaxed">
-  <!-- 
-    =======================================================================
-    PRINTABLE CV / RESUME TEMPLATE
-    =======================================================================
-    - Edit the HTML text in this file to update your printable resume.
-    - Tip: Keep the text aligned with src/data/portfolio.ts for consistency.
-    - Print / Save as PDF: Click the "Print / Save as PDF" button or press Ctrl+P.
-    =======================================================================
-  -->
-  <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 shadow-xl rounded-2xl border border-slate-200">
+<body class="bg-slate-100 text-neutral-900 py-8 px-4 font-sans leading-normal">
+
+  <!-- Printable CV Container -->
+  <div class="cv-container max-w-4xl mx-auto bg-white p-8 sm:p-12 shadow-xl rounded-xl border border-slate-200">
     
-    <!-- Print / Back Toolbar -->
-    <div class="no-print flex justify-between items-center mb-8 pb-4 border-b border-slate-200">
-      <a href="./" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm flex items-center gap-1">
-        ← Back to Portfolio
+    <!-- Action / Navigation Toolbar (Hidden in Print) -->
+    <div class="no-print flex flex-wrap justify-between items-center gap-3 mb-8 pb-4 border-b border-slate-200">
+      <a href="./" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm flex items-center gap-1.5 transition-colors">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Back to Portfolio</span>
       </a>
-      <button onclick="window.print()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold shadow">
-        Print / Save as PDF 🖨️
-      </button>
+
+      <div class="flex items-center gap-3">
+        <a 
+          href="./Ngo_Tran_Quoc_Tuan_CV.pdf" 
+          download="Ngo_Tran_Quoc_Tuan_CV.pdf" 
+          class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold shadow flex items-center gap-1.5 transition-all"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Download PDF</span>
+        </a>
+
+        <button 
+          onclick="window.print()" 
+          class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-semibold shadow flex items-center gap-1.5 transition-all"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span>Print / Save as PDF</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b-2 border-slate-900">
-      <div>
-        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Liam Nguyen</h1>
-        <p class="text-lg font-semibold text-indigo-600 mt-0.5">Senior Full-Stack Software Engineer</p>
-        <p class="text-xs text-slate-500 mt-1">Hanoi, Vietnam · Remote Worldwide · tuanntq99@gmail.com</p>
-      </div>
-      <div class="text-xs font-mono text-slate-600 sm:text-right space-y-1">
-        <div>GitHub: <a href="https://github.com/tuanntq99" class="text-indigo-600 underline">github.com/tuanntq99</a></div>
-        <div>LinkedIn: <a href="https://linkedin.com/in/tuanntq99" class="text-indigo-600 underline">linkedin.com/in/tuanntq99</a></div>
-        <div>Status: Available for Opportunities</div>
-      </div>
-    </div>
+    <!-- CV Header -->
+    <header class="text-center pb-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-black mb-2">
+        Ngo Tran Quoc Tuan
+      </h1>
 
-    <!-- Executive Summary -->
-    <div class="my-6">
-      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Executive Summary</h2>
-      <p class="text-sm text-slate-700 leading-normal">
-        Results-driven Senior Software Engineer with 5+ years of full-lifecycle engineering experience spanning high-throughput backend services, distributed systems, responsive modern frontends, and mission-critical automated verification. Proven track record delivering 99.98% uptime in digital banking, cutting API latencies by 45%, and architecting automated BDD CI/CD pipelines.
+      <div class="text-xs sm:text-sm text-neutral-800 flex flex-wrap justify-center items-center gap-x-2 gap-y-1">
+        <span>Ha Noi, Viet Nam</span>
+        <span class="text-neutral-400">|</span>
+        <a href="tel:+84979137027" class="hover:underline">+84 979 137 027</a>
+        <span class="text-neutral-400">|</span>
+        <a href="https://linkedin.com/in/tuanntq" target="_blank" rel="noopener noreferrer" class="hover:underline">linkedin.com/in/tuanntq</a>
+        <span class="text-neutral-400">|</span>
+        <a href="mailto:tuanhd131@gmail.com" class="hover:underline">tuanhd131@gmail.com</a>
+        <span class="text-neutral-400">|</span>
+        <a href="https://facebook.com/tuanntq99/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/tuanntq99/</a>
+      </div>
+
+      <hr class="border-t border-neutral-900 mt-4 mb-3">
+
+      <!-- Professional Summary -->
+      <p class="text-justify text-xs sm:text-[13px] text-neutral-800 leading-relaxed">
+        Java Backend Developer with over 2 years of experience, including 1 year contributing to enterprise tax payment systems integrated with a major bank. Experienced in developing secure, high-availability, and transaction-sensitive applications ensuring data integrity and compliance. Skilled in Spring Boot, Spring Security, and backend system optimization.
       </p>
-    </div>
+    </header>
 
-    <!-- Core Competencies -->
-    <div class="my-6">
-      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Technical Skills & Competencies</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-        <div><strong class="text-slate-900">Frontend:</strong> TypeScript, React, Next.js, Astro, Tailwind CSS, Vue, Redux/Zustand</div>
-        <div><strong class="text-slate-900">Backend:</strong> Java, Spring Boot, Node.js, Express, NestJS, REST, GraphQL, Microservices</div>
-        <div><strong class="text-slate-900">Databases & Cache:</strong> PostgreSQL, MySQL, Redis, MongoDB, Kafka, ElasticSearch</div>
-        <div><strong class="text-slate-900">Cloud & DevOps:</strong> Docker, Kubernetes, AWS (S3, EC2, Lambda), GitHub Actions, CI/CD, Nginx</div>
-        <div><strong class="text-slate-900">Quality & Testing:</strong> Selenium, Playwright, Cucumber BDD, Serenity BDD, JUnit, Jest</div>
-        <div><strong class="text-slate-900">Methodologies:</strong> Clean Architecture, Domain-Driven Design (DDD), Agile/Scrum, Code Review</div>
+    <!-- SECTION: SKILLS -->
+    <section class="mt-4">
+      <div class="border-b border-neutral-900 pb-0.5 mb-2">
+        <h2 class="text-sm font-bold tracking-wider text-black uppercase">SKILLS</h2>
       </div>
-    </div>
 
-    <!-- Work Experience -->
-    <div class="my-6 space-y-5">
-      <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">Professional Experience</h2>
+      <div class="text-xs sm:text-[13px] text-neutral-900 space-y-1 leading-normal">
+        <div><span class="font-bold">Backend:</span> Java, Apache Kafka</div>
+        <div><span class="font-bold">Frameworks:</span> Spring Boot, Hibernate</div>
+        <div><span class="font-bold">Cloud &amp; DevOps:</span> AWS at fundamental level, Docker, Linux (Ubuntu)</div>
+        <div><span class="font-bold">Version Control:</span> GitHub, GitLab, Fork</div>
+        <div><span class="font-bold">Database:</span> Oracle, MySQL, MongoDB, PostgreSQL</div>
+        <div><span class="font-bold">Development Tools:</span> Cursor, IntelliJ, Postman</div>
+        <div><span class="font-bold">Testing:</span> SonarQube, JUnit, Mockito</div>
+        <div><span class="font-bold">Languages:</span> English (Basic)</div>
+      </div>
+    </section>
 
-      <div>
-        <div class="flex justify-between items-baseline">
-          <h3 class="text-base font-bold text-slate-900">Senior Full-Stack & Systems Engineer</h3>
-          <span class="text-xs font-mono text-slate-500">2023 – Present</span>
+    <!-- SECTION: WORK EXPERIENCES -->
+    <section class="mt-5">
+      <div class="border-b border-neutral-900 pb-0.5 mb-3">
+        <h2 class="text-sm font-bold tracking-wider text-black uppercase">WORK EXPERIENCES</h2>
+      </div>
+
+      <!-- Experience 1: IGNIFY -->
+      <div class="mb-5">
+        <div class="flex justify-between items-baseline mb-1.5">
+          <h3 class="text-xs sm:text-[13.5px] font-bold text-black">
+            Back-End Developer <span class="font-normal">|</span> IGNIFY
+          </h3>
+          <span class="text-xs font-semibold text-neutral-800">Apr 2025 - Present</span>
         </div>
-        <div class="text-xs font-medium text-indigo-600 mb-1.5">Leading Financial Technology & Banking Group · Hanoi, Vietnam</div>
-        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
-          <li>Architected and shipped core digital lending microservices handling high transaction volumes with 99.98% production uptime.</li>
-          <li>Refactored query execution plans and implemented Redis cache-aside strategies, reducing peak API latency by 45%.</li>
-          <li>Implemented automated BDD test suites covering 140+ critical banking scenarios, reducing manual regression cycles by 70%.</li>
-          <li>Ensured compliance with national banking regulatory requirements and bank security standards.</li>
+
+        <ul class="list-disc ml-5 text-xs sm:text-[13px] text-neutral-800 space-y-1 leading-relaxed">
+          <li>Work closely with Joint Stock Commercial Bank for Investment and Development of Vietnam (BIDV) on system integration and payment processing.</li>
+          <li>Design and developed high-performance APIs using Java Spring Framework.</li>
+          <li>Write clean, maintainable, and efficient code following best practices.</li>
+          <li>Write and maintained clear technical documentation for APIs, system architecture and system workflows.</li>
+          <li>Work closely with Business Analysts to analyze business requirements and translate process workflows into technical solutions.</li>
         </ul>
+
+        <!-- Key Projects for IGNIFY -->
+        <div class="mt-2.5 ml-2">
+          <h4 class="text-xs sm:text-[13px] font-bold text-black mb-1">Key Projects</h4>
+
+          <!-- Project 1.1 -->
+          <div class="mb-2.5 ml-3">
+            <div class="text-xs sm:text-[13px] font-bold text-neutral-900">
+              • Customs Duty - Public Service module of BIDV Direct 
+              <a href="https://tuanntq.is-a.dev" target="_blank" class="font-normal text-blue-700 underline text-xs">(Link)</a>
+            </div>
+            <p class="text-xs sm:text-[12.5px] text-neutral-800 mt-0.5 leading-relaxed">
+              <span class="font-bold">Description:</span> Designed and developed a Customs Duty Management System that allows makers to declare and pay customs duties, while checkers verify and approve tax transactions, generate reports, print official receipts, and export tax reports for auditing purposes.
+            </p>
+            <div class="text-xs sm:text-[12.5px] text-neutral-900 mt-0.5">
+              <span class="font-bold">Technologies Used:</span> Spring Boot, Oracle, Quartz, Apache Kafka, Redis.
+            </div>
+          </div>
+
+          <!-- Project 1.2 -->
+          <div class="ml-3">
+            <div class="text-xs sm:text-[13px] font-bold text-neutral-900">
+              • Domestic Tax - Public Service module of BIDV Direct 
+              <a href="https://tuanntq.is-a.dev" target="_blank" class="font-normal text-blue-700 underline text-xs">(Link)</a>
+            </div>
+            <p class="text-xs sm:text-[12.5px] text-neutral-800 mt-0.5 leading-relaxed">
+              <span class="font-bold">Description:</span> Developed a Domestic Tax Payment System enabling fast, convenient, and reliable payment of land tax, vehicle tax, and other domestic taxes.
+            </p>
+            <div class="text-xs sm:text-[12.5px] text-neutral-900 mt-0.5">
+              <span class="font-bold">Technologies Used:</span> Spring Boot, Oracle, Quartz, Apache Kafka, Redis.
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <div class="flex justify-between items-baseline">
-          <h3 class="text-base font-bold text-slate-900">Full-Stack Software Engineer</h3>
-          <span class="text-xs font-mono text-slate-500">2021 – 2023</span>
+      <!-- Experience 2: DS GLOBAL -->
+      <div class="mb-5">
+        <div class="flex justify-between items-baseline mb-1.5">
+          <h3 class="text-xs sm:text-[13.5px] font-bold text-black">
+            Back-End Developer <span class="font-normal">|</span> DS GLOBAL
+          </h3>
+          <span class="text-xs font-semibold text-neutral-800">Apr 2024 - Apr 2025</span>
         </div>
-        <div class="text-xs font-medium text-indigo-600 mb-1.5">Digital Solutions & Cloud Innovation Co. · Hanoi, Vietnam</div>
-        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
-          <li>Engineered scalable customer-facing web applications using React, Next.js, and Node.js serving 200,000+ monthly active users.</li>
-          <li>Designed unified design system with Tailwind CSS, reducing frontend development turnaround time by 40%.</li>
-          <li>Containerized deployment environments using Docker and GitHub Actions, lowering release failure rate below 1%.</li>
+
+        <ul class="list-disc ml-5 text-xs sm:text-[13px] text-neutral-800 space-y-1 leading-relaxed">
+          <li>Designed and developed high-performance APIs using Java Spring Framework.</li>
+          <li>Designed and optimized database structures for efficient data storage and retrieval.</li>
+          <li>Developed secure account management using Spring Security, ensuring proper authentication and authorization for web and mobile platforms.</li>
+          <li>Implemented global exception handling with multi-language support.</li>
+          <li>Wrote clean, maintainable, and efficient code following best practices.</li>
+          <li>Built and optimized SQL queries to improve performance up to 10 times.</li>
+          <li>Designed and built a WebSocket load balancer, increasing system scalability at least 5 times.</li>
+          <li>Led the Snap# project team, achieving on-time delivery and boosting efficiency by 20%.</li>
         </ul>
+
+        <!-- Key Projects for DS GLOBAL -->
+        <div class="mt-2.5 ml-2">
+          <h4 class="text-xs sm:text-[13px] font-bold text-black mb-1">Key Projects</h4>
+
+          <!-- Project 2.1 -->
+          <div class="mb-2.5 ml-3">
+            <div class="text-xs sm:text-[13px] font-bold text-neutral-900">
+              • Snap#
+            </div>
+            <p class="text-xs sm:text-[12.5px] text-neutral-800 mt-0.5 leading-relaxed">
+              <span class="font-bold">Description:</span> A photo kiosk system serving customers in Korea and Don Chicken in Vietnam, providing photo printing, centralized kiosk and printer management, user management, analytics tracking, and remote kiosk control via a mobile application.
+            </p>
+            <div class="text-xs sm:text-[12.5px] text-neutral-900 mt-0.5">
+              <span class="font-bold">Technologies Used:</span> Spring Boot, Spring Security, WebSocket, Scheduling, MySQL, Docker, AWS S3.
+            </div>
+          </div>
+
+          <!-- Project 2.2 -->
+          <div class="mb-2.5 ml-3">
+            <div class="text-xs sm:text-[13px] font-bold text-neutral-900">
+              • LPA
+            </div>
+            <p class="text-xs sm:text-[12.5px] text-neutral-800 mt-0.5 leading-relaxed">
+              <span class="font-bold">Description:</span> A medical clinic management system designed to streamline patient form creation, customer account management, medical record handling, and integrate secure and efficient medical record printing functionalities.
+            </p>
+            <div class="text-xs sm:text-[12.5px] text-neutral-900 mt-0.5">
+              <span class="font-bold">Technologies Used:</span> Spring Boot, Spring Security, MySQL, MongoDB, Docker, Scheduling, Redis.
+            </div>
+          </div>
+
+          <!-- Project 2.3 -->
+          <div class="ml-3">
+            <div class="text-xs sm:text-[13px] font-bold text-neutral-900">
+              • IMAGEBOX
+            </div>
+            <p class="text-xs sm:text-[12.5px] text-neutral-800 mt-0.5 leading-relaxed">
+              <span class="font-bold">Description:</span> Contributed to the development of a handheld photo printing system that enables users to connect their mobile devices via Bluetooth and print photos instantly.
+            </p>
+            <div class="text-xs sm:text-[12.5px] text-neutral-900 mt-0.5">
+              <span class="font-bold">Technologies Used:</span> Laravel, MySQL.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EDUCATION -->
+    <section class="mt-5">
+      <div class="border-b border-neutral-900 pb-0.5 mb-2.5">
+        <h2 class="text-sm font-bold tracking-wider text-black uppercase">EDUCATION</h2>
       </div>
 
       <div>
-        <div class="flex justify-between items-baseline">
-          <h3 class="text-base font-bold text-slate-900">Software Engineer (Web & Automation)</h3>
-          <span class="text-xs font-mono text-slate-500">2019 – 2021</span>
+        <div class="flex justify-between items-baseline mb-0.5">
+          <h3 class="text-xs sm:text-[13.5px] font-bold text-black">
+            Bachelor's degree <span class="font-normal">|</span> Hanoi University of Science and Technology
+          </h3>
+          <span class="text-xs font-semibold text-neutral-800">2017 - 2022</span>
         </div>
-        <div class="text-xs font-medium text-indigo-600 mb-1.5">Tech Pioneer Labs · Hanoi, Vietnam</div>
-        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
-          <li>Developed high-traffic e-commerce storefronts and backend REST APIs with payment integrations.</li>
-          <li>Instituted automated unit and integration tests, elevating codebase test coverage from 42% to 88%.</li>
-        </ul>
+        <p class="text-xs sm:text-[12.5px] text-neutral-800">
+          Major: Mechanical Engineering
+        </p>
       </div>
-    </div>
-
-    <!-- Education & Certifications -->
-    <div class="my-6 pt-4 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div>
-        <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Education</h2>
-        <div class="text-xs font-bold text-slate-900">Bachelor of Science in Software Engineering</div>
-        <div class="text-xs text-slate-600">Top Technology University · High Honors (Top 5%)</div>
-      </div>
-      <div>
-        <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Certifications</h2>
-        <div class="text-xs text-slate-800 space-y-1">
-          <div>• AWS Certified Solutions Architect – Associate</div>
-          <div>• CKAD: Certified Kubernetes Application Developer</div>
-          <div>• Professional Scrum Master (PSM I)</div>
-        </div>
-      </div>
-    </div>
+    </section>
 
   </div>
+
 </body>
 </html>

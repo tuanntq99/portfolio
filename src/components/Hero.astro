@@ -79,7 +79,7 @@ const { personal } = portfolioData;
             href="#contact" 
             class="px-6 py-3 rounded-xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm dark:bg-slate-900/90 dark:text-slate-200 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-700/80 transition-all duration-300 hover:border-slate-400 dark:hover:border-slate-600 flex items-center gap-2"
           >
-            <span>Contact Liam</span>
+            <span>Contact {personal.name.split(' ').slice(-1)[0]}</span>
             <svg class="w-4 h-4 text-indigo-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
@@ -171,35 +171,35 @@ const { personal } = portfolioData;
             <!-- Stage 2: Gateway & Microservices Grid -->
             <div class="grid grid-cols-2 gap-2.5">
               
-              <!-- Microservice A -->
+              <!-- Microservice A: BIDV Tax & Customs Engine -->
               <div 
                 class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-cyan-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-cyan-300 dark:border-slate-800 dark:hover:border-cyan-500/50 transition-all cursor-pointer ring-2 ring-indigo-500/20"
                 data-node="lending"
               >
                 <div class="flex items-center gap-1.5 mb-1">
                   <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Lending Engine</span>
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">BIDV Tax Engine</span>
                 </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Java · Spring Boot</div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Spring Boot · Quartz</div>
                 <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold">
-                  <span>8 Pods (K8s)</span>
-                  <span>99.98% Up</span>
+                  <span>Customs Duty</span>
+                  <span>99.98% SLA</span>
                 </div>
               </div>
 
-              <!-- Microservice B -->
+              <!-- Microservice B: WebSocket & Security Gateway -->
               <div 
-                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-cyan-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-cyan-300 dark:border-slate-800 dark:hover:border-cyan-500/50 transition-all cursor-pointer"
+                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-emerald-300 dark:border-slate-800 dark:hover:border-emerald-500/50 transition-all cursor-pointer"
                 data-node="event"
               >
                 <div class="flex items-center gap-1.5 mb-1">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Event Gateway</span>
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">WebSocket Balancer</span>
                 </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Node.js · NestJS</div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Spring Security · Kiosk</div>
                 <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
-                  <span>15k req/sec</span>
-                  <span>Async</span>
+                  <span>5x Scale</span>
+                  <span>Load Balanced</span>
                 </div>
               </div>
 
@@ -210,7 +210,7 @@ const { personal } = portfolioData;
               <div class="w-0.5 h-3 bg-gradient-to-b from-cyan-500 to-emerald-500 opacity-60"></div>
             </div>
 
-            <!-- Stage 3: Data Tier (Redis & PostgreSQL) -->
+            <!-- Stage 3: Data Tier (Redis & Oracle / MySQL) -->
             <div class="grid grid-cols-2 gap-2.5">
               
               <!-- Redis Cache -->
@@ -220,23 +220,23 @@ const { personal } = portfolioData;
               >
                 <div class="flex items-center justify-between mb-1">
                   <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Redis Cache</span>
-                  <span class="text-[9px] font-mono px-1 py-0.2 bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 rounded">In-Memory</span>
+                  <span class="text-[9px] font-mono px-1 py-0.2 bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 rounded">Sub-ms</span>
                 </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Cache-Aside · Sliding Rate</div>
-                <div class="mt-1 text-[10px] font-mono font-semibold text-rose-600 dark:text-rose-400">94.6% Hit Ratio · 4ms</div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Status Caching · Rate Limit</div>
+                <div class="mt-1 text-[10px] font-mono font-semibold text-rose-600 dark:text-rose-400">Fast State Retrieval</div>
               </div>
 
-              <!-- PostgreSQL -->
+              <!-- Relational HA Database -->
               <div 
                 class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-blue-300 dark:border-slate-800 dark:hover:border-blue-500/50 transition-all cursor-pointer"
                 data-node="postgres"
               >
                 <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">PostgreSQL HA</span>
+                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Oracle / MySQL HA</span>
                   <span class="text-[9px] font-mono px-1 py-0.2 bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded">ACID</span>
                 </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Read Replicas · Multi-AZ</div>
-                <div class="mt-1 text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400">Zero Data Loss · Idempotent</div>
+                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Maker-Checker Dual Auth</div>
+                <div class="mt-1 text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400">10x SQL Query Boost</div>
               </div>
 
             </div>
@@ -251,21 +251,21 @@ const { personal } = portfolioData;
                   <span class="text-xs">⚡</span>
                   <div>
                     <div class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Apache Kafka Event Bus</div>
-                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Decoupled Pub/Sub · Guaranteed At-Least-Once Delivery</div>
+                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Decoupled Tax Notifications · Guaranteed Delivery</div>
                   </div>
                 </div>
-                <span class="text-[10px] font-mono font-semibold text-amber-600 dark:text-amber-400">15k msg/s</span>
+                <span class="text-[10px] font-mono font-semibold text-amber-600 dark:text-amber-400">Real-Time</span>
               </div>
             </div>
 
             <!-- Interactive Node Telemetry Inspector -->
             <div id="arch-inspector" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 text-xs font-mono transition-all">
               <div class="flex items-center justify-between text-[11px] font-bold text-indigo-600 dark:text-cyan-400 mb-1" id="inspector-title">
-                <span>Selected: Lending Engine (Core Microservice)</span>
+                <span>Selected: BIDV Direct Customs & Tax Engine</span>
                 <span class="text-[9px] font-normal text-slate-400">Click any component</span>
               </div>
               <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-normal" id="inspector-desc">
-                Architected in Java 17 & Spring Boot with automated loan decision pipelines, idempotent endpoints, and 140+ Cucumber BDD scenarios preventing duplicate disbursements.
+                Engineered in Java Spring Boot with Oracle, Quartz scheduling, and maker-checker dual authorization workflows for enterprise bank tax declaration and verification.
               </p>
             </div>
 
@@ -275,9 +275,9 @@ const { personal } = portfolioData;
           <div class="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
             <span class="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-semibold">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              P99: 38ms (Target &lt;100ms)
+              High-Availability Banking Systems
             </span>
-            <span>Docker · K8s · Spring · Redis · Kafka</span>
+            <span>Java · Spring Boot · Oracle · Kafka · Docker</span>
           </div>
 
         </div>
@@ -287,22 +287,15 @@ const { personal } = portfolioData;
   </div>
 </section>
 
-<script>
-  // Dynamic typewriter text effect for multiple titles
-  const roles = [
-    "Senior Full-Stack Software Engineer",
-    "Cloud & Distributed Systems Specialist",
-    "Performance & Scalability Enthusiast",
-    "Automated Quality Engineering Champion"
-  ];
-  
+<script define:vars={{ roles: personal.roles }}>
+  // Dynamic typewriter text effect using personal.roles
   let roleIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   const typewriterElement = document.getElementById('typewriter-text');
 
   function typeEffect() {
-    if (!typewriterElement) return;
+    if (!typewriterElement || !roles || roles.length === 0) return;
     const currentRole = roles[roleIndex];
 
     if (isDeleting) {
@@ -333,27 +326,27 @@ const { personal } = portfolioData;
   const nodeData = {
     edge: {
       title: "Edge CDN & Web Application Firewall",
-      desc: "Cloudflare global network handles TLS termination, DDOS mitigation, and cache routing within 15ms globally before hitting cloud servers."
+      desc: "Cloudflare global anycast network handles SSL/TLS termination, anti-DDoS mitigation, and rapid request routing within 15ms."
     },
     lending: {
-      title: "Digital Lending Microservice (Core Engine)",
-      desc: "Java 17 & Spring Boot service executing real-time identity checks and loan appraisal algorithms with 99.98% production availability."
+      title: "BIDV Direct Customs & Tax Engine",
+      desc: "Engineered in Java Spring Boot with Oracle, Quartz scheduling, and maker-checker dual authorization workflows for enterprise bank tax declaration and verification."
     },
     event: {
-      title: "Distributed Event Gateway",
-      desc: "Node.js & NestJS gateway handling high-concurrency event ingestion (15,000 req/sec) with sliding-window Redis rate limiting."
+      title: "WebSocket Load Balancer & Spring Security Gateway",
+      desc: "Custom-architected WebSocket load balancer boosting concurrent kiosk platform scalability by 5x with Spring Security role authentication and multi-lingual error handling."
     },
     redis: {
-      title: "Redis In-Memory Distributed Cache",
-      desc: "Sub-millisecond query cache layer achieving 94.6% hit ratio, reducing upstream database load and cutting peak API latency by 45%."
+      title: "Redis Distributed In-Memory Cache",
+      desc: "High-speed caching layer ensuring sub-millisecond retrieval of tax transaction states, appointment queues, and kiosk telemetry."
     },
     postgres: {
-      title: "PostgreSQL High-Availability Cluster",
-      desc: "Primary-replica multi-AZ database enforcing ACID compliance, transaction idempotency, and automated point-in-time recovery."
+      title: "Oracle & MySQL Enterprise Relational Tier",
+      desc: "Optimized relational database schemas with rewritten SQL queries delivering up to 10x query performance boosts and strict ACID transactional guarantees."
     },
     kafka: {
       title: "Apache Kafka Streaming Event Hub",
-      desc: "Decoupled asynchronous event broker orchestrating loan status webhooks, notification streams, and analytical pipelines with zero message loss."
+      desc: "Decoupled asynchronous event broker orchestrating tax status notifications, financial webhooks, and audit log pipelines with guaranteed at-least-once delivery."
     }
   };
 

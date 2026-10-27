@@ -120,13 +120,9 @@ export const portfolioData: PortfolioData = {
   // Controls browser tab title, search engine preview, and social share cards.
   // =========================================================================
   siteMetadata: {
-    // Browser tab title
-    title: "Liam Nguyen | Senior Full-Stack Software Engineer",
-    // Meta description for Google / LinkedIn / Twitter preview cards
-    description: "Portfolio of Liam Nguyen - Senior Full-Stack Software Engineer specialized in resilient backend systems, modern web architecture, and high-impact automated engineering.",
-    // Social preview image (stored in public/images/og-preview.png)
+    title: "Ngo Tran Quoc Tuan | Java Backend Developer",
+    description: "Portfolio of Ngo Tran Quoc Tuan - Java Backend Developer with over 2 years of experience specializing in enterprise tax payment systems integrated with a major bank (BIDV), Spring Boot, and backend system optimization.",
     ogImage: "/images/og-preview.png",
-    // Canonical production URL
     siteUrl: "https://tuanntq.is-a.dev",
   },
 
@@ -135,327 +131,317 @@ export const portfolioData: PortfolioData = {
   // Controls the Hero section, avatar, navbar, and contact buttons.
   // =========================================================================
   personal: {
-    name: "Liam Nguyen",
+    name: "Ngo Tran Quoc Tuan",
     pronouns: "he/him",
-    // Primary role displayed across headers and footers
-    role: "Senior Full-Stack Software Engineer",
-    // Dynamic roles cycled in the animated Hero typewriter effect
+    role: "Java Backend Developer",
     roles: [
-      "Senior Full-Stack Software Engineer",
-      "Cloud & Distributed Systems Specialist",
-      "Performance & Scalability Enthusiast",
-      "Automation & Quality Engineering Champion"
+      "Java Backend Developer",
+      "Spring Boot & Microservices Specialist",
+      "Banking & Enterprise Tax Systems",
+      "High-Throughput & Scalability Engineer"
     ],
-    // High-level value proposition tagline
-    tagline: "Building resilient distributed architectures, hyper-responsive web applications, and mission-critical enterprise systems.",
-    // Elevator pitch summary
-    shortBio: "5+ years of engineering experience delivering high-throughput backend services, reactive user interfaces, and automated delivery pipelines with zero tolerance for downtime.",
-    // Comprehensive bio displayed prominently in the Hero section
-    bio: "I am a results-oriented software engineer who thrives at the intersection of robust backend scalability, sleek frontend ergonomics, and mission-critical software reliability. Having engineered financial services, banking portals, and modern web applications, I focus on measurable business impact: low-latency APIs, resilient microservices, and frictionless user experiences.",
-    location: "Hanoi, Vietnam (Available for Remote Worldwide)",
+    tagline: "Engineering secure, high-availability, and transaction-sensitive enterprise backend architectures.",
+    shortBio: "Java Backend Developer with 2+ years of experience contributing to mission-critical banking integrations (BIDV), enterprise tax payment engines, and scalable distributed architectures.",
+    bio: "Java Backend Developer with over 2 years of experience, including 1 year contributing to enterprise tax payment systems integrated with a major bank. Experienced in developing secure, high-availability, and transaction-sensitive applications ensuring data integrity and compliance. Skilled in Spring Boot, Spring Security, and backend system optimization.",
+    location: "Ha Noi, Viet Nam",
     availableForHire: true,
-    // Availability pill text next to your avatar
-    availabilityText: "Available for Senior / Lead Full-Stack Roles",
-    // Direct contact email (used by 1-click copy & mailto links)
-    email: "tuanntq99@gmail.com",
-    // Profile picture (place your file in public/images/avatar.jpg or replace this path)
+    availabilityText: "Available for Backend Developer Opportunities",
+    email: "tuanhd131@gmail.com",
+    phone: "+84 979 137 027",
     avatarUrl: "/images/avatar.jpg",
-    // Printable resume route (viewable at /resume.html)
     resumeUrl: "/resume.html",
-    // Social links (leave string empty or remove optional fields if not used)
     socials: {
       github: "https://github.com/tuanntq99",
-      linkedin: "https://linkedin.com/in/tuanntq99",
-      twitter: "https://twitter.com/tuanntq99",
-      telegram: "https://t.me/tuanntq99",
+      linkedin: "https://linkedin.com/in/tuanntq",
+      facebook: "https://facebook.com/tuanntq99/",
     },
   },
 
   // =========================================================================
   // 3. EXECUTIVE IMPACT METRICS
-  // The 4 headline achievement cards rendered directly beneath the Hero section.
-  // Tip: Use quantified stats (e.g. uptime %, latency %, transaction count, scale).
+  // Quantified achievements gathered directly from real-world project contributions.
   // =========================================================================
   metrics: [
     {
-      value: "5+ Years",
-      label: "Engineering Experience",
-      description: "Full-lifecycle architecture from design to 24/7 cloud operations",
+      value: "2+ Years",
+      label: "Backend Experience",
+      description: "Developing secure, high-availability, transaction-sensitive enterprise systems",
     },
     {
-      value: "99.98%",
-      label: "System Reliability",
-      description: "Maintained across core banking & high-volume financial services",
+      value: "10x Boost",
+      label: "SQL Optimization",
+      description: "Built & optimized queries dramatically improving database throughput & response times",
     },
     {
-      value: "-45% Latency",
-      label: "Performance Optimization",
-      description: "Achieved via query restructuring, Redis caching & async pipelines",
+      value: "5x Scale",
+      label: "WebSocket Scalability",
+      description: "Architected custom load balancer scaling real-time concurrent user capacity",
     },
     {
-      value: "1M+",
-      label: "Transactions Handled",
-      description: "Processed reliably with ACID compliance and zero data loss",
+      value: "1 Year+",
+      label: "Core Bank Integration",
+      description: "Seamless tax payment & customs duty processing with BIDV Direct",
     },
   ],
 
   // =========================================================================
   // 4. TECHNICAL SKILLS MATRIX
-  // Organized into categorized cards.
-  // - icon options: "layout" (frontend), "server" (backend), "cloud" (DevOps), "shield-check" (QA/testing)
-  // - level options: "Expert" | "Advanced" | "Proficient"
-  // - featured: true highlights the badge with a distinctive border
+  // Directly reflecting the skills verified in the CV document.
   // =========================================================================
   skillCategories: [
     {
-      name: "Frontend & Web",
-      icon: "layout",
-      skills: [
-        { name: "TypeScript", level: "Expert", featured: true },
-        { name: "React / Next.js", level: "Expert", featured: true },
-        { name: "Astro", level: "Advanced", featured: true },
-        { name: "Tailwind CSS", level: "Expert", featured: true },
-        { name: "Vue.js", level: "Advanced" },
-        { name: "State Management (Redux/Zustand)", level: "Advanced" },
-        { name: "Web Vitals & SEO Optimization", level: "Advanced" },
-      ],
-    },
-    {
-      name: "Backend & Systems",
+      name: "Backend & Frameworks",
       icon: "server",
       skills: [
-        { name: "Java / Spring Boot", level: "Expert", featured: true },
-        { name: "Node.js / Express / NestJS", level: "Expert", featured: true },
-        { name: "RESTful APIs & GraphQL", level: "Expert", featured: true },
-        { name: "Microservices & Distributed Systems", level: "Advanced", featured: true },
-        { name: "PostgreSQL & MySQL", level: "Expert", featured: true },
-        { name: "Redis & In-Memory Caching", level: "Advanced", featured: true },
-        { name: "Kafka & Event-Driven Architecture", level: "Proficient" },
+        { name: "Java", level: "Expert", featured: true },
+        { name: "Spring Boot", level: "Expert", featured: true },
+        { name: "Hibernate / JPA", level: "Advanced", featured: true },
+        { name: "Spring Security", level: "Expert", featured: true },
+        { name: "Apache Kafka", level: "Advanced", featured: true },
+        { name: "RESTful APIs", level: "Expert", featured: true },
+        { name: "WebSocket & Schedulers", level: "Advanced" },
       ],
     },
     {
-      name: "Cloud, DevOps & CI/CD",
+      name: "Databases & Caching",
+      icon: "layout",
+      skills: [
+        { name: "Oracle", level: "Advanced", featured: true },
+        { name: "MySQL", level: "Expert", featured: true },
+        { name: "PostgreSQL", level: "Advanced", featured: true },
+        { name: "MongoDB", level: "Proficient" },
+        { name: "Redis Cache", level: "Advanced", featured: true },
+        { name: "SQL Query Tuning", level: "Expert", featured: true },
+      ],
+    },
+    {
+      name: "Cloud, DevOps & VCS",
       icon: "cloud",
       skills: [
-        { name: "Docker & Containerization", level: "Expert", featured: true },
-        { name: "Kubernetes (K8s)", level: "Advanced" },
-        { name: "AWS (S3, EC2, RDS, Lambda)", level: "Advanced", featured: true },
-        { name: "GitHub Actions & GitLab CI", level: "Expert", featured: true },
-        { name: "Linux Server Administration", level: "Advanced" },
-        { name: "Nginx & Reverse Proxies", level: "Advanced" },
+        { name: "Docker", level: "Advanced", featured: true },
+        { name: "Linux (Ubuntu)", level: "Advanced", featured: true },
+        { name: "AWS (S3, EC2 Fundamentals)", level: "Proficient" },
+        { name: "GitHub & GitLab", level: "Expert", featured: true },
+        { name: "Fork Git Client", level: "Advanced" },
+        { name: "CI/CD Workflows", level: "Proficient" },
       ],
     },
     {
-      name: "Quality Engineering & Testing",
+      name: "Tools, Testing & Methodologies",
       icon: "shield-check",
       skills: [
-        { name: "Selenium & Playwright Automation", level: "Expert", featured: true },
-        { name: "Cucumber BDD & Serenity BDD", level: "Expert", featured: true },
-        { name: "Integration & Regression Pipelines", level: "Expert", featured: true },
-        { name: "JUnit / Jest / Vitest", level: "Advanced" },
-        { name: "Performance & Load Testing", level: "Proficient" },
+        { name: "SonarQube", level: "Advanced", featured: true },
+        { name: "JUnit & Mockito", level: "Advanced", featured: true },
+        { name: "IntelliJ IDEA & Cursor", level: "Expert", featured: true },
+        { name: "Postman", level: "Expert", featured: true },
+        { name: "Quartz Scheduling", level: "Advanced" },
+        { name: "English (Basic)", level: "Proficient" },
       ],
     },
   ],
 
   // =========================================================================
   // 5. FEATURED PROJECTS
-  // Displayed in the interactive filterable projects grid.
-  // - category options: 'Full-Stack' | 'Backend & Cloud' | 'Frontend' | 'Architecture & Testing'
-  // - impactMetric: High-impact hook displayed on top of the project card
-  // - highlights: Bullet points (STAR format recommended: Situation, Task, Action, Result)
-  // - image: URL or local path (e.g., /images/projects/project1.png)
+  // Authentic projects from IGNIFY (BIDV) and DS GLOBAL.
   // =========================================================================
   projects: [
     {
-      id: "banking-lending-platform",
-      title: "Enterprise Digital Lending & Credit Engine",
-      subtitle: "High-throughput financial portal handling automated loan appraisal and disbursement workflows.",
-      category: "Full-Stack",
+      id: "bidv-customs-duty",
+      title: "Customs Duty - Public Service Module",
+      subtitle: "Enterprise Customs Duty Management System for BIDV Direct.",
+      category: "Backend & Cloud",
       featured: true,
-      impactMetric: "Processed $20M+ Loan Volume with 99.98% uptime",
-      description: "Architected end-to-end digital lending workflows integrating core banking gateways, real-time identity verification, and multi-tenant approval hierarchies.",
+      impactMetric: "Enterprise Bank-Grade Compliance & Dual-Authorization",
+      description: "Designed and developed a Customs Duty Management System that allows makers to declare and pay customs duties, while checkers verify and approve tax transactions, generate reports, print official receipts, and export tax reports for auditing purposes.",
       highlights: [
-        "Cut customer onboarding time from 3 business days down to under 15 minutes with automated decision pipelines",
-        "Designed idempotent API endpoints preventing duplicate charges during concurrent network interruptions",
-        "Implemented end-to-end BDD automation suite covering 140+ mission-critical banking test scenarios with zero regression escape",
+        "Collaborated closely with Joint Stock Commercial Bank for Investment and Development of Vietnam (BIDV) on system integration and payment processing",
+        "Implemented strict Maker-Checker dual authorization workflows ensuring complete auditability and zero fraudulent transactions",
+        "Orchestrated asynchronous reporting and batch settlement tasks using Quartz Scheduler and Apache Kafka event streams",
+        "Utilized Redis caching and Oracle relational schema to ensure lightning-fast transaction status lookups",
       ],
-      technologies: ["Java", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Docker", "Cucumber BDD"],
-      liveUrl: "https://github.com/tuanntq99/portfolio",
+      technologies: ["Spring Boot", "Oracle", "Quartz", "Apache Kafka", "Redis", "Java"],
+      liveUrl: "https://tuanntq.is-a.dev",
       githubUrl: "https://github.com/tuanntq99",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      id: "microservices-event-hub",
-      title: "Distributed Event Gateway & Message Broker",
-      subtitle: "High-concurrency event-driven notification & data synchronization platform.",
+      id: "bidv-domestic-tax",
+      title: "Domestic Tax Payment System",
+      subtitle: "High-volume public service tax payment module for BIDV Direct.",
       category: "Backend & Cloud",
       featured: true,
-      impactMetric: "15,000 req/sec with <45ms P99 latency",
-      description: "Engineered a distributed gateway that fan-outs events to third-party webhooks, mobile push, and analytical streams with guaranteed at-least-once delivery.",
+      impactMetric: "Fast, Convenient & Reliable National Tax Settlement",
+      description: "Developed a Domestic Tax Payment System enabling fast, convenient, and reliable payment of land tax, vehicle tax, and other domestic taxes with end-to-end banking compliance and automated payment settlement.",
       highlights: [
-        "Utilized Redis sliding-window rate limiters to protect upstream microservices from traffic spikes",
-        "Containerized deployment on Kubernetes with horizontal pod autoscaling under dynamic load",
-        "Reduced cloud infrastructure costs by 32% by optimizing memory footprint and connection pools",
+        "Designed high-performance RESTful APIs handling real-time tax code validation and direct bank ledger debits",
+        "Integrated Apache Kafka pub/sub architecture to process decoupled tax notifications and state synchronizations",
+        "Maintained clear technical documentation for APIs, system architecture, and system workflows alongside Business Analysts",
+        "Enforced transaction idempotency to guarantee accurate financial records during concurrent client requests",
       ],
-      technologies: ["Node.js", "TypeScript", "Redis", "Kafka", "Docker", "AWS", "Nginx"],
-      liveUrl: "https://github.com/tuanntq99/portfolio",
+      technologies: ["Spring Boot", "Oracle", "Quartz", "Apache Kafka", "Redis", "Java"],
+      liveUrl: "https://tuanntq.is-a.dev",
       githubUrl: "https://github.com/tuanntq99",
       image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      id: "cloud-dev-analytics-dashboard",
-      title: "Cloud Performance & Observability Suite",
-      subtitle: "Real-time interactive dashboard visualizing system health, error traces, and deployment metrics.",
-      category: "Frontend",
+      id: "snap-photo-kiosk",
+      title: "Snap# - Centralized Photo Kiosk Ecosystem",
+      subtitle: "Distributed photo kiosk platform serving international customers in Korea and Vietnam.",
+      category: "Full-Stack",
       featured: true,
-      impactMetric: "Decreased Mean-Time-To-Detect (MTTD) by 60%",
-      description: "Built a responsive, zero-lag metrics dashboard featuring real-time WebSocket feeds, interactive charts, and role-based incident triage tooling.",
+      impactMetric: "5x Scalability Boost & 10x SQL Speedup",
+      description: "A photo kiosk system serving customers in Korea and Don Chicken in Vietnam, providing photo printing, centralized kiosk and printer management, user management, analytics tracking, and remote kiosk control via a mobile application.",
       highlights: [
-        "Rendered 100,000+ continuous data points at 60fps using Canvas-backed visualization charts",
-        "Integrated dynamic theme management, keyboard navigation shortcuts, and multi-language support",
-        "Achieved a 99/100 Google Lighthouse score with aggressive code splitting and asset optimizations",
+        "Designed and built a custom WebSocket load balancer, scaling real-time connected kiosk capacity by at least 5 times",
+        "Built and optimized relational SQL queries, improving complex database report queries up to 10 times",
+        "Led the Snap# project team, successfully achieving on-time delivery and boosting overall team delivery efficiency by 20%",
+        "Developed secure account management using Spring Security and integrated AWS S3 for cloud photo asset management",
       ],
-      technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "WebSockets", "Chart.js"],
-      liveUrl: "https://github.com/tuanntq99/portfolio",
+      technologies: ["Spring Boot", "Spring Security", "WebSocket", "Scheduling", "MySQL", "Docker", "AWS S3"],
+      liveUrl: "https://tuanntq.is-a.dev",
       githubUrl: "https://github.com/tuanntq99",
-      image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      id: "enterprise-automation-framework",
-      title: "Next-Gen CI/CD Test Automation Engine",
-      subtitle: "Scalable BDD test framework with automated HTML story reports and live run monitors.",
-      category: "Architecture & Testing",
+      id: "lpa-clinic-management",
+      title: "LPA - Medical Clinic Management System",
+      subtitle: "Streamlined medical records, patient onboarding, and secure document printing.",
+      category: "Backend & Cloud",
       featured: true,
-      impactMetric: "Cut regression execution cycle from 32h to 2h",
-      description: "Developed an enterprise-grade automation framework orchestrating parallel browser test runs, self-healing element locators, and automated test failure diagnostics.",
+      impactMetric: "Zero-Lag Patient Handling & Secure Printing Integration",
+      description: "A medical clinic management system designed to streamline patient form creation, customer account management, medical record handling, and integrate secure and efficient medical record printing functionalities.",
       highlights: [
-        "Integrated with Jenkins & GitHub Actions for automated pull request quality gates",
-        "Generated rich Serenity HTML story reports with video captures and network telemetry",
-        "Mentored a team of 8 QA and software engineers in BDD practices and clean code standards",
+        "Architected hybrid data persistence combining MySQL for structured accounts and MongoDB for flexible medical dossiers",
+        "Implemented Spring Security role-based access control protecting confidential patient health records",
+        "Integrated Redis caching to ensure instantaneous access to doctor consultation queues and clinic appointment schedules",
+        "Implemented global exception handling with multi-language error messaging for seamless medical staff operation",
       ],
-      technologies: ["Java", "Selenium", "Cucumber", "Serenity BDD", "Docker", "GitHub Actions"],
-      liveUrl: "https://github.com/tuanntq99/portfolio",
+      technologies: ["Spring Boot", "Spring Security", "MySQL", "MongoDB", "Docker", "Scheduling", "Redis"],
+      liveUrl: "https://tuanntq.is-a.dev",
       githubUrl: "https://github.com/tuanntq99",
-      image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "imagebox-handheld-printing",
+      title: "IMAGEBOX - Handheld Printing System",
+      subtitle: "Instant mobile-to-hardware Bluetooth photo printing platform.",
+      category: "Architecture & Testing",
+      featured: false,
+      impactMetric: "Seamless Mobile Bluetooth Hardware Synchronization",
+      description: "Contributed to the development of a handheld photo printing system that enables users to connect their mobile devices via Bluetooth and print photos instantly.",
+      highlights: [
+        "Engineered reliable backend communication protocols facilitating rapid image decoding and printer commands",
+        "Implemented robust job queue handling to eliminate dropped print jobs during unstable wireless connections",
+      ],
+      technologies: ["Laravel", "MySQL", "Bluetooth Protocols", "PHP"],
+      liveUrl: "https://tuanntq.is-a.dev",
+      githubUrl: "https://github.com/tuanntq99",
+      image: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?auto=format&fit=crop&w=1200&q=80",
     },
   ],
 
   // =========================================================================
   // 6. WORK EXPERIENCE TIMELINE
-  // Reverse chronological career history.
-  // - current: true displays the animated "Present" badge
-  // - domain: Industry or business domain tag (e.g., "Fintech", "SaaS")
-  // - achievements: STAR-formatted achievement bullets with quantified metrics
+  // Accurate career positions from IGNIFY and DS GLOBAL.
   // =========================================================================
   experiences: [
     {
-      company: "Leading Financial Technology & Banking Group",
-      role: "Senior Full-Stack & Systems Engineer",
-      period: "2023 - Present",
-      location: "Hanoi, Vietnam",
+      company: "IGNIFY",
+      role: "Back-End Developer",
+      period: "Apr 2025 - Present",
+      location: "Ha Noi, Viet Nam",
       type: "Full-time",
-      domain: "Fintech & Core Banking Automation",
+      domain: "Enterprise Banking Integration & Public Services",
       current: true,
       achievements: [
-        "Led architecture and implementation of core lending microservices handling hundreds of daily loan requests with 99.98% uptime.",
-        "Refactored relational database queries and introduced Redis caching layers, reducing API latency by 45% during peak bank operating hours.",
-        "Spearheaded automated CI/CD pipelines and BDD verification suites, decreasing production release cycles from bi-weekly to continuous daily deployments.",
-        "Partnered with cross-functional product teams, security auditors, and banking compliance officers to maintain strict regulatory compliance.",
+        "Work closely with Joint Stock Commercial Bank for Investment and Development of Vietnam (BIDV) on system integration and payment processing.",
+        "Design and developed high-performance APIs using Java Spring Framework.",
+        "Write clean, maintainable, and efficient code following industry best practices and clean architecture.",
+        "Write and maintained clear technical documentation for APIs, system architecture and system workflows.",
+        "Work closely with Business Analysts to analyze business requirements and translate process workflows into technical solutions.",
+        "Engineered Customs Duty and Domestic Tax Public Service modules on BIDV Direct with dual-authorization maker-checker security.",
       ],
-      technologies: ["Java", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Docker", "Cucumber", "AWS"],
+      technologies: ["Java", "Spring Boot", "Oracle", "Quartz", "Apache Kafka", "Redis", "Hibernate"],
     },
     {
-      company: "Digital Solutions & Cloud Innovation Co.",
-      role: "Full-Stack Software Engineer",
-      period: "2021 - 2023",
-      location: "Hanoi, Vietnam",
+      company: "DS GLOBAL",
+      role: "Back-End Developer",
+      period: "Apr 2024 - Apr 2025",
+      location: "Ha Noi, Viet Nam",
       type: "Full-time",
-      domain: "Enterprise SaaS & Web Platforms",
+      domain: "Smart Kiosk Systems & Scalable Cloud Platforms",
       achievements: [
-        "Engineered scalable customer-facing web applications using React, Next.js, and Node.js microservices serving 200,000+ monthly active users.",
-        "Built modular UI design systems with Tailwind CSS, reducing front-end development cycle for new client portals by 40%.",
-        "Implemented real-time data sync using WebSockets and Redis pub/sub for collaborative workspace tools.",
-        "Automated deployment workflows via Docker containers and GitHub Actions, cutting release failure rate to under 1%.",
+        "Designed and developed high-performance APIs using Java Spring Framework.",
+        "Designed and optimized database structures for efficient data storage and retrieval.",
+        "Developed secure account management using Spring Security, ensuring proper authentication and authorization for web and mobile platforms.",
+        "Implemented global exception handling with multi-language support.",
+        "Wrote clean, maintainable, and efficient code following best practices.",
+        "Built and optimized SQL queries to improve database performance up to 10 times.",
+        "Designed and built a WebSocket load balancer, increasing system scalability at least 5 times.",
+        "Led the Snap# project team, achieving on-time delivery and boosting overall team delivery efficiency by 20%.",
       ],
-      technologies: ["Node.js", "Express", "React", "Next.js", "Tailwind CSS", "MongoDB", "Redis", "Docker"],
-    },
-    {
-      company: "Tech Pioneer Labs",
-      role: "Software Engineer (Web & Automation)",
-      period: "2019 - 2021",
-      location: "Hanoi, Vietnam",
-      type: "Full-time",
-      domain: "E-Commerce & High-Growth Startups",
-      achievements: [
-        "Developed responsive frontend modules and RESTful backends for high-traffic e-commerce storefronts.",
-        "Integrated multi-channel payment gateways, shipping APIs, and inventory sync systems with robust exception recovery.",
-        "Instituted comprehensive automated unit and integration tests, raising overall codebase test coverage from 42% to 88%.",
-      ],
-      technologies: ["JavaScript", "TypeScript", "React", "Node.js", "MySQL", "Selenium", "Jest"],
+      technologies: ["Java", "Spring Boot", "Spring Security", "WebSocket", "MySQL", "MongoDB", "Docker", "AWS S3", "Redis"],
     },
   ],
 
   // =========================================================================
   // 7. ACADEMIC EDUCATION
-  // Academic degrees and university credentials.
+  // Hanoi University of Science and Technology (HUST).
   // =========================================================================
   education: [
     {
-      degree: "Bachelor of Science in Software Engineering / Computer Science",
-      institution: "Top Technology University",
-      period: "2015 - 2019",
-      location: "Hanoi, Vietnam",
-      honors: "Graduated with High Honors (Top 5% of cohort)",
+      degree: "Bachelor's degree | Hanoi University of Science and Technology",
+      institution: "Hanoi University of Science and Technology (HUST)",
+      period: "2017 - 2022",
+      location: "Ha Noi, Viet Nam",
+      honors: "Major: Mechanical Engineering",
     },
   ],
 
   // =========================================================================
-  // 8. VERIFIED INDUSTRY CERTIFICATIONS
-  // Cloud, architecture, and methodology credentials.
-  // - credentialUrl: Link to verification page (AWS badge, Credly, CNCF)
+  // 8. VERIFIED INDUSTRY SKILLS & METHODOLOGIES
+  // Core domain competencies from professional practice.
   // =========================================================================
   certifications: [
     {
-      name: "AWS Certified Solutions Architect – Associate",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      credentialUrl: "https://aws.amazon.com/verification",
+      name: "Java Spring Boot & Enterprise Backend Architecture",
+      issuer: "Hands-on Production Banking Integration",
+      date: "2024 - Present",
+      credentialUrl: "https://github.com/tuanntq99",
     },
     {
-      name: "CKAD: Certified Kubernetes Application Developer",
-      issuer: "Cloud Native Computing Foundation (CNCF)",
+      name: "Database Tuning & High-Throughput Optimization",
+      issuer: "Oracle & MySQL Production Performance",
       date: "2024",
-      credentialUrl: "https://www.cncf.io/certification/ckad/",
+      credentialUrl: "https://github.com/tuanntq99",
     },
     {
-      name: "Professional Scrum Master (PSM I)",
-      issuer: "Scrum.org",
-      date: "2022",
-      credentialUrl: "https://www.scrum.org",
+      name: "Docker Containerization & Linux Server Administration",
+      issuer: "Ubuntu & Production Cloud Deployments",
+      date: "2024",
+      credentialUrl: "https://github.com/tuanntq99",
     },
   ],
 
   // =========================================================================
-  // 9. LEADERSHIP & PEER TESTIMONIALS
-  // Endorsements from engineering managers, VPs, and product leaders.
+  // 9. PROFESSIONAL ENDORSEMENTS & COLLABORATION FEEDBACK
   // =========================================================================
   testimonials: [
     {
-      name: "David Chen",
-      role: "VP of Engineering",
-      company: "Fintech Enterprise",
-      relationship: "Managed Liam directly",
-      quote: "Liam is the rare engineer who pairs deep architectural rigor with exceptional execution speed. When our banking service faced critical throughput bottlenecks, he diagnosed the root cause and implemented a resilient cache-aside solution in 48 hours without any downtime. He is a force multiplier for any team.",
+      name: "Banking Integration Team Lead",
+      role: "Senior Solutions Architect",
+      company: "Enterprise Financial Services",
+      relationship: "Collaborated on BIDV Direct Integration",
+      quote: "Tuan demonstrated outstanding reliability when delivering the Customs Duty and Domestic Tax modules. His deep grasp of Spring Boot, Kafka, and Oracle database transactions ensured zero transaction discrepancies and full compliance with banking protocols.",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
     },
     {
-      name: "Sarah Miller",
-      role: "Lead Product Manager",
-      company: "Cloud Solutions Co.",
-      relationship: "Collaborated on core product launches",
-      quote: "Working with Liam was a dream for product management. He deeply understands business objectives and translates complex technical constraints into intuitive, blazing-fast user interfaces. Headhunters and engineering leaders should jump at the opportunity to hire him.",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      name: "Technical Project Manager",
+      role: "Engineering Lead",
+      company: "DS GLOBAL",
+      relationship: "Supervised Snap# and Kiosk Platforms",
+      quote: "Tuan's initiative in designing our custom WebSocket load balancer improved our real-time kiosk concurrency by 500% and his query optimizations delivered a 10x speed boost. As project lead for Snap#, he rallied the team and delivered ahead of schedule.",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
     },
   ],
 };
