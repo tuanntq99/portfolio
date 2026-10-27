@@ -115,32 +115,54 @@ export interface PortfolioData {
 }
 
 export const portfolioData: PortfolioData = {
+  // =========================================================================
+  // 1. SITE & SEO METADATA
+  // Controls browser tab title, search engine preview, and social share cards.
+  // =========================================================================
   siteMetadata: {
+    // Browser tab title
     title: "Liam Nguyen | Senior Full-Stack Software Engineer",
+    // Meta description for Google / LinkedIn / Twitter preview cards
     description: "Portfolio of Liam Nguyen - Senior Full-Stack Software Engineer specialized in resilient backend systems, modern web architecture, and high-impact automated engineering.",
+    // Social preview image (stored in public/images/og-preview.png)
     ogImage: "/images/og-preview.png",
+    // Canonical production URL
     siteUrl: "https://tuanntq.is-a.dev",
   },
 
+  // =========================================================================
+  // 2. PERSONAL IDENTITY & CONTACT
+  // Controls the Hero section, avatar, navbar, and contact buttons.
+  // =========================================================================
   personal: {
     name: "Liam Nguyen",
     pronouns: "he/him",
+    // Primary role displayed across headers and footers
     role: "Senior Full-Stack Software Engineer",
+    // Dynamic roles cycled in the animated Hero typewriter effect
     roles: [
       "Senior Full-Stack Software Engineer",
       "Cloud & Distributed Systems Specialist",
       "Performance & Scalability Enthusiast",
       "Automation & Quality Engineering Champion"
     ],
+    // High-level value proposition tagline
     tagline: "Building resilient distributed architectures, hyper-responsive web applications, and mission-critical enterprise systems.",
+    // Elevator pitch summary
     shortBio: "5+ years of engineering experience delivering high-throughput backend services, reactive user interfaces, and automated delivery pipelines with zero tolerance for downtime.",
+    // Comprehensive bio displayed prominently in the Hero section
     bio: "I am a results-oriented software engineer who thrives at the intersection of robust backend scalability, sleek frontend ergonomics, and mission-critical software reliability. Having engineered financial services, banking portals, and modern web applications, I focus on measurable business impact: low-latency APIs, resilient microservices, and frictionless user experiences.",
     location: "Hanoi, Vietnam (Available for Remote Worldwide)",
     availableForHire: true,
+    // Availability pill text next to your avatar
     availabilityText: "Available for Senior / Lead Full-Stack Roles",
+    // Direct contact email (used by 1-click copy & mailto links)
     email: "tuanntq99@gmail.com",
+    // Profile picture (place your file in public/images/avatar.jpg or replace this path)
     avatarUrl: "/images/avatar.jpg",
+    // Printable resume route (viewable at /resume.html)
     resumeUrl: "/resume.html",
+    // Social links (leave string empty or remove optional fields if not used)
     socials: {
       github: "https://github.com/tuanntq99",
       linkedin: "https://linkedin.com/in/tuanntq99",
@@ -149,6 +171,11 @@ export const portfolioData: PortfolioData = {
     },
   },
 
+  // =========================================================================
+  // 3. EXECUTIVE IMPACT METRICS
+  // The 4 headline achievement cards rendered directly beneath the Hero section.
+  // Tip: Use quantified stats (e.g. uptime %, latency %, transaction count, scale).
+  // =========================================================================
   metrics: [
     {
       value: "5+ Years",
@@ -172,6 +199,13 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 4. TECHNICAL SKILLS MATRIX
+  // Organized into categorized cards.
+  // - icon options: "layout" (frontend), "server" (backend), "cloud" (DevOps), "shield-check" (QA/testing)
+  // - level options: "Expert" | "Advanced" | "Proficient"
+  // - featured: true highlights the badge with a distinctive border
+  // =========================================================================
   skillCategories: [
     {
       name: "Frontend & Web",
@@ -224,6 +258,14 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 5. FEATURED PROJECTS
+  // Displayed in the interactive filterable projects grid.
+  // - category options: 'Full-Stack' | 'Backend & Cloud' | 'Frontend' | 'Architecture & Testing'
+  // - impactMetric: High-impact hook displayed on top of the project card
+  // - highlights: Bullet points (STAR format recommended: Situation, Task, Action, Result)
+  // - image: URL or local path (e.g., /images/projects/project1.png)
+  // =========================================================================
   projects: [
     {
       id: "banking-lending-platform",
@@ -299,6 +341,13 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 6. WORK EXPERIENCE TIMELINE
+  // Reverse chronological career history.
+  // - current: true displays the animated "Present" badge
+  // - domain: Industry or business domain tag (e.g., "Fintech", "SaaS")
+  // - achievements: STAR-formatted achievement bullets with quantified metrics
+  // =========================================================================
   experiences: [
     {
       company: "Leading Financial Technology & Banking Group",
@@ -347,6 +396,10 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 7. ACADEMIC EDUCATION
+  // Academic degrees and university credentials.
+  // =========================================================================
   education: [
     {
       degree: "Bachelor of Science in Software Engineering / Computer Science",
@@ -357,6 +410,11 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 8. VERIFIED INDUSTRY CERTIFICATIONS
+  // Cloud, architecture, and methodology credentials.
+  // - credentialUrl: Link to verification page (AWS badge, Credly, CNCF)
+  // =========================================================================
   certifications: [
     {
       name: "AWS Certified Solutions Architect – Associate",
@@ -378,6 +436,10 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  // =========================================================================
+  // 9. LEADERSHIP & PEER TESTIMONIALS
+  // Endorsements from engineering managers, VPs, and product leaders.
+  // =========================================================================
   testimonials: [
     {
       name: "David Chen",

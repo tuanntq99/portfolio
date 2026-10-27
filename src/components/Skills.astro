@@ -16,13 +16,13 @@ const iconSvgs = {
     
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono font-medium text-indigo-400">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-500/10 dark:border-indigo-500/20 text-xs font-mono font-medium dark:text-indigo-400">
         <span>Tech Stack & Competencies</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 dark:text-slate-100 tracking-tight">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
         Engineered for <span class="text-gradient">End-to-End Delivery</span>
       </h2>
-      <p class="text-sm sm:text-base text-slate-400 dark:text-slate-400">
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">
         A full-spectrum toolkit honed over 5+ years, spanning responsive client-side architectures, resilient distributed backends, and rock-solid automated verification.
       </p>
     </div>
@@ -30,13 +30,13 @@ const iconSvgs = {
     <!-- Skills Category Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
       {skillCategories.map((category) => (
-        <div class="rounded-2xl bg-slate-900/70 border border-slate-800/90 p-6 sm:p-8 backdrop-blur-md hover:border-slate-700 transition-all duration-300 shadow-xl group">
+        <div class="rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/90 p-6 sm:p-8 backdrop-blur-md hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-xl group">
           
           <!-- Category Header -->
-          <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-            <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 shadow-inner" set:html={iconSvgs[category.icon as keyof typeof iconSvgs]} />
+          <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+            <div class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 shadow-inner" set:html={iconSvgs[category.icon as keyof typeof iconSvgs]} />
             <div>
-              <h3 class="text-lg font-bold text-slate-100 dark:text-slate-100 group-hover:text-cyan-300 transition-colors">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
                 {category.name}
               </h3>
               <span class="text-xs font-mono text-slate-500">
@@ -50,17 +50,17 @@ const iconSvgs = {
             {category.skills.map((skill) => (
               <div class={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
                 skill.featured 
-                  ? 'bg-slate-800/90 text-slate-100 border border-indigo-500/30 hover:border-indigo-400 hover:bg-slate-800 shadow-sm'
-                  : 'bg-slate-950/60 text-slate-300 border border-slate-800/80 hover:border-slate-700 hover:text-white'
+                  ? 'bg-indigo-50 text-indigo-900 border border-indigo-200 dark:bg-slate-800/90 dark:text-slate-100 dark:border-indigo-500/30 hover:border-indigo-400 hover:bg-indigo-100/60 dark:hover:bg-slate-800 shadow-sm'
+                  : 'bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-950/60 dark:text-slate-300 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white'
               }`}>
                 <span>{skill.name}</span>
                 {skill.level && (
                   <span class={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
                     skill.level === 'Expert' 
-                      ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20' 
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/20' 
                       : skill.level === 'Advanced'
-                      ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/20'
-                      : 'bg-slate-700/50 text-slate-400'
+                      ? 'bg-cyan-100 text-cyan-800 border border-cyan-200 dark:bg-cyan-500/15 dark:text-cyan-400 dark:border-cyan-500/20'
+                      : 'bg-slate-200 text-slate-700 dark:bg-slate-700/50 dark:text-slate-400'
                   }`}>
                     {skill.level}
                   </span>
@@ -74,19 +74,19 @@ const iconSvgs = {
     </div>
 
     <!-- Quick Architecture & Methodology Highlights -->
-    <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 via-indigo-950/20 to-slate-900/90 border border-indigo-900/30">
+    <div class="mt-12 p-6 rounded-2xl bg-white dark:bg-gradient-to-r dark:from-slate-900/90 dark:via-indigo-950/20 dark:to-slate-900/90 border border-slate-200 dark:border-indigo-900/30 shadow-sm">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center sm:text-left">
         <div class="space-y-1">
-          <div class="font-bold text-sm text-slate-200">Architectural Paradigm</div>
-          <div class="text-xs text-slate-400 font-mono">Microservices, Event-Driven, Clean Architecture & DDD</div>
+          <div class="font-bold text-sm text-slate-800 dark:text-slate-200">Architectural Paradigm</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">Microservices, Event-Driven, Clean Architecture & DDD</div>
         </div>
         <div class="space-y-1">
-          <div class="font-bold text-sm text-slate-200">Quality Strategy</div>
-          <div class="text-xs text-slate-400 font-mono">Behavior-Driven Development (BDD), Contract Testing, E2E Automation</div>
+          <div class="font-bold text-sm text-slate-800 dark:text-slate-200">Quality Strategy</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">Behavior-Driven Development (BDD), Contract Testing, E2E Automation</div>
         </div>
         <div class="space-y-1">
-          <div class="font-bold text-sm text-slate-200">DevOps Culture</div>
-          <div class="text-xs text-slate-400 font-mono">Infrastructure as Code, Automated Quality Gates, Trunk-Based Delivery</div>
+          <div class="font-bold text-sm text-slate-800 dark:text-slate-200">DevOps Culture</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">Infrastructure as Code, Automated Quality Gates, Trunk-Based Delivery</div>
         </div>
       </div>
     </div>

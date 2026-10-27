@@ -11,20 +11,20 @@ const { personal } = portfolioData;
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
     <!-- Big Headline CTA Card -->
-    <div class="rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800 p-8 sm:p-12 md:p-16 text-center space-y-8 shadow-2xl backdrop-blur-xl relative">
+    <div class="rounded-3xl bg-white dark:bg-gradient-to-b dark:from-slate-900/90 dark:to-slate-950/90 border border-slate-200 dark:border-slate-800 p-8 sm:p-12 md:p-16 text-center space-y-8 shadow-xl dark:shadow-2xl backdrop-blur-xl relative">
       
       <!-- Top Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono font-medium text-emerald-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20 text-xs font-mono font-medium dark:text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
         <span>Let's Build Something High-Impact</span>
       </div>
 
       <!-- Main Heading -->
       <div class="space-y-4 max-w-2xl mx-auto">
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-100 dark:text-slate-100 tracking-tight leading-tight">
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
           Ready to elevate your <span class="text-gradient">engineering velocity</span>?
         </h2>
-        <p class="text-sm sm:text-base text-slate-300 dark:text-slate-300 leading-relaxed">
+        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
           I am currently open to senior full-stack, distributed backend, or technical lead opportunities. Whether you have a specific role in mind or just want to discuss system architecture, let's connect.
         </p>
       </div>
@@ -36,9 +36,9 @@ const { personal } = portfolioData;
         <button 
           id="copy-email-btn"
           data-email={personal.email}
-          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-200 bg-slate-950/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all duration-200 flex items-center justify-center gap-2 shadow-inner group"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-200 dark:bg-slate-950/80 dark:hover:bg-slate-800 dark:border-slate-700/80 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm group"
         >
-          <svg class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4 text-indigo-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
           </svg>
           <span id="copy-text">{personal.email}</span>
@@ -58,20 +58,20 @@ const { personal } = portfolioData;
       </div>
 
       <!-- Copied Feedback Toast -->
-      <div id="copy-toast" class="hidden font-mono text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg inline-block animate-fade-in">
+      <div id="copy-toast" class="hidden font-mono text-xs text-emerald-800 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/20 px-3 py-1.5 rounded-lg inline-block animate-fade-in font-medium">
         ✓ Email copied to clipboard!
       </div>
 
       <!-- Quick Metrics Strip for Recruiters -->
-      <div class="pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-slate-400">
+      <div class="pt-8 border-t border-slate-100 dark:border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-slate-600 dark:text-slate-400">
         <div>
-          <span class="text-slate-500">Location:</span> {personal.location}
+          <span class="text-slate-400 dark:text-slate-500">Location:</span> {personal.location}
         </div>
         <div>
-          <span class="text-slate-500">Notice Period:</span> Available Immediately / 2 Weeks
+          <span class="text-slate-400 dark:text-slate-500">Notice Period:</span> Available Immediately / 2 Weeks
         </div>
         <div>
-          <span class="text-slate-500">Average Response:</span> &lt; 12 Hours
+          <span class="text-slate-400 dark:text-slate-500">Average Response:</span> &lt; 12 Hours
         </div>
       </div>
 
