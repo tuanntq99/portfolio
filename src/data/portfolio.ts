@@ -390,8 +390,8 @@ export const portfolioData: PortfolioData = {
   // =========================================================================
   education: [
     {
-      degree: "Bachelor's degree | Hanoi University of Science and Technology",
-      institution: "Hanoi University of Science and Technology (HUST)",
+      degree: "Bachelor's degree",
+      institution: "Hanoi University of Science and Technology",
       period: "2017 - 2022",
       location: "Ha Noi, Viet Nam",
       honors: "Major: Mechanical Engineering",
