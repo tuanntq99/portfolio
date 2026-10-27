@@ -119,7 +119,7 @@ export const portfolioData: PortfolioData = {
     title: "Liam Nguyen | Senior Full-Stack Software Engineer",
     description: "Portfolio of Liam Nguyen - Senior Full-Stack Software Engineer specialized in resilient backend systems, modern web architecture, and high-impact automated engineering.",
     ogImage: "/images/og-preview.png",
-    siteUrl: "https://tuanntq99.github.io/portfolio",
+    siteUrl: "https://tuanntq.is-a.dev",
   },
 
   personal: {

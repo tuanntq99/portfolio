@@ -65,7 +65,7 @@ npm install
 npm run dev
 ```
 
-Visit [`http://localhost:4321/portfolio`](http://localhost:4321/portfolio) in your browser.
+Visit [`http://localhost:4321`](http://localhost:4321) in your browser.
 
 ---
 
@@ -87,25 +87,23 @@ npm run preview
 
 ## 🚀 Deploying to GitHub Pages
 
-This repository is already configured with a GitHub Actions workflow in [`.github/workflows/deploy.yml`](file:///d:/Working/Liam/portfolio/.github/workflows/deploy.yml).
+This repository is already configured with a GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
 ### Step 1: Enable GitHub Pages in your repository settings
 1. On GitHub, navigate to your repository: `https://github.com/tuanntq99/portfolio`
 2. Click **Settings** ⚙️ → **Pages** (in the left sidebar).
-3. Under **Build and deployment** > **Source**, select **GitHub Actions**.
+3. Under **Build and deployment** > **Source**, select **GitHub Actions** (⚠️ do not choose *Deploy from a branch*).
+4. Under **Custom domain**, ensure `tuanntq.is-a.dev` is configured.
 
 ### Step 2: Push your code to the `main` branch
 ```bash
 git add .
-git commit -m "feat: launch developer portfolio with dynamic data and tailwind"
+git commit -m "feat: configure custom domain tuanntq.is-a.dev"
 git push origin main
 ```
 
 Your portfolio will automatically build and publish to:
-👉 **`https://tuanntq99.github.io/portfolio/`**
-
-> **Note for Custom Domains or Root Pages:**  
-> If you deploy to a custom domain (e.g. `yourname.dev`) or a root user page (`tuanntq99.github.io`), simply set `BASE_PATH='/'` in your environment or update `base: '/'` in [`astro.config.mjs`](file:///d:/Working/Liam/portfolio/astro.config.mjs).
+👉 **`https://tuanntq.is-a.dev/`**
 
 ---
 
