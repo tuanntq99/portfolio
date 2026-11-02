@@ -43,6 +43,19 @@ const jsonLines = (obj: Record<string, unknown>, depth = 1): string[] => {
   });
 };
 const responseLines = [punct('{'), ...jsonLines(apiResponse), punct('}')];
+
+// ---- "Headers" tab: contact & status info dressed up as HTTP response headers ----
+const linkedinShort = personal.socials.linkedin.replace(/^https?:\/\/(www\.)?/, '');
+const responseHeaders: { key: string; value: string; href?: string; id?: string; accent?: boolean }[] = [
+  { key: 'Content-Type', value: 'application/json; charset=utf-8' },
+  { key: 'X-Powered-By', value: 'Java · Spring Boot' },
+  { key: 'X-Location', value: personal.location },
+  { key: 'X-Local-Time', value: 'UTC+7', id: 'api-local-time' },
+  { key: 'X-Open-To-Work', value: personal.availableForHire ? 'true · Backend roles' : 'false', accent: personal.availableForHire },
+  { key: 'X-Contact-Email', value: personal.email, href: `mailto:${personal.email}` },
+  { key: 'X-LinkedIn', value: linkedinShort, href: personal.socials.linkedin },
+  { key: 'Content-Language', value: 'vi, en' },
+];
 const [firstName, ...rest] = personal.name.split(' ');
 const lastName = rest.pop();
 const middle = rest.join(' ');
@@ -163,11 +176,17 @@ const marqueeItems = [
               </span>
             </div>
 
-            <!-- Response meta -->
+            <!-- Response meta + tabs -->
             <div class="px-4 py-2 border-b border-slate-800 flex items-center justify-between font-mono text-[11px]">
-              <div class="flex items-center gap-3 text-slate-400">
-                <span class="text-slate-200 border-b-2 border-indigo-500 pb-0.5">Body</span>
-                <span>Headers</span>
+              <div class="flex items-center gap-3 text-slate-400" role="tablist">
+                <button type="button" role="tab" data-api-tab="body" aria-selected="true" class="api-tab pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">Body</button>
+                <button type="button" role="tab" data-api-tab="headers" aria-selected="false" class="api-tab relative pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">
+                  Headers <span class="text-slate-500">({responseHeaders.length})</span>
+                  <span class="api-tab-hint absolute -top-0.5 -right-2 flex h-1.5 w-1.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400"></span>
+                  </span>
+                </button>
               </div>
               <div class="api-status flex items-center gap-2.5">
                 <span class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold">
@@ -177,15 +196,32 @@ const marqueeItems = [
               </div>
             </div>
 
-            <!-- Response body -->
-            <div class="relative">
-              <div class="api-loading absolute inset-0 flex items-center justify-center gap-2 font-mono text-xs text-slate-400 pointer-events-none">
+            <!-- Response panels (stacked in one grid cell so the card height never jumps) -->
+            <div class="relative grid">
+              <div class="api-loading absolute inset-0 z-10 flex items-center justify-center gap-2 font-mono text-xs text-slate-400 pointer-events-none">
                 <svg class="w-4 h-4 animate-spin text-cyan-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
                 Sending request…
               </div>
-              <pre class="p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code>{responseLines.map((line, i) => (
+
+              <!-- Body -->
+              <pre data-api-panel="body" role="tabpanel" class="[grid-area:1/1] p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code>{responseLines.map((line, i) => (
                 <span class="api-line block" style={`--d:${900 + i * 55}ms`} set:html={line} />
               ))}</code></pre>
+
+              <!-- Headers -->
+              <div data-api-panel="headers" role="tabpanel" class="invisible [grid-area:1/1] p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono overflow-x-auto">
+                <div class="api-line text-slate-400 mb-1" style="--d:0ms">HTTP/1.1 <span class="text-emerald-400 font-semibold">200 OK</span></div>
+                {responseHeaders.map((h, i) => (
+                  <div class="api-line flex gap-2 whitespace-nowrap" style={`--d:${(i + 1) * 45}ms`}>
+                    <span class="text-sky-300">{h.key}:</span>
+                    {h.href ? (
+                      <a href={h.href} target={h.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" class="text-emerald-300 underline decoration-emerald-300/40 underline-offset-2 hover:decoration-emerald-300">{h.value}</a>
+                    ) : (
+                      <span id={h.id} class={h.accent ? 'text-amber-300' : 'text-emerald-300'}>{h.value}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <!-- Footer -->
@@ -241,5 +277,37 @@ const marqueeItems = [
       setTimeout(tick, delay);
     };
     setTimeout(tick, delay);
+  }
+
+  // API card: Body / Headers tabs
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-api-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-api-panel]');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.apiTab;
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
+      document.querySelector('.api-tab-hint')?.remove();
+      panels.forEach((panel) => {
+        const show = panel.dataset.apiPanel === target;
+        panel.classList.toggle('invisible', !show);
+        if (!show) return;
+        // Replay the line-by-line reveal (fast, no initial "loading" delay)
+        panel.querySelectorAll<HTMLElement>('.api-line').forEach((line, i) => {
+          line.style.setProperty('--d', `${i * 40}ms`);
+          line.classList.remove('api-line');
+          void line.offsetWidth;
+          line.classList.add('api-line');
+        });
+      });
+    });
+  });
+
+  // Live Hanoi time in the X-Local-Time header
+  const localTimeEl = document.getElementById('api-local-time');
+  if (localTimeEl) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', hour12: false });
+    const update = () => (localTimeEl.textContent = `${fmt.format(new Date())} (UTC+7)`);
+    update();
+    setInterval(update, 30_000);
   }
 </script>
