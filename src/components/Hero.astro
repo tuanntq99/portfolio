@@ -2,8 +2,47 @@
 import { portfolioData } from '../data/portfolio';
 import { withBase } from '../utils/path';
 
-const { personal, skillCategories, experiences } = portfolioData;
+const { personal, skillCategories, experiences, metrics } = portfolioData;
 const current = experiences.find((e) => e.current) ?? experiences[0];
+
+// ---- Fake REST response shown in the hero "API client" card ----
+const apiResponse = {
+  name: personal.name,
+  role: personal.role,
+  experience: `${metrics[0]?.value ?? '2+'} years`,
+  company: current.company,
+  domain: 'Banking · BIDV Direct',
+  stack: ['Spring Boot', 'Kafka', 'Oracle', 'Redis'],
+  highlights: {
+    queryLatency: '3s → 0.3s',
+    concurrency: '1k → 5k req',
+    teamEfficiency: '+20%',
+  },
+  openToWork: personal.availableForHire,
+};
+
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const punct = (s: string) => `<span class="text-slate-500">${s}</span>`;
+const fmtValue = (v: unknown): string => {
+  if (typeof v === 'string') return `<span class="text-emerald-300">"${esc(v)}"</span>`;
+  if (typeof v === 'boolean' || typeof v === 'number') return `<span class="text-amber-300">${v}</span>`;
+  if (Array.isArray(v)) return punct('[') + v.map(fmtValue).join(punct(', ')) + punct(']');
+  return '';
+};
+// Pretty-print JSON into highlighted lines (short primitive arrays stay inline)
+const jsonLines = (obj: Record<string, unknown>, depth = 1): string[] => {
+  const pad = '  '.repeat(depth);
+  const entries = Object.entries(obj);
+  return entries.flatMap(([key, value], i) => {
+    const comma = i < entries.length - 1 ? punct(',') : '';
+    const k = `${pad}<span class="text-sky-300">"${esc(key)}"</span>${punct(': ')}`;
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      return [k + punct('{'), ...jsonLines(value as Record<string, unknown>, depth + 1), pad + punct('}') + comma];
+    }
+    return [k + fmtValue(value) + comma];
+  });
+};
+const responseLines = [punct('{'), ...jsonLines(apiResponse), punct('}')];
 const [firstName, ...rest] = personal.name.split(' ');
 const lastName = rest.pop();
 const middle = rest.join(' ');
@@ -97,47 +136,62 @@ const marqueeItems = [
         </div>
       </div>
 
-      <!-- Right column: Java code window -->
+      <!-- Right column: API client card (Postman-style request / response) -->
       <div class="lg:col-span-5 animate-fade-in-up" style="animation-delay: 150ms; animation-fill-mode: both">
         <div class="glow-border rounded-2xl animate-float">
           <div class="rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl shadow-indigo-900/30 overflow-hidden">
+
             <!-- Window bar -->
-            <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800">
               <div class="flex items-center gap-1.5">
                 <span class="w-3 h-3 rounded-full bg-rose-500/90"></span>
                 <span class="w-3 h-3 rounded-full bg-amber-400/90"></span>
                 <span class="w-3 h-3 rounded-full bg-emerald-500/90"></span>
               </div>
-              <div class="font-mono text-[11px] text-slate-400 flex items-center gap-1.5">
-                <span class="text-orange-400">☕</span> BackendDeveloper.java
-              </div>
+              <div class="font-mono text-[11px] text-slate-400">Developer API</div>
               <span class="w-10"></span>
             </div>
 
-            <!-- Code -->
-            <pre class="p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code><span class="text-slate-500">@Service</span>
-<span class="text-violet-400">public class</span> <span class="text-cyan-300">BackendDeveloper</span> {"{"}
-
-  <span class="text-violet-400">String</span> name    = <span class="text-emerald-300">"{personal.name}"</span>;
-  <span class="text-violet-400">String</span> company = <span class="text-emerald-300">"{current.company}"</span>;
-  <span class="text-violet-400">String</span> domain  = <span class="text-emerald-300">"Banking · BIDV"</span>;
-
-  <span class="text-violet-400">List</span>&lt;<span class="text-cyan-300">String</span>&gt; stack = <span class="text-amber-300">List</span>.of(
-    <span class="text-emerald-300">"Spring Boot"</span>, <span class="text-emerald-300">"Kafka"</span>,
-    <span class="text-emerald-300">"Oracle"</span>, <span class="text-emerald-300">"Redis"</span>, <span class="text-emerald-300">"Docker"</span>);
-
-  <span class="text-slate-500">// 3s → 0.3s · 1,000 → 5,000 concurrent</span>
-  <span class="text-violet-400">Impact</span> <span class="text-amber-300">optimize</span>() {"{"}
-    <span class="text-violet-400">return new</span> <span class="text-cyan-300">Impact</span>(<span class="text-orange-300">10x</span>, <span class="text-orange-300">5x</span>);
-  {"}"}
-{"}"}</code></pre>
-
-            <div class="px-5 py-2.5 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
-              <span class="flex items-center gap-1.5 text-emerald-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                BUILD SUCCESS
+            <!-- Request bar -->
+            <div class="p-3 border-b border-slate-800 flex items-center gap-2">
+              <div class="flex-1 min-w-0 flex items-center rounded-lg bg-slate-900 border border-slate-800 overflow-hidden font-mono text-[12px]">
+                <span class="px-2.5 py-2 font-bold text-emerald-400 bg-emerald-500/10 border-r border-slate-800">GET</span>
+                <span class="px-2.5 py-2 text-slate-300 truncate">/api/v1/developers/<span class="text-cyan-300">tuan</span></span>
+              </div>
+              <span class="api-send shrink-0 px-3.5 py-2 rounded-lg text-[12px] font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-500 shadow-md shadow-indigo-500/30">
+                Send
               </span>
-              <span>Java · Spring</span>
+            </div>
+
+            <!-- Response meta -->
+            <div class="px-4 py-2 border-b border-slate-800 flex items-center justify-between font-mono text-[11px]">
+              <div class="flex items-center gap-3 text-slate-400">
+                <span class="text-slate-200 border-b-2 border-indigo-500 pb-0.5">Body</span>
+                <span>Headers</span>
+              </div>
+              <div class="api-status flex items-center gap-2.5">
+                <span class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>200 OK
+                </span>
+                <span class="text-slate-500">42 ms</span>
+              </div>
+            </div>
+
+            <!-- Response body -->
+            <div class="relative">
+              <div class="api-loading absolute inset-0 flex items-center justify-center gap-2 font-mono text-xs text-slate-400 pointer-events-none">
+                <svg class="w-4 h-4 animate-spin text-cyan-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
+                Sending request…
+              </div>
+              <pre class="p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code>{responseLines.map((line, i) => (
+                <span class="api-line block" style={`--d:${900 + i * 55}ms`} set:html={line} />
+              ))}</code></pre>
+            </div>
+
+            <!-- Footer -->
+            <div class="px-4 py-2.5 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>application/json</span>
+              <span>Spring Boot · REST</span>
             </div>
           </div>
         </div>
