@@ -2,374 +2,190 @@
 import { portfolioData } from '../data/portfolio';
 import { withBase } from '../utils/path';
 
-const { personal } = portfolioData;
+const { personal, skillCategories, experiences } = portfolioData;
+const current = experiences.find((e) => e.current) ?? experiences[0];
+const [firstName, ...rest] = personal.name.split(' ');
+const lastName = rest.pop();
+const middle = rest.join(' ');
+
+// Unique list of technologies for the marquee
+const marqueeItems = [
+  ...new Set([
+    'Java', 'Spring Boot', 'Spring Security', 'Hibernate', 'Apache Kafka', 'Oracle', 'MySQL',
+    'PostgreSQL', 'MongoDB', 'Redis', 'Quartz', 'WebSocket', 'Docker', 'AWS', 'Linux', 'JUnit', 'SonarQube',
+    ...skillCategories.flatMap((c) => c.skills).filter((s) => !s.includes('(')),
+  ]),
+];
 ---
 
-<section id="overview" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
-  <!-- Ambient background glow spots -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none"></div>
-  <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+<section id="overview" class="relative pt-28 pb-10 sm:pt-36 sm:pb-14 overflow-hidden">
+  <!-- Ambient glows -->
+  <div class="absolute -top-20 left-1/4 w-[520px] h-[420px] bg-indigo-600/20 rounded-full blur-[130px] pointer-events-none animate-pulse-slow"></div>
+  <div class="absolute top-1/3 right-0 w-[420px] h-[320px] bg-cyan-500/15 rounded-full blur-[110px] pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[300px] h-[260px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-      
-      <!-- Left Column: Elevator Pitch & CTAs -->
-      <div class="lg:col-span-7 space-y-6">
-        
-        <!-- Developer Avatar & Seniority Pill -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+
+      <!-- Left column -->
+      <div class="lg:col-span-7 space-y-7 animate-fade-in-up">
+
+        <!-- Avatar + availability -->
         <div class="flex items-center gap-4">
-          <div class="relative group shrink-0">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 p-[2px] shadow-lg shadow-indigo-500/25 group-hover:shadow-indigo-500/40 transition-all duration-300">
-              <img 
-                src={withBase(personal.avatarUrl)} 
-                alt={personal.name} 
-                class="w-full h-full object-cover rounded-[14px]"
-                loading="eager"
-              />
+          <div class="relative shrink-0">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 p-[2px] shadow-lg shadow-indigo-500/30">
+              <img src={withBase(personal.avatarUrl)} alt={personal.name} class="w-full h-full object-cover rounded-[14px]" loading="eager" />
             </div>
-            <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-slate-950"></span>
-            </span>
+            {personal.availableForHire && (
+              <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white dark:border-slate-950"></span>
+              </span>
+            )}
           </div>
-          
           <div class="space-y-1.5">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/30 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-sm">
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">{personal.availabilityText}</span>
-              <span class="text-slate-300 dark:text-slate-600">|</span>
-              <span class="text-slate-600 dark:text-slate-400">{personal.location}</span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              {personal.availabilityText}
             </div>
-            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Direct: <a href={`mailto:${personal.email}`} class="text-indigo-600 dark:text-cyan-400 hover:underline">{personal.email}</a>
+            <div class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              {personal.location}
             </div>
           </div>
         </div>
 
-        <!-- Main Title & Typographic Hook -->
+        <!-- Name & role -->
         <div class="space-y-3">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 leading-[1.15]">
-            Architecting <span class="text-gradient">resilient systems</span> & high-impact products.
+          <p class="font-mono text-sm text-indigo-600 dark:text-cyan-400">Hello, I'm</p>
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.05]">
+            {firstName} {middle}<br />
+            <span class="text-gradient">{lastName}</span>
           </h1>
-          <div class="h-8 sm:h-9 flex items-center">
-            <span class="text-lg sm:text-xl font-mono text-indigo-600 dark:text-cyan-400 font-semibold" id="typewriter-text">
-              Senior Full-Stack Software Engineer
-            </span>
+          <div class="h-8 flex items-center font-mono text-lg sm:text-xl font-semibold text-slate-700 dark:text-slate-200">
+            <span class="text-indigo-500 dark:text-cyan-400 mr-2">&gt;</span>
+            <span id="typewriter-text" data-roles={JSON.stringify(personal.roles)}>{personal.roles[0]}</span>
             <span class="inline-block w-2 h-5 ml-1 bg-indigo-600 dark:bg-cyan-400 animate-pulse"></span>
           </div>
         </div>
 
-        <!-- Elevator Pitch / Bio -->
-        <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
+        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
           {personal.bio}
         </p>
 
-        <!-- Action Buttons -->
-        <div class="pt-2 flex flex-wrap items-center gap-4">
-          <a 
-            href="#projects" 
-            class="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-[1.02] flex items-center gap-2"
-          >
-            <span>Explore Featured Projects</span>
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="#projects" class="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 shadow-lg transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2">
+            View Projects
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
-
-          <a 
-            href="#contact" 
-            class="px-6 py-3 rounded-xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm dark:bg-slate-900/90 dark:text-slate-200 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-700/80 transition-all duration-300 hover:border-slate-400 dark:hover:border-slate-600 flex items-center gap-2"
-          >
-            <span>Contact {personal.name.split(' ').slice(-1)[0]}</span>
-            <svg class="w-4 h-4 text-indigo-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
+          <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-700 transition-all duration-300 hover:-translate-y-0.5">
+            Get in touch
           </a>
-
-          <a 
-            href={personal.socials.github} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="GitHub Profile" 
-            class="p-3 rounded-xl text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 shadow-sm dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:border-slate-800 transition-colors"
-          >
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-          </a>
-
-          <a 
-            href={personal.socials.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="LinkedIn Profile" 
-            class="p-3 rounded-xl text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 shadow-sm dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:border-slate-800 transition-colors"
-          >
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Recruiter Quick Summary Badges -->
-        <div class="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
-          <div class="flex items-center gap-1.5">
-            <span class="text-emerald-600 dark:text-emerald-400 font-bold">✓</span>
-            <span>Clean Architecture & DDD</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-indigo-600 dark:text-cyan-400 font-bold">✓</span>
-            <span>99.98% SLA Delivery</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-violet-600 dark:text-indigo-400 font-bold">✓</span>
-            <span>Automated CI/CD Quality Gates</span>
+          <div class="flex items-center gap-2 ml-1">
+            {personal.socials.linkedin && (
+              <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-3 rounded-xl text-slate-600 hover:text-[#0a66c2] bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            )}
+            {personal.socials.github && (
+              <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-3 rounded-xl text-slate-600 hover:text-slate-900 bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
+              </a>
+            )}
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Interactive Distributed System Architecture Blueprint -->
-      <div class="lg:col-span-5">
-        <div class="relative rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden backdrop-blur-xl group hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
-          
-          <!-- Blueprint Header Bar -->
-          <div class="px-4 py-3 bg-slate-50 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 inline-block"></span>
-              <span class="font-mono text-xs text-slate-700 dark:text-slate-300 font-bold tracking-tight">System Architecture Topology</span>
+      <!-- Right column: Java code window -->
+      <div class="lg:col-span-5 animate-fade-in-up" style="animation-delay: 150ms; animation-fill-mode: both">
+        <div class="glow-border rounded-2xl animate-float">
+          <div class="rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl shadow-indigo-900/30 overflow-hidden">
+            <!-- Window bar -->
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-rose-500/90"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400/90"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/90"></span>
+              </div>
+              <div class="font-mono text-[11px] text-slate-400 flex items-center gap-1.5">
+                <span class="text-orange-400">☕</span> BackendDeveloper.java
+              </div>
+              <span class="w-10"></span>
             </div>
-            <div class="flex items-center gap-1.5 font-mono text-[10px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-2 py-0.5 rounded-full">
-              <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>99.98% SLA LIVE</span>
+
+            <!-- Code -->
+            <pre class="p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code><span class="text-slate-500">@Service</span>
+<span class="text-violet-400">public class</span> <span class="text-cyan-300">BackendDeveloper</span> {"{"}
+
+  <span class="text-violet-400">String</span> name    = <span class="text-emerald-300">"{personal.name}"</span>;
+  <span class="text-violet-400">String</span> company = <span class="text-emerald-300">"{current.company}"</span>;
+  <span class="text-violet-400">String</span> domain  = <span class="text-emerald-300">"Banking · BIDV"</span>;
+
+  <span class="text-violet-400">List</span>&lt;<span class="text-cyan-300">String</span>&gt; stack = <span class="text-amber-300">List</span>.of(
+    <span class="text-emerald-300">"Spring Boot"</span>, <span class="text-emerald-300">"Kafka"</span>,
+    <span class="text-emerald-300">"Oracle"</span>, <span class="text-emerald-300">"Redis"</span>, <span class="text-emerald-300">"Docker"</span>);
+
+  <span class="text-slate-500">// 3s → 0.3s · 1,000 → 5,000 concurrent</span>
+  <span class="text-violet-400">Impact</span> <span class="text-amber-300">optimize</span>() {"{"}
+    <span class="text-violet-400">return new</span> <span class="text-cyan-300">Impact</span>(<span class="text-orange-300">10x</span>, <span class="text-orange-300">5x</span>);
+  {"}"}
+{"}"}</code></pre>
+
+            <div class="px-5 py-2.5 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span class="flex items-center gap-1.5 text-emerald-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                BUILD SUCCESS
+              </span>
+              <span>Java · Spring</span>
             </div>
           </div>
-
-          <!-- Interactive Topology Diagram Canvas -->
-          <div class="p-5 space-y-3.5">
-            
-            <!-- Stage 1: Edge & Ingress -->
-            <div 
-              class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-indigo-300 dark:border-slate-800 dark:hover:border-indigo-500/50 transition-all cursor-pointer"
-              data-node="edge"
-            >
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span class="p-1 rounded bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs">🌐</span>
-                  <div>
-                    <div class="text-xs font-bold text-slate-800 dark:text-slate-200">Cloudflare Edge & WAF</div>
-                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Global Anycast CDN · SSL/TLS 1.3 · Anti-DDoS</div>
-                  </div>
-                </div>
-                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-100/80 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-semibold">&lt; 15ms</span>
-              </div>
-            </div>
-
-            <!-- Flow Connector 1 -->
-            <div class="flex justify-center -my-1">
-              <div class="w-0.5 h-3 bg-gradient-to-b from-indigo-500 to-cyan-500 opacity-60"></div>
-            </div>
-
-            <!-- Stage 2: Gateway & Microservices Grid -->
-            <div class="grid grid-cols-2 gap-2.5">
-              
-              <!-- Microservice A: BIDV Tax & Customs Engine -->
-              <div 
-                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-cyan-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-cyan-300 dark:border-slate-800 dark:hover:border-cyan-500/50 transition-all cursor-pointer ring-2 ring-indigo-500/20"
-                data-node="lending"
-              >
-                <div class="flex items-center gap-1.5 mb-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">BIDV Tax Engine</span>
-                </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Spring Boot · Quartz</div>
-                <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold">
-                  <span>Customs Duty</span>
-                  <span>99.98% SLA</span>
-                </div>
-              </div>
-
-              <!-- Microservice B: WebSocket & Security Gateway -->
-              <div 
-                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-emerald-300 dark:border-slate-800 dark:hover:border-emerald-500/50 transition-all cursor-pointer"
-                data-node="event"
-              >
-                <div class="flex items-center gap-1.5 mb-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">WebSocket Balancer</span>
-                </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Spring Security · Kiosk</div>
-                <div class="mt-1.5 flex items-center justify-between text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
-                  <span>5x Scale</span>
-                  <span>Load Balanced</span>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Flow Connector 2 -->
-            <div class="flex justify-center -my-1">
-              <div class="w-0.5 h-3 bg-gradient-to-b from-cyan-500 to-emerald-500 opacity-60"></div>
-            </div>
-
-            <!-- Stage 3: Data Tier (Redis & Oracle / MySQL) -->
-            <div class="grid grid-cols-2 gap-2.5">
-              
-              <!-- Redis Cache -->
-              <div 
-                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-rose-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-rose-300 dark:border-slate-800 dark:hover:border-rose-500/50 transition-all cursor-pointer"
-                data-node="redis"
-              >
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Redis Cache</span>
-                  <span class="text-[9px] font-mono px-1 py-0.2 bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 rounded">Sub-ms</span>
-                </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Status Caching · Rate Limit</div>
-                <div class="mt-1 text-[10px] font-mono font-semibold text-rose-600 dark:text-rose-400">Fast State Retrieval</div>
-              </div>
-
-              <!-- Relational HA Database -->
-              <div 
-                class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-blue-300 dark:border-slate-800 dark:hover:border-blue-500/50 transition-all cursor-pointer"
-                data-node="postgres"
-              >
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Oracle / MySQL HA</span>
-                  <span class="text-[9px] font-mono px-1 py-0.2 bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded">ACID</span>
-                </div>
-                <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Maker-Checker Dual Auth</div>
-                <div class="mt-1 text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400">10x SQL Query Boost</div>
-              </div>
-
-            </div>
-
-            <!-- Stage 4: Apache Kafka Streaming Banner -->
-            <div 
-              class="arch-node group/node p-2.5 rounded-xl bg-slate-50 hover:bg-amber-50/60 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 hover:border-amber-300 dark:border-slate-800 dark:hover:border-amber-500/50 transition-all cursor-pointer"
-              data-node="kafka"
-            >
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span class="text-xs">⚡</span>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-800 dark:text-slate-200">Apache Kafka Event Bus</div>
-                    <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">Decoupled Tax Notifications · Guaranteed Delivery</div>
-                  </div>
-                </div>
-                <span class="text-[10px] font-mono font-semibold text-amber-600 dark:text-amber-400">Real-Time</span>
-              </div>
-            </div>
-
-            <!-- Interactive Node Telemetry Inspector -->
-            <div id="arch-inspector" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 text-xs font-mono transition-all">
-              <div class="flex items-center justify-between text-[11px] font-bold text-indigo-600 dark:text-cyan-400 mb-1" id="inspector-title">
-                <span>Selected: BIDV Direct Customs & Tax Engine</span>
-                <span class="text-[9px] font-normal text-slate-400">Click any component</span>
-              </div>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-normal" id="inspector-desc">
-                Engineered in Java Spring Boot with Oracle, Quartz scheduling, and maker-checker dual authorization workflows for enterprise bank tax declaration and verification.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- Bottom Telemetry Status Strip -->
-          <div class="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
-            <span class="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-semibold">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              High-Availability Banking Systems
-            </span>
-            <span>Java · Spring Boot · Oracle · Kafka · Docker</span>
-          </div>
-
         </div>
       </div>
+    </div>
+  </div>
 
+  <!-- Tech marquee -->
+  <div class="marquee relative mt-16 sm:mt-20 overflow-hidden border-y border-slate-200/80 dark:border-slate-800/70 bg-white/50 dark:bg-slate-900/40 py-4">
+    <div class="marquee-track flex w-max gap-10">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <span class="flex items-center gap-10 font-mono text-sm font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap">
+          {item}
+          <span class="text-indigo-400/60">✦</span>
+        </span>
+      ))}
     </div>
   </div>
 </section>
 
-<script define:vars={{ roles: personal.roles }}>
-  // Dynamic typewriter text effect using personal.roles
-  let roleIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typewriterElement = document.getElementById('typewriter-text');
+<script>
+  // Typewriter cycling through personal.roles
+  const el = document.getElementById('typewriter-text');
+  const roles: string[] = el ? JSON.parse(el.dataset.roles || '[]') : [];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function typeEffect() {
-    if (!typewriterElement || !roles || roles.length === 0) return;
-    const currentRole = roles[roleIndex];
+  if (el && roles.length > 1 && !reduceMotion) {
+    let roleIndex = 0;
+    let charIndex = roles[0].length;
+    let deleting = true;
+    let delay = 2200;
 
-    if (isDeleting) {
-      typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
-    }
+    const tick = () => {
+      const role = roles[roleIndex];
+      charIndex += deleting ? -1 : 1;
+      el.textContent = role.substring(0, charIndex);
 
-    let typeSpeed = isDeleting ? 30 : 65;
-
-    if (!isDeleting && charIndex === currentRole.length) {
-      typeSpeed = 2200; // Pause at end of text
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-      typeSpeed = 400; // Short pause before next word
-    }
-
-    setTimeout(typeEffect, typeSpeed);
+      delay = deleting ? 30 : 65;
+      if (!deleting && charIndex === role.length) {
+        deleting = true;
+        delay = 2200;
+      } else if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        delay = 350;
+      }
+      setTimeout(tick, delay);
+    };
+    setTimeout(tick, delay);
   }
-
-  typeEffect();
-
-  // Architecture Blueprint interactive node inspector
-  const nodeData = {
-    edge: {
-      title: "Edge CDN & Web Application Firewall",
-      desc: "Cloudflare global anycast network handles SSL/TLS termination, anti-DDoS mitigation, and rapid request routing within 15ms."
-    },
-    lending: {
-      title: "BIDV Direct Customs & Tax Engine",
-      desc: "Engineered in Java Spring Boot with Oracle, Quartz scheduling, and maker-checker dual authorization workflows for enterprise bank tax declaration and verification."
-    },
-    event: {
-      title: "WebSocket Load Balancer & Spring Security Gateway",
-      desc: "Custom-architected WebSocket load balancer boosting concurrent kiosk platform scalability by 5x with Spring Security role authentication and multi-lingual error handling."
-    },
-    redis: {
-      title: "Redis Distributed In-Memory Cache",
-      desc: "High-speed caching layer ensuring sub-millisecond retrieval of tax transaction states, appointment queues, and kiosk telemetry."
-    },
-    postgres: {
-      title: "Oracle & MySQL Enterprise Relational Tier",
-      desc: "Optimized relational database schemas with rewritten SQL queries delivering up to 10x query performance boosts and strict ACID transactional guarantees."
-    },
-    kafka: {
-      title: "Apache Kafka Streaming Event Hub",
-      desc: "Decoupled asynchronous event broker orchestrating tax status notifications, financial webhooks, and audit log pipelines with guaranteed at-least-once delivery."
-    }
-  };
-
-  const archNodes = document.querySelectorAll('.arch-node');
-  const inspectorTitle = document.getElementById('inspector-title');
-  const inspectorDesc = document.getElementById('inspector-desc');
-
-  archNodes.forEach(node => {
-    node.addEventListener('click', () => {
-      const key = node.getAttribute('data-node');
-      if (!key || !nodeData[key as keyof typeof nodeData]) return;
-
-      // Update active ring
-      archNodes.forEach(n => n.classList.remove('ring-2', 'ring-indigo-500'));
-      node.classList.add('ring-2', 'ring-indigo-500');
-
-      // Update inspector text
-      if (inspectorTitle) {
-        inspectorTitle.innerHTML = `<span>Selected: ${nodeData[key as keyof typeof nodeData].title}</span><span class="text-[9px] font-normal text-slate-400">Active</span>`;
-      }
-      if (inspectorDesc) {
-        inspectorDesc.textContent = nodeData[key as keyof typeof nodeData].desc;
-      }
-    });
-  });
 </script>

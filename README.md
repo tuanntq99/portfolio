@@ -8,19 +8,17 @@ An ultra-modern, high-performance developer portfolio built with **Astro** and *
 
 ## 🌟 Key Features
 
-- **⚡ Blazing Fast & Zero-JS Baseline**: Built on Astro's island architecture for near-perfect Google Lighthouse scores and rapid loading.
-- **🎨 Headhunter-Centric Design**:
-  - **Quantified Impact Metrics**: Highlights business ROI (e.g., *99.98% System Uptime*, *-45% Latency Reduction*, *1M+ Transactions Processed*).
-  - **Interactive Developer Terminal**: Simulated production terminal featuring live tab switching (`developer.json`, `ci_pipeline.sh`, `sla_monitor.log`).
-  - **Dynamic Title Rotation**: Typewriter animation cycling through your core engineering roles.
-  - **STAR-Formatted Experience**: Reverse chronological career timeline with quantifiable achievement bullets.
-  - **Production Projects Grid**: Dynamic category filtering (`Full-Stack`, `Backend & Cloud`, `Frontend`, `Architecture & Testing`) with impact tags and repository links.
-  - **Verified Endorsements & Certifications**: High-trust social proof and AWS / K8s certification badges.
-  - **1-Click Copy Email & Direct CTA**: Frictionless recruiter contact with animated clipboard confirmation toast.
-- **🌗 Dark / Light Mode with Zero-Flicker**: Instant theme toggle with localStorage persistence.
-- **📄 Printable CV / Resume View**: Built-in resume at `/resume.html` with one-click print-to-PDF formatting.
-- **🚀 1-File Dynamic Data Configuration**: All portfolio content (bio, skills, metrics, projects, experience, socials, SEO) is managed in a single TypeScript file (`src/data/portfolio.ts`).
-- **📦 GitHub Pages Ready**: Pre-configured static build with automated GitHub Actions CI/CD deployment.
+- **⚡ Fast & static**: Astro + Tailwind, near-zero JS, deployed to GitHub Pages.
+- **☕ Java-themed hero**: Typewriter role rotation, animated `BackendDeveloper.java` code card and a scrolling tech-stack marquee.
+- **📊 Impact metrics**: Real numbers from the CV (10x query speed-up, 5x WebSocket scalability, 20% team efficiency).
+- **🗂️ Projects grid**: Filter by company (IGNIFY / DS GLOBAL).
+- **🧭 Experience timeline + Education**.
+- **🏅 Certifications & 💬 References**: Sections are built in but **hidden automatically while their lists are empty** — add entries in `portfolio.ts` and they (and the References nav link) appear.
+- **📄 One-click CV download**: A single `Download CV` button in the sticky navbar downloads `public/Ngo_Tran_Quoc_Tuan_CV.pdf`.
+- **🌗 Dark / Light mode** with zero flicker, scroll-reveal animations (respects `prefers-reduced-motion`).
+- **🚀 Single data file**: All content lives in `src/data/portfolio.ts`.
+
+> **Updating the CV:** replace `public/Ngo_Tran_Quoc_Tuan_CV.pdf` with the new PDF (keep the same name) and update `src/data/portfolio.ts` so the website matches it.
 
 ---
 
@@ -28,7 +26,7 @@ An ultra-modern, high-performance developer portfolio built with **Astro** and *
 
 - **Framework**: [Astro 4](https://astro.build/)
 - **Styling**: [Tailwind CSS v3](https://tailwindcss.com/)
-- **Typography**: Plus Jakarta Sans, Inter & JetBrains Mono (via Google Fonts)
+- **Typography**: Plus Jakarta Sans & JetBrains Mono (via Google Fonts)
 - **Deployment**: GitHub Pages via GitHub Actions
 
 ---
@@ -43,13 +41,14 @@ Simply open this file and update any of the following strongly-typed fields:
 
 | Section | What to Edit |
 | :--- | :--- |
-| **Personal Info** | Name, roles, bio, elevator pitch, location, email, avatar image, resume link, socials |
-| **Executive Metrics** | The 4 high-impact metric cards shown right below the hero |
-| **Technical Skills** | Categorized list of skills (Frontend, Backend, Cloud & DevOps, Testing) and levels (`Expert`, `Advanced`) |
-| **Featured Projects** | Project title, category, impact metric hook, description, STAR bullets, tags, GitHub / demo URLs |
-| **Experience Timeline** | Companies, roles, date periods, domain tags, quantified achievements, tech stack |
-| **Certifications & Education**| Degrees, honors, verified certifications and verification URLs |
-| **Testimonials** | Quotes from engineering leadership, roles, companies, and avatar images |
+| **Personal Info** | Name, roles, bio, location, email, phone, avatar, CV path / download file name, socials |
+| **Metrics** | The 4 impact cards below the hero |
+| **Skills** | Skill groups (same as the CV) |
+| **Projects** | Title, company, description, optional highlights, technologies, optional link |
+| **Experience** | Company, role, period, achievements (`**text**` renders bold) |
+| **Education** | Degree, institution, period, major |
+| **Certifications** | Empty = hidden. Name, issuer, date, credential URL |
+| **Testimonials (References)** | Empty = hidden. Name, role, company, relationship, quote, contact |
 
 ---
 
@@ -117,18 +116,18 @@ Your portfolio will automatically build and publish to:
 │   ├── images/
 │   │   ├── avatar.jpg          # Profile portrait
 │   │   └── og-preview.png      # Social share card
-│   └── resume.html             # Printable resume document
+│   └── Ngo_Tran_Quoc_Tuan_CV.pdf  # Downloadable CV (single source)
 ├── src/
 │   ├── components/
 │   │   ├── Contact.astro       # 1-click email copy & recruiter CTAs
-│   │   ├── Experience.astro    # Career timeline & certifications
+│   │   ├── Experience.astro    # Timeline, education & certifications (hidden if empty)
 │   │   ├── Footer.astro        # Social links & live timezone clock
-│   │   ├── Hero.astro          # Avatar, typewriter title, interactive terminal
+│   │   ├── Hero.astro          # Avatar, typewriter title, Java code card, marquee
 │   │   ├── Metrics.astro       # Quantified achievements strip
-│   │   ├── Navbar.astro        # Sticky glass header & theme toggle
-│   │   ├── Projects.astro      # Filterable project grid with impact metrics
+│   │   ├── Navbar.astro        # Sticky header, theme toggle, Download CV button
+│   │   ├── Projects.astro      # Project grid filtered by company
 │   │   ├── Skills.astro        # Domain skill matrix with proficiency badges
-│   │   ├── Testimonials.astro  # Endorsement quotes from leadership
+│   │   ├── Testimonials.astro  # References (hidden if empty)
 │   │   └── ThemeScript.astro   # Zero-flicker dark/light mode initializer
 │   ├── data/
 │   │   └── portfolio.ts        # 🎯 CENTRAL DYNAMIC DATA FILE (edit here!)
@@ -139,6 +138,7 @@ Your portfolio will automatically build and publish to:
 │   ├── styles/
 │   │   └── global.css          # Tailwind directives & custom utilities
 │   └── utils/
+│       ├── format.ts           # **bold** text helper for experience bullets
 │       └── path.ts             # Safe base-path URL resolver
 ├── astro.config.mjs            # Astro & Tailwind configuration
 ├── package.json
