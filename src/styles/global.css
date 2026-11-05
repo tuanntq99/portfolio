@@ -154,6 +154,10 @@
   .api-loading { display: none; }
   .reveal, .reveal.is-visible { opacity: 1; animation: none; }
   .marquee-track, .glow-border::before { animation: none; }
+  /* Ambient loops and entrances (Tailwind animate-* utilities) */
+  .animate-float, .animate-ping, .animate-pulse, .animate-pulse-slow, .animate-glow,
+  .animate-fade-in, .animate-fade-in-up { animation: none; }
+  html { scroll-behavior: auto; }
 }
 
 /* Custom Scrollbar */
