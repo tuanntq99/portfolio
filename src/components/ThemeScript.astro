@@ -3,6 +3,9 @@
 ---
 
 <script is:inline>
+  // Mark JS as available so scroll-reveal only hides content it can reveal
+  document.documentElement.classList.add('js');
+
   const applyTheme = () => {
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

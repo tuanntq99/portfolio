@@ -15,7 +15,7 @@ const { personal } = portfolioData;
       
       <!-- Top Badge -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20 text-xs font-mono font-medium dark:text-emerald-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" aria-hidden="true"></span>
         <span>05 · Contact</span>
       </div>
 
@@ -36,7 +36,7 @@ const { personal } = portfolioData;
         <button 
           id="copy-email-btn"
           data-email={personal.email}
-          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-200 dark:bg-slate-950/80 dark:hover:bg-slate-800 dark:border-slate-700/80 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm group"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-200 dark:bg-slate-950/80 dark:hover:bg-slate-800 dark:border-slate-700/80 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
         >
           <svg class="w-4 h-4 text-indigo-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -49,7 +49,7 @@ const { personal } = portfolioData;
           href={personal.socials.facebook}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:scale-[1.02] flex items-center justify-center gap-2"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-600 to-cyan-700 hover:brightness-110 shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:scale-[1.02] motion-reduce:hover:scale-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 flex items-center justify-center gap-2"
         >
           <span>Send Direct Message</span>
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -60,20 +60,20 @@ const { personal } = portfolioData;
       </div>
 
       <!-- Copied Feedback Toast -->
-      <div id="copy-toast" class="hidden font-mono text-xs text-emerald-800 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/20 px-3 py-1.5 rounded-lg inline-block animate-fade-in font-medium">
+      <div id="copy-toast" role="status" class="hidden font-mono text-xs text-emerald-800 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/20 px-3 py-1.5 rounded-lg inline-block animate-fade-in font-medium">
         ✓ Email copied to clipboard!
       </div>
 
       <!-- Quick Metrics Strip for Recruiters -->
       <div class="pt-8 border-t border-slate-100 dark:border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-slate-600 dark:text-slate-400">
         <div>
-          <span class="text-slate-400 dark:text-slate-500">Location:</span> {personal.location}
+          <span class="text-slate-500 dark:text-slate-400">Location:</span> {personal.location}
         </div>
         <div>
-          <span class="text-slate-400 dark:text-slate-500">Phone:</span> <a href={`tel:${personal.phone?.replace(/\s+/g, '')}`} class="hover:underline">{personal.phone}</a>
+          <span class="text-slate-500 dark:text-slate-400">Phone:</span> <a href={`tel:${personal.phone?.replace(/\s+/g, '')}`} class="hover:underline rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900">{personal.phone}</a>
         </div>
         <div>
-          <span class="text-slate-400 dark:text-slate-500">LinkedIn:</span> <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" class="hover:underline">{personal.socials.linkedin.replace(/^https?:\/\//, '')}</a>
+          <span class="text-slate-500 dark:text-slate-400">LinkedIn:</span> <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" class="hover:underline rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900">{personal.socials.linkedin.replace(/^https?:\/\//, '')}</a>
         </div>
       </div>
 
