@@ -1,24 +1,48 @@
-# 🚀 Senior Full-Stack Developer Portfolio
+# Ngo Tran Quoc Tuan · Java Backend Developer Portfolio
 
-An ultra-modern, high-performance developer portfolio built with **Astro** and **Tailwind CSS**, designed specifically to impress technical headhunters, engineering directors, and talent recruiters with measurable impact metrics and senior craftsmanship.
+A fast, static, accessible portfolio built with **Astro** and **Tailwind CSS**. It is aimed at two readers: recruiters who scan in 30 seconds and tech leads who read in depth. Every claim on the site comes from the CV, and is backed by numbers.
 
-![Portfolio Preview](./public/images/og-preview.png)
+🔗 **Live:** [tuanntq.is-a.dev](https://tuanntq.is-a.dev/)
 
 ---
 
 ## 🌟 Key Features
 
-- **⚡ Fast & static**: Astro + Tailwind, near-zero JS, deployed to GitHub Pages.
-- **☕ Java-themed hero**: Typewriter role rotation, animated `BackendDeveloper.java` code card and a scrolling tech-stack marquee.
-- **📊 Impact metrics**: Real numbers from the CV (10x query speed-up, 5x WebSocket scalability, 20% team efficiency).
-- **🗂️ Projects grid**: Filter by company (IGNIFY / DS GLOBAL).
-- **🧭 Experience timeline + Education**.
-- **🏅 Certifications & 💬 References**: Sections are built in but **hidden automatically while their lists are empty** — add entries in `portfolio.ts` and they (and the References nav link) appear.
-- **📄 One-click CV download**: A single `Download CV` button in the sticky navbar downloads `public/Ngo_Tran_Quoc_Tuan_CV.pdf`.
-- **🌗 Dark / Light mode** with zero flicker, scroll-reveal animations (respects `prefers-reduced-motion`).
-- **🚀 Single data file**: All content lives in `src/data/portfolio.ts`.
+- **⚡ Fast and static.** Astro + Tailwind, about 5 KB of JS. Fonts load without blocking render. Deployed to GitHub Pages.
+- **☕ API-console hero.** A Postman-style `GET /api/v1/developers/tuan` card:
+  - The **Body** tab shows the JSON profile.
+  - The **Headers** tab carries contact details as HTTP headers, plus live Hanoi time.
+  - **Send** replays the request.
+  - The status bar shows the page's real time-to-first-byte.
+- **📌 Evidence first.** A proof line under the role shows `2+ yrs · BIDV Direct · 10x query · 5x WebSocket`, visible in the first mobile viewport.
+- **📊 Impact metrics.** Real numbers from the CV: 10x query speed-up, 5x WebSocket scalability, 20% team efficiency.
+- **🗂️ Projects grid.** Filter by company (IGNIFY / DS GLOBAL). Screen readers hear the result count.
+- **🧭 Experience timeline + Education.**
+- **🏅 Certifications and 💬 References.** These sections are built in but **hidden automatically while their lists are empty**. Add entries in `portfolio.ts` and they appear, along with the References nav link.
+- **📄 One-click CV download.** A single `Download CV` button in the sticky navbar downloads `public/Ngo_Tran_Quoc_Tuan_CV.pdf`.
+- **🌗 Dark and light mode.** No flicker on load. Both themes meet WCAG AA contrast.
 
-> **Updating the CV:** replace `public/Ngo_Tran_Quoc_Tuan_CV.pdf` with the new PDF (keep the same name) and update `src/data/portfolio.ts` so the website matches it.
+> **Updating the CV:** replace `public/Ngo_Tran_Quoc_Tuan_CV.pdf` with the new PDF (keep the same name) and update `src/data/portfolio.ts` so the website matches it. The site must never claim anything that is not in the CV.
+
+---
+
+## ♿ Accessibility
+
+- **Contrast.** WCAG AA in both themes. White text on gradients always ends on a `-600`/`-700` step. Secondary text is `slate-600` (light) or `slate-400` (dark), never `slate-500`.
+- **Keyboard.**
+  - A *Skip to content* link.
+  - Visible `focus-visible` rings everywhere.
+  - The API card tabs follow the WAI-ARIA tabs pattern (Arrow keys, Home and End).
+- **Screen readers.**
+  - The role is read as static text, not the typewriter.
+  - The JSON card has a plain-language summary.
+  - Live regions announce the filter results and the copy-email result.
+- **Motion.**
+  - Everything respects `prefers-reduced-motion`.
+  - The tech marquee has a pause button.
+  - The typewriter makes one pass, then stops.
+- **Touch.** Controls are at least 44 px on mobile.
+- **No-JS.** Scroll-reveal content only hides when JavaScript can reveal it again.
 
 ---
 
@@ -26,59 +50,52 @@ An ultra-modern, high-performance developer portfolio built with **Astro** and *
 
 - **Framework**: [Astro 4](https://astro.build/)
 - **Styling**: [Tailwind CSS v3](https://tailwindcss.com/)
-- **Typography**: Plus Jakarta Sans & JetBrains Mono (via Google Fonts)
-- **Deployment**: GitHub Pages via GitHub Actions
+- **Typography**: Plus Jakarta Sans and JetBrains Mono (via Google Fonts)
+- **Deployment**: GitHub Pages via GitHub Actions (Node 20)
 
 ---
 
-## ⚡ How to Dynamically Change Your Data
+## ⚡ Updating Content
 
-You do **not** need to touch any UI layout or HTML code to update your portfolio. Everything is centralized in:
+You do **not** need to touch any layout or HTML to update the portfolio. All content lives in one strongly typed file:
 
-📂 [`src/data/portfolio.ts`](file:///d:/Working/Liam/portfolio/src/data/portfolio.ts)
-
-Simply open this file and update any of the following strongly-typed fields:
+📂 [`src/data/portfolio.ts`](src/data/portfolio.ts)
 
 | Section | What to Edit |
 | :--- | :--- |
-| **Personal Info** | Name, roles, bio, location, email, phone, avatar, CV path / download file name, socials |
-| **Metrics** | The 4 impact cards below the hero |
+| **Site metadata** | Page title, description, OG image, site URL |
+| **Personal Info** | Name, roles (typewriter), bio, location, email, phone, avatar, CV path / download file name, socials |
+| **Metrics** | The 4 impact cards below the hero. The first three also feed the hero proof line |
 | **Skills** | Skill groups (same as the CV) |
-| **Projects** | Title, company, description, optional highlights, technologies, optional link |
-| **Experience** | Company, role, period, achievements (`**text**` renders bold) |
+| **Projects** | Title, subtitle, company, description, optional highlights, technologies, optional link |
+| **Experience** | Company, role, period, location, achievements (`**text**` renders bold) |
 | **Education** | Degree, institution, period, major |
-| **Certifications** | Empty = hidden. Name, issuer, date, credential URL |
-| **Testimonials (References)** | Empty = hidden. Name, role, company, relationship, quote, contact |
+| **Certifications** | Empty means hidden. Name, issuer, date, credential URL |
+| **Testimonials (References)** | Empty means hidden. Name, role, company, relationship, quote, contact |
 
 ---
 
 ## 💻 Local Development
 
-Clone the repository and install dependencies:
-
 ```bash
 # Install dependencies
 npm install
 
-# Start local development server
+# Start the local dev server
 npm run dev
 ```
 
-Visit [`http://localhost:4321`](http://localhost:4321) in your browser.
+Then open [`http://localhost:4321`](http://localhost:4321).
 
 ---
 
 ## 🏗️ Building for Production
 
-To create an optimized, static build in the `dist/` directory:
-
 ```bash
+# Static build into dist/
 npm run build
-```
 
-To preview the production build locally:
-
-```bash
+# Preview the production build locally
 npm run preview
 ```
 
@@ -86,23 +103,20 @@ npm run preview
 
 ## 🚀 Deploying to GitHub Pages
 
-This repository is already configured with a GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+Deployment runs from the GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on every push to `main`.
 
-### Step 1: Enable GitHub Pages in your repository settings
-1. On GitHub, navigate to your repository: `https://github.com/tuanntq99/portfolio`
-2. Click **Settings** ⚙️ → **Pages** (in the left sidebar).
-3. Under **Build and deployment** > **Source**, select **GitHub Actions** (⚠️ do not choose *Deploy from a branch*).
-4. Under **Custom domain**, ensure `tuanntq.is-a.dev` is configured.
+### One-time setup
+1. On GitHub, open **Settings → Pages** for `tuanntq99/portfolio`.
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+   > ⚠️ Do **not** use *Deploy from a branch*. That mode publishes the raw repository root, which has no `index.html`. It races the Actions deploy and can leave the site serving **404**.
+3. Under **Custom domain**, keep `tuanntq.is-a.dev`, with **Enforce HTTPS** on. `public/CNAME` already contains the domain.
 
-### Step 2: Push your code to the `main` branch
+### Publishing
 ```bash
-git add .
-git commit -m "feat: configure custom domain tuanntq.is-a.dev"
 git push origin main
 ```
 
-Your portfolio will automatically build and publish to:
-👉 **`https://tuanntq.is-a.dev/`**
+The workflow builds the site and publishes `dist/` to 👉 **`https://tuanntq.is-a.dev/`** in about 40 seconds. Check progress in the **Actions** tab, or with `gh run list`.
 
 ---
 
@@ -111,42 +125,43 @@ Your portfolio will automatically build and publish to:
 ```text
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # GitHub Pages CI/CD workflow
+│       └── deploy.yml          # Build + deploy to GitHub Pages
 ├── public/
 │   ├── images/
 │   │   ├── avatar.jpg          # Profile portrait
 │   │   └── og-preview.png      # Social share card
+│   ├── CNAME                   # Custom domain (tuanntq.is-a.dev)
 │   └── Ngo_Tran_Quoc_Tuan_CV.pdf  # Downloadable CV (single source)
 ├── src/
 │   ├── components/
-│   │   ├── Contact.astro       # 1-click email copy & recruiter CTAs
-│   │   ├── Experience.astro    # Timeline, education & certifications (hidden if empty)
-│   │   ├── Footer.astro        # Social links & live timezone clock
-│   │   ├── Hero.astro          # Avatar, typewriter title, Java code card, marquee
+│   │   ├── Contact.astro       # Copy-email (with mailto fallback) and contact CTAs
+│   │   ├── Experience.astro    # Timeline, education and certifications (hidden if empty)
+│   │   ├── Footer.astro        # Social links, live Hanoi clock, back to top
+│   │   ├── Hero.astro          # Avatar, typewriter, proof line, API console card, pausable marquee
 │   │   ├── Metrics.astro       # Quantified achievements strip
 │   │   ├── Navbar.astro        # Sticky header, theme toggle, Download CV button
-│   │   ├── Projects.astro      # Project grid filtered by company
-│   │   ├── Skills.astro        # Domain skill matrix with proficiency badges
+│   │   ├── Projects.astro      # Project grid with company filter
+│   │   ├── Skills.astro        # Skill groups from the CV
 │   │   ├── Testimonials.astro  # References (hidden if empty)
-│   │   └── ThemeScript.astro   # Zero-flicker dark/light mode initializer
+│   │   └── ThemeScript.astro   # Zero-flicker theme init and JS detection
 │   ├── data/
-│   │   └── portfolio.ts        # 🎯 CENTRAL DYNAMIC DATA FILE (edit here!)
+│   │   └── portfolio.ts        # 🎯 Central content file (edit here!)
 │   ├── layouts/
-│   │   └── Layout.astro        # HTML root layout & SEO metadata
+│   │   └── Layout.astro        # HTML root, SEO metadata, fonts, skip link
 │   ├── pages/
-│   │   └── index.astro         # Main homepage
+│   │   └── index.astro         # Homepage
 │   ├── styles/
-│   │   └── global.css          # Tailwind directives & custom utilities
+│   │   └── global.css          # Tailwind directives, utilities, animations, reduced motion
 │   └── utils/
 │       ├── format.ts           # **bold** text helper for experience bullets
 │       └── path.ts             # Safe base-path URL resolver
-├── astro.config.mjs            # Astro & Tailwind configuration
+├── astro.config.mjs            # Astro and Tailwind configuration
 ├── package.json
-└── tailwind.config.mjs         # Custom colors, animations & fonts
+└── tailwind.config.mjs         # Custom colors, animations and fonts
 ```
 
 ---
 
 ## 📄 License
 
-MIT License. Feel free to use this template for your own developer portfolio!
+MIT License. Feel free to adapt this template for your own developer portfolio.
