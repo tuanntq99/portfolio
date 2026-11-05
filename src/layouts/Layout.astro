@@ -58,6 +58,9 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(withBase(ogIm
     <ThemeScript />
   </head>
   <body class="bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative selection:bg-indigo-600 selection:text-white dark:selection:bg-indigo-500 transition-colors duration-200">
+    <!-- Skip link: first focus stop, jumps past the navbar -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-xl focus:text-sm focus:font-semibold focus:text-white focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300">Skip to content</a>
+
     <!-- Cybernetic grid background -->
     <div class="fixed inset-0 bg-grid-pattern opacity-25 dark:opacity-40 pointer-events-none z-0"></div>
 

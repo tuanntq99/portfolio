@@ -22,7 +22,7 @@ const apiResponse = {
 };
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const punct = (s: string) => `<span class="text-slate-500">${s}</span>`;
+const punct = (s: string) => `<span class="text-slate-400">${s}</span>`;
 const fmtValue = (v: unknown): string => {
   if (typeof v === 'string') return `<span class="text-emerald-300">"${esc(v)}"</span>`;
   if (typeof v === 'boolean' || typeof v === 'number') return `<span class="text-amber-300">${v}</span>`;
@@ -43,6 +43,8 @@ const jsonLines = (obj: Record<string, unknown>, depth = 1): string[] => {
   });
 };
 const responseLines = [punct('{'), ...jsonLines(apiResponse), punct('}')];
+// Plain-language version of the JSON for screen readers
+const apiSummary = `${apiResponse.name}, ${apiResponse.role}, ${apiResponse.experience} of experience, currently at ${apiResponse.company} (${apiResponse.domain}). Stack: ${apiResponse.stack.join(', ')}. Query latency ${apiResponse.highlights.queryLatency}, concurrency ${apiResponse.highlights.concurrency}, team efficiency ${apiResponse.highlights.teamEfficiency}. ${apiResponse.openToWork ? 'Open to work.' : ''}`;
 
 // ---- "Headers" tab: contact & status info dressed up as HTTP response headers ----
 const linkedinShort = personal.socials.linkedin.replace(/^https?:\/\/(www\.)?/, '');
@@ -56,8 +58,15 @@ const responseHeaders: { key: string; value: string; href?: string; id?: string;
   { key: 'X-LinkedIn', value: linkedinShort, href: personal.socials.linkedin },
   { key: 'Content-Language', value: 'vi, en' },
 ];
+// Compact evidence line (visible above the fold on mobile). CV facts only.
+const proofLine = [
+  { text: `${metrics[0]?.value ?? '2+'} yrs`, strong: true },
+  { text: 'BIDV Direct', strong: true },
+  { text: `${metrics[1]?.value ?? '10x'} query` },
+  { text: `${metrics[2]?.value ?? '5x'} WebSocket` },
+];
 const [firstName, ...rest] = personal.name.split(' ');
-const lastName = rest.pop();
+const lastName = rest.pop() ?? '';
 const middle = rest.join(' ');
 
 // Unique list of technologies for the marquee
@@ -72,7 +81,7 @@ const marqueeItems = [
 
 <section id="overview" class="relative pt-28 pb-10 sm:pt-36 sm:pb-14 overflow-hidden">
   <!-- Ambient glows -->
-  <div class="absolute -top-20 left-1/4 w-[520px] h-[420px] bg-indigo-600/20 rounded-full blur-[130px] pointer-events-none animate-pulse-slow"></div>
+  <div class="absolute -top-20 left-1/4 w-[520px] h-[420px] bg-indigo-600/20 rounded-full blur-[130px] pointer-events-none"></div>
   <div class="absolute top-1/3 right-0 w-[420px] h-[320px] bg-cyan-500/15 rounded-full blur-[110px] pointer-events-none"></div>
   <div class="absolute bottom-0 left-0 w-[300px] h-[260px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -80,27 +89,26 @@ const marqueeItems = [
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
       <!-- Left column -->
-      <div class="lg:col-span-7 space-y-7 animate-fade-in-up">
+      <div class="lg:col-span-7 space-y-7 animate-fade-in-up motion-reduce:animate-none">
 
         <!-- Avatar + availability -->
         <div class="flex items-center gap-4">
           <div class="relative shrink-0">
             <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 p-[2px] shadow-lg shadow-indigo-500/30">
-              <img src={withBase(personal.avatarUrl)} alt={personal.name} class="w-full h-full object-cover rounded-[14px]" loading="eager" />
+              <img src={withBase(personal.avatarUrl)} alt={`Portrait of ${personal.name}`} width="96" height="96" class="w-full h-full object-cover rounded-[14px]" loading="eager" />
             </div>
             {personal.availableForHire && (
-              <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="absolute -bottom-1 -right-1 flex h-4 w-4" aria-hidden="true">
                 <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white dark:border-slate-950"></span>
               </span>
             )}
           </div>
           <div class="space-y-1.5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse motion-reduce:animate-none" aria-hidden="true"></span>
               {personal.availabilityText}
             </div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               {personal.location}
             </div>
@@ -115,10 +123,20 @@ const marqueeItems = [
             <span class="text-gradient">{lastName}</span>
           </h1>
           <div class="h-8 flex items-center font-mono text-lg sm:text-xl font-semibold text-slate-700 dark:text-slate-200">
-            <span class="text-indigo-500 dark:text-cyan-400 mr-2">&gt;</span>
-            <span id="typewriter-text" data-roles={JSON.stringify(personal.roles)}>{personal.roles[0]}</span>
-            <span class="inline-block w-2 h-5 ml-1 bg-indigo-600 dark:bg-cyan-400 animate-pulse"></span>
+            <span class="text-indigo-500 dark:text-cyan-400 mr-2" aria-hidden="true">&gt;</span>
+            <span class="sr-only">{personal.role}</span>
+            <span id="typewriter-text" aria-hidden="true" data-roles={JSON.stringify(personal.roles)}>{personal.roles[0]}</span>
+            <span class="inline-block w-2 h-5 ml-1 bg-indigo-600 dark:bg-cyan-400 animate-pulse motion-reduce:animate-none" aria-hidden="true"></span>
           </div>
+          <!-- Evidence line: the CV's headline facts, readable within the first mobile viewport -->
+          <p class="font-mono text-sm text-slate-600 dark:text-slate-400">
+            {proofLine.map((item, i) => (
+              <>
+                {i > 0 && <span class="text-slate-400 dark:text-slate-500" aria-hidden="true"> · </span>}
+                <span class={item.strong ? 'font-semibold text-slate-900 dark:text-white' : ''}>{item.text}</span>
+              </>
+            ))}
+          </p>
         </div>
 
         <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
@@ -127,21 +145,21 @@ const marqueeItems = [
 
         <!-- CTAs -->
         <div class="flex flex-wrap items-center gap-3">
-          <a href="#projects" class="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 shadow-lg transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2">
+          <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 shadow-lg transition-all duration-300 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
+            Get in touch
+          </a>
+          <a href="#projects" class="px-6 py-3 flex items-center gap-2 rounded-xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-700 transition-all duration-300 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
             View Projects
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
-          <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-700 transition-all duration-300 hover:-translate-y-0.5">
-            Get in touch
-          </a>
           <div class="flex items-center gap-2 ml-1">
             {personal.socials.linkedin && (
-              <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-3 rounded-xl text-slate-600 hover:text-[#0a66c2] bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors">
+              <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-3 rounded-xl text-slate-600 hover:text-[#0a66c2] bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
             )}
             {personal.socials.github && (
-              <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-3 rounded-xl text-slate-600 hover:text-slate-900 bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors">
+              <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-3 rounded-xl text-slate-600 hover:text-slate-900 bg-white border border-slate-200 dark:text-slate-400 dark:hover:text-white dark:bg-slate-900/80 dark:border-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
               </a>
             )}
@@ -150,8 +168,8 @@ const marqueeItems = [
       </div>
 
       <!-- Right column: API client card (Postman-style request / response) -->
-      <div class="lg:col-span-5 animate-fade-in-up" style="animation-delay: 150ms; animation-fill-mode: both">
-        <div class="glow-border rounded-2xl animate-float">
+      <div class="lg:col-span-5 animate-fade-in-up motion-reduce:animate-none" style="animation-delay: 150ms; animation-fill-mode: both">
+        <div class="glow-border rounded-2xl animate-float motion-reduce:animate-none">
           <div class="rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl shadow-indigo-900/30 overflow-hidden">
 
             <!-- Window bar -->
@@ -171,28 +189,28 @@ const marqueeItems = [
                 <span class="px-2.5 py-2 font-bold text-emerald-400 bg-emerald-500/10 border-r border-slate-800">GET</span>
                 <span class="px-2.5 py-2 text-slate-300 truncate">/api/v1/developers/<span class="text-cyan-300">tuan</span></span>
               </div>
-              <span class="api-send shrink-0 px-3.5 py-2 rounded-lg text-[12px] font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-500 shadow-md shadow-indigo-500/30">
+              <button type="button" id="api-send" class="api-send shrink-0 px-3.5 py-2 rounded-lg text-[12px] font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-700 shadow-md shadow-indigo-500/30 hover:brightness-110 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
                 Send
-              </span>
+              </button>
             </div>
 
             <!-- Response meta + tabs -->
             <div class="px-4 py-2 border-b border-slate-800 flex items-center justify-between font-mono text-[11px]">
-              <div class="flex items-center gap-3 text-slate-400" role="tablist">
-                <button type="button" role="tab" data-api-tab="body" aria-selected="true" class="api-tab pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">Body</button>
-                <button type="button" role="tab" data-api-tab="headers" aria-selected="false" class="api-tab relative pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">
-                  Headers <span class="text-slate-500">({responseHeaders.length})</span>
-                  <span class="api-tab-hint absolute -top-0.5 -right-2 flex h-1.5 w-1.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <div class="flex items-center gap-3 text-slate-400" role="tablist" aria-label="Response">
+                <button type="button" role="tab" id="api-tab-body" aria-controls="api-panel-body" tabindex="0" data-api-tab="body" aria-selected="true" class="api-tab focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">Body</button>
+                <button type="button" role="tab" id="api-tab-headers" aria-controls="api-panel-headers" tabindex="-1" data-api-tab="headers" aria-selected="false" class="api-tab focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 relative pb-0.5 border-b-2 border-transparent hover:text-slate-200 transition-colors aria-selected:text-slate-200 aria-selected:border-indigo-500">
+                  Headers <span class="text-slate-400">({responseHeaders.length})</span>
+                  <span class="api-tab-hint absolute -top-0.5 -right-2 flex h-1.5 w-1.5" aria-hidden="true">
+                    <span class="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400"></span>
                   </span>
                 </button>
               </div>
-              <div class="api-status flex items-center gap-2.5">
+              <div class="api-status flex items-center gap-2.5" role="status">
                 <span class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>200 OK
                 </span>
-                <span class="text-slate-500">42 ms</span>
+                <span class="text-slate-400">42 ms</span>
               </div>
             </div>
 
@@ -204,18 +222,21 @@ const marqueeItems = [
               </div>
 
               <!-- Body -->
-              <pre data-api-panel="body" role="tabpanel" class="[grid-area:1/1] p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 overflow-x-auto"><code>{responseLines.map((line, i) => (
-                <span class="api-line block" style={`--d:${900 + i * 55}ms`} set:html={line} />
-              ))}</code></pre>
+              <div data-api-panel="body" id="api-panel-body" role="tabpanel" aria-labelledby="api-tab-body" tabindex="0" class="[grid-area:1/1] rounded-b-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+                <p class="sr-only">{apiSummary}</p>
+                <pre aria-hidden="true" class="p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono text-slate-300 max-sm:whitespace-pre-wrap max-sm:break-words sm:overflow-x-auto"><code>{responseLines.map((line, i) => (
+                  <span class="api-line block max-sm:pl-[6ch] max-sm:-indent-[6ch]" style={`--d:${900 + i * 55}ms`} data-d={900 + i * 55} set:html={line} />
+                ))}</code></pre>
+              </div>
 
               <!-- Headers -->
-              <div data-api-panel="headers" role="tabpanel" class="invisible [grid-area:1/1] p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono overflow-x-auto">
+              <div data-api-panel="headers" id="api-panel-headers" role="tabpanel" aria-labelledby="api-tab-headers" tabindex="0" class="invisible [grid-area:1/1] p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 font-mono sm:overflow-x-auto rounded-b-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
                 <div class="api-line text-slate-400 mb-1" style="--d:0ms">HTTP/1.1 <span class="text-emerald-400 font-semibold">200 OK</span></div>
                 {responseHeaders.map((h, i) => (
-                  <div class="api-line flex gap-2 whitespace-nowrap" style={`--d:${(i + 1) * 45}ms`}>
+                  <div class="api-line flex flex-wrap gap-x-2 sm:flex-nowrap sm:whitespace-nowrap" style={`--d:${(i + 1) * 45}ms`}>
                     <span class="text-sky-300">{h.key}:</span>
                     {h.href ? (
-                      <a href={h.href} target={h.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" class="text-emerald-300 underline decoration-emerald-300/40 underline-offset-2 hover:decoration-emerald-300">{h.value}</a>
+                      <a href={h.href} target={h.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" class="text-emerald-300 break-all underline decoration-emerald-300/40 underline-offset-2 hover:decoration-emerald-300 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">{h.value}</a>
                     ) : (
                       <span id={h.id} class={h.accent ? 'text-amber-300' : 'text-emerald-300'}>{h.value}</span>
                     )}
@@ -236,7 +257,7 @@ const marqueeItems = [
   </div>
 
   <!-- Tech marquee -->
-  <div class="marquee relative mt-16 sm:mt-20 overflow-hidden border-y border-slate-200/80 dark:border-slate-800/70 bg-white/50 dark:bg-slate-900/40 py-4">
+  <div aria-hidden="true" class="marquee relative mt-16 sm:mt-20 overflow-hidden border-y border-slate-200/80 dark:border-slate-800/70 bg-white/50 dark:bg-slate-900/40 py-4">
     <div class="marquee-track flex w-max gap-10">
       {[...marqueeItems, ...marqueeItems].map((item) => (
         <span class="flex items-center gap-10 font-mono text-sm font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap">
@@ -279,27 +300,66 @@ const marqueeItems = [
     setTimeout(tick, delay);
   }
 
-  // API card: Body / Headers tabs
-  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-api-tab]');
+  // API card: Body / Headers tabs (WAI-ARIA tabs pattern, automatic activation)
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-api-tab]'));
   const panels = document.querySelectorAll<HTMLElement>('[data-api-panel]');
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.apiTab;
-      tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
-      document.querySelector('.api-tab-hint')?.remove();
-      panels.forEach((panel) => {
-        const show = panel.dataset.apiPanel === target;
-        panel.classList.toggle('invisible', !show);
-        if (!show) return;
-        // Replay the line-by-line reveal (fast, no initial "loading" delay)
-        panel.querySelectorAll<HTMLElement>('.api-line').forEach((line, i) => {
-          line.style.setProperty('--d', `${i * 40}ms`);
-          line.classList.remove('api-line');
-          void line.offsetWidth;
-          line.classList.add('api-line');
-        });
-      });
+
+  // Restart a CSS animation by toggling its class (forces a reflow in between)
+  const restart = (el: Element, cls: string) => {
+    el.classList.remove(cls);
+    void (el as HTMLElement).offsetWidth;
+    el.classList.add(cls);
+  };
+  const replayLines = (panel: HTMLElement, delay: (i: number, line: HTMLElement) => number) => {
+    panel.querySelectorAll<HTMLElement>('.api-line').forEach((line, i) => {
+      line.style.setProperty('--d', `${delay(i, line)}ms`);
+      restart(line, 'api-line');
     });
+  };
+  const activePanel = () =>
+    Array.from(panels).find((p) => !p.classList.contains('invisible')) ?? panels[0];
+
+  const selectTab = (tab: HTMLButtonElement, focus = false) => {
+    const target = tab.dataset.apiTab;
+    tabs.forEach((t) => {
+      const selected = t === tab;
+      t.setAttribute('aria-selected', String(selected));
+      t.tabIndex = selected ? 0 : -1;
+    });
+    if (focus) tab.focus();
+    document.querySelector('.api-tab-hint')?.remove();
+    panels.forEach((panel) => {
+      const show = panel.dataset.apiPanel === target;
+      panel.classList.toggle('invisible', !show);
+      // Replay the line-by-line reveal (fast, no initial "loading" delay)
+      if (show) replayLines(panel, (i) => i * 40);
+    });
+  };
+
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      const keys: Record<string, number> = {
+        ArrowRight: (idx + 1) % tabs.length,
+        ArrowLeft: (idx - 1 + tabs.length) % tabs.length,
+        Home: 0,
+        End: tabs.length - 1,
+      };
+      if (!(e.key in keys)) return;
+      e.preventDefault();
+      selectTab(tabs[keys[e.key]], true);
+    });
+  });
+
+  // "Send" replays the request: loader → status → response lines
+  document.getElementById('api-send')?.addEventListener('click', () => {
+    const loader = document.querySelector('.api-loading');
+    const status = document.querySelector('.api-status');
+    const send = document.getElementById('api-send');
+    if (loader) restart(loader, 'api-loading');
+    if (status) restart(status, 'api-status');
+    if (send) restart(send, 'api-send');
+    replayLines(activePanel(), (i, line) => Number(line.dataset.d) || 900 + i * 45);
   });
 
   // Live Hanoi time in the X-Local-Time header
