@@ -48,7 +48,9 @@ const navLinks = [
         <!-- Theme toggle -->
         <button
           id="theme-toggle"
-          aria-label="Toggle dark/light mode"
+          type="button"
+          aria-label="Dark mode"
+          aria-pressed="true"
           class="max-lg:min-h-11 max-lg:min-w-11 inline-flex items-center justify-center p-2 rounded-xl text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 shadow-sm dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:text-slate-400 dark:hover:text-slate-100 dark:border-slate-800/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
           <svg class="w-5 h-5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,7 +77,9 @@ const navLinks = [
         <!-- Mobile menu toggle -->
         <button
           id="mobile-menu-btn"
+          type="button"
           aria-label="Toggle navigation menu"
+          aria-controls="mobile-menu"
           aria-expanded="false"
           class="lg:hidden min-h-11 min-w-11 inline-flex items-center justify-center p-2 rounded-xl text-slate-600 hover:text-slate-900 bg-white border border-slate-200 shadow-sm dark:bg-slate-900/80 dark:border-slate-800/80 dark:text-slate-400 dark:hover:text-slate-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
@@ -106,9 +110,13 @@ const navLinks = [
 
 <script>
   // Theme toggle
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+  const themeBtn = document.getElementById('theme-toggle');
+  const syncTheme = () => themeBtn?.setAttribute('aria-pressed', String(document.documentElement.classList.contains('dark')));
+  syncTheme();
+  themeBtn?.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    syncTheme();
   });
 
   // Mobile drawer

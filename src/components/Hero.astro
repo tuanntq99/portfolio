@@ -56,7 +56,7 @@ const responseHeaders: { key: string; value: string; href?: string; id?: string;
   { key: 'X-Open-To-Work', value: personal.availableForHire ? 'true · Backend roles' : 'false', accent: personal.availableForHire },
   { key: 'X-Contact-Email', value: personal.email, href: `mailto:${personal.email}` },
   { key: 'X-LinkedIn', value: linkedinShort, href: personal.socials.linkedin },
-  { key: 'Content-Language', value: 'vi, en' },
+  { key: 'X-Languages', value: 'vi, en' },
 ];
 // Compact evidence line (visible above the fold on mobile). CV facts only.
 const proofLine = [
@@ -210,7 +210,7 @@ const marqueeItems = [
                 <span class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>200 OK
                 </span>
-                <span class="text-slate-400">42 ms</span>
+                <span id="api-latency" class="text-slate-400" title="Time to first byte for this page">— ms</span>
               </div>
             </div>
 
@@ -256,8 +256,9 @@ const marqueeItems = [
     </div>
   </div>
 
-  <!-- Tech marquee -->
-  <div aria-hidden="true" class="marquee relative mt-16 sm:mt-20 overflow-hidden border-y border-slate-200/80 dark:border-slate-800/70 bg-white/50 dark:bg-slate-900/40 py-4">
+  <!-- Tech marquee (pausable: WCAG 2.2.2) -->
+  <div class="relative mt-16 sm:mt-20">
+  <div id="tech-marquee" aria-hidden="true" class="marquee relative overflow-hidden border-y border-slate-200/80 dark:border-slate-800/70 bg-white/50 dark:bg-slate-900/40 py-4">
     <div class="marquee-track flex w-max gap-10">
       {[...marqueeItems, ...marqueeItems].map((item) => (
         <span class="flex items-center gap-10 font-mono text-sm font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap">
@@ -266,6 +267,11 @@ const marqueeItems = [
         </span>
       ))}
     </div>
+  </div>
+  <button type="button" id="marquee-toggle" aria-pressed="false" aria-label="Pause scrolling tech list" class="motion-reduce:hidden absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center min-h-11 min-w-11 rounded-xl text-slate-600 hover:text-slate-900 bg-white/90 border border-slate-200 shadow-sm dark:bg-slate-900/90 dark:text-slate-400 dark:hover:text-white dark:border-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
+    <svg data-icon="pause" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+    <svg data-icon="play" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+  </button>
   </div>
 </section>
 
@@ -285,6 +291,8 @@ const marqueeItems = [
       const role = roles[roleIndex];
       charIndex += deleting ? -1 : 1;
       el.textContent = role.substring(0, charIndex);
+      // One full pass through the roles, then rest on the primary role (no endless motion)
+      if (roleIndex === 0 && !deleting && charIndex === role.length) return;
 
       delay = deleting ? 30 : 65;
       if (!deleting && charIndex === role.length) {
@@ -299,6 +307,27 @@ const marqueeItems = [
     };
     setTimeout(tick, delay);
   }
+
+  // Marquee pause / play
+  const marquee = document.getElementById('tech-marquee');
+  const marqueeBtn = document.getElementById('marquee-toggle');
+  marqueeBtn?.addEventListener('click', () => {
+    const paused = marquee?.classList.toggle('is-paused') ?? false;
+    marqueeBtn.setAttribute('aria-pressed', String(paused));
+    marqueeBtn.setAttribute('aria-label', paused ? 'Resume scrolling tech list' : 'Pause scrolling tech list');
+    marqueeBtn.querySelector('[data-icon="pause"]')?.classList.toggle('hidden', paused);
+    marqueeBtn.querySelector('[data-icon="play"]')?.classList.toggle('hidden', !paused);
+  });
+
+  // Real time-to-first-byte for this page, shown in the API card status
+  const latencyEl = document.getElementById('api-latency');
+  const showLatency = () => {
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    if (!latencyEl || !nav || !nav.responseStart) return;
+    latencyEl.textContent = `${Math.max(1, Math.round(nav.responseStart - nav.requestStart))} ms`;
+  };
+  if (document.readyState === 'complete') showLatency();
+  else window.addEventListener('load', showLatency, { once: true });
 
   // API card: Body / Headers tabs (WAI-ARIA tabs pattern, automatic activation)
   const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-api-tab]'));
