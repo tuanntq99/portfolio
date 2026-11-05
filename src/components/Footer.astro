@@ -21,23 +21,23 @@ const currentYear = new Date().getFullYear();
 
       <!-- Center: Social Links -->
       <div class="flex items-center gap-4 text-slate-600 dark:text-slate-400">
-        <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors">
+        <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center max-sm:min-h-11 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
           GitHub
         </a>
         <span class="text-slate-300 dark:text-slate-700">•</span>
-        <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors">
+        <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center max-sm:min-h-11 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
           LinkedIn
         </a>
         {personal.socials.facebook && (
           <>
             <span class="text-slate-300 dark:text-slate-700">•</span>
-            <a href={personal.socials.facebook} target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors">
+            <a href={personal.socials.facebook} target="_blank" rel="noopener noreferrer" class="inline-flex items-center max-sm:min-h-11 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
               Facebook
             </a>
           </>
         )}
         <span class="text-slate-300 dark:text-slate-700">•</span>
-        <a href={`mailto:${personal.email}`} class="hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors">
+        <a href={`mailto:${personal.email}`} class="inline-flex items-center max-sm:min-h-11 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950">
           Email
         </a>
       </div>
@@ -45,14 +45,14 @@ const currentYear = new Date().getFullYear();
       <!-- Right: Back to Top & Time -->
       <div class="flex items-center gap-4">
         <div class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" aria-hidden="true"></span>
           <span id="footer-time">Hanoi (UTC+7)</span>
         </div>
 
         <button 
           id="back-to-top"
           aria-label="Back to top"
-          class="p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-950 border border-slate-200 shadow-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-300 dark:hover:text-white dark:border-slate-800 transition-all hover:-translate-y-0.5"
+          class="inline-flex items-center justify-center min-h-11 min-w-11 p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-950 border border-slate-200 shadow-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-300 dark:hover:text-white dark:border-slate-800 transition-all hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
         >
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -63,7 +63,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Copyright -->
-    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-900 text-center text-slate-500 dark:text-slate-600 text-[11px]">
+    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-900 text-center text-slate-600 dark:text-slate-400 text-[11px]">
       © {currentYear} {personal.name}. Built with Astro &amp; Tailwind CSS.
     </div>
 
@@ -74,7 +74,9 @@ const currentYear = new Date().getFullYear();
   // Smooth scroll back to top
   const backToTopBtn = document.getElementById('back-to-top');
   backToTopBtn?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    document.getElementById('main-content')?.focus({ preventScroll: true });
   });
 
   // Display current local time in Hanoi (UTC+7)
