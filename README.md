@@ -22,7 +22,7 @@ A fast, static, accessible portfolio built with **Astro** and **Tailwind CSS**. 
 - **📄 One-click CV download.** A single `Download CV` button in the sticky navbar downloads `public/Ngo_Tran_Quoc_Tuan_CV.pdf`.
 - **🌗 Dark and light mode.** No flicker on load. Both themes meet WCAG AA contrast.
 
-> **Updating the CV:** replace `public/Ngo_Tran_Quoc_Tuan_CV.pdf` with the new PDF (keep the same name) and update `src/data/portfolio.ts` so the website matches it. The site must never claim anything that is not in the CV.
+> **Updating the CV:** replace `public/Ngo_Tran_Quoc_Tuan_CV.pdf` with the new PDF (keep the same name) and update `src/data/portfolio.ts` so the website matches it. The site must never claim anything that is not in the CV. The download link is versioned automatically from the PDF's content (`?v=<hash>`), so visitors always get the new file without clearing their cache.
 
 ---
 
