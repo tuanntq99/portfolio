@@ -63,7 +63,7 @@ You do **not** need to touch any layout or HTML to update the portfolio. All con
 
 | Section | What to Edit |
 | :--- | :--- |
-| **Site metadata** | Page title, description, OG image, site URL |
+| **Site metadata** | Page title, description, optional `ogImage` (share image), site URL |
 | **Personal Info** | Name, roles (typewriter), bio, location, email, phone, avatar, CV path / download file name, socials |
 | **Metrics** | The 4 impact cards below the hero. `metrics[0]`, `[1]` and `[2]` also feed the hero proof line |
 | **Skills** | Skill groups (same as the CV), plus `languageNote` for the English line |
@@ -129,8 +129,7 @@ The workflow builds the site and publishes `dist/` to 👉 **`https://tuanntq.is
 │       └── deploy.yml          # Build + deploy to GitHub Pages
 ├── public/
 │   ├── images/
-│   │   ├── avatar.jpg          # Profile portrait
-│   │   └── og-preview.png      # Social share card
+│   │   └── avatar.jpg          # Profile portrait
 │   ├── CNAME                   # Custom domain (tuanntq.is-a.dev)
 │   └── Ngo_Tran_Quoc_Tuan_CV.pdf  # Downloadable CV (single source)
 ├── src/

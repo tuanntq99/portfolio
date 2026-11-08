@@ -87,7 +87,7 @@ export interface PortfolioData {
   siteMetadata: {
     title: string;
     description: string;
-    ogImage: string;
+    ogImage?: string; // Optional social share image (path in /public or full URL)
     siteUrl: string;
   };
   personal: PersonalInfo;
@@ -110,7 +110,6 @@ export const portfolioData: PortfolioData = {
     title: "Ngo Tran Quoc Tuan | Java Backend Developer",
     description:
       "Java Backend Developer with 2.5+ years building banking and fintech systems for BIDV, currently Dev Lead. Payment processing, loan origination and digital signing with Spring Boot, Kafka, Oracle and PostgreSQL.",
-    ogImage: "/images/og-preview.png",
     siteUrl: "https://tuanntq.is-a.dev",
   },
 
