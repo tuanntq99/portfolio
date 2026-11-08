@@ -18,7 +18,9 @@ const {
   ogImage = siteMetadata.ogImage 
 } = Astro.props;
 
-const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(withBase(ogImage), Astro.site).toString();
+const fullOgImage = ogImage
+  ? ogImage.startsWith('http') ? ogImage : new URL(withBase(ogImage), Astro.site).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -35,14 +37,14 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(withBase(ogIm
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={fullOgImage} />
+    {fullOgImage && <meta property="og:image" content={fullOgImage} />}
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content={fullOgImage ? 'summary_large_image' : 'summary'} />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={fullOgImage} />
+    {fullOgImage && <meta property="twitter:image" content={fullOgImage} />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
