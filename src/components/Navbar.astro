@@ -1,8 +1,24 @@
 ---
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { portfolioData } from '../data/portfolio';
 import { withBase } from '../utils/path';
 
 const { personal, testimonials } = portfolioData;
+
+// Cache-bust the CV link with a short hash of the PDF's content, computed at build time.
+// Replacing the PDF changes the URL, so browsers and the CDN never serve a stale copy.
+const cvHref = (() => {
+  const href = withBase(personal.cvUrl);
+  if (/^https?:/.test(personal.cvUrl)) return href;
+  try {
+    const pdf = readFileSync(join(process.cwd(), 'public', personal.cvUrl));
+    return `${href}?v=${createHash('sha256').update(pdf).digest('hex').slice(0, 10)}`;
+  } catch {
+    return href;
+  }
+})();
 
 const navLinks = [
   { href: '#overview', label: 'Overview' },
@@ -63,7 +79,7 @@ const navLinks = [
 
         <!-- The one and only CV download button -->
         <a
-          href={withBase(personal.cvUrl)}
+          href={cvHref}
           download={personal.cvFileName}
           class="group relative inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 min-h-11 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 bg-[length:200%_100%] bg-left hover:bg-right shadow-lg shadow-indigo-500/30 hover:shadow-cyan-500/30 transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
         >
