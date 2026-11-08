@@ -14,10 +14,10 @@ A fast, static, accessible portfolio built with **Astro** and **Tailwind CSS**. 
   - The **Headers** tab carries contact details as HTTP headers, plus live Hanoi time.
   - **Send** replays the request.
   - The status bar shows the page's real time-to-first-byte.
-- **📌 Evidence first.** A proof line under the role shows `2+ yrs · BIDV Direct · 10x query · 5x WebSocket`, visible in the first mobile viewport.
-- **📊 Impact metrics.** Real numbers from the CV: 10x query speed-up, 5x WebSocket scalability, 20% team efficiency.
-- **🗂️ Projects grid.** Filter by company (IGNIFY / DS GLOBAL). Screen readers hear the result count.
-- **🧭 Experience timeline + Education.**
+- **📌 Evidence first.** A proof line under the role shows `2.5+ yrs · Dev Lead · BIDV · 6/6 projects on time · ~99% failed tx auto-resolved`, visible in the first mobile viewport.
+- **📊 Impact metrics.** Real numbers from the CV: 2.5+ years, ~99% of failed transactions auto-resolved, 6/6 BIDV projects on schedule, up to 10x faster SQL.
+- **🗂️ Projects grid.** Filter by company (SKYMAP / DS GLOBAL): GOV, RLOS, B.ONE and other BIDV projects, plus Snap# and LPA. Screen readers hear the result count.
+- **🧭 Experience timeline, Other experience and Education.**
 - **🏅 Certifications and 💬 References.** These sections are built in but **hidden automatically while their lists are empty**. Add entries in `portfolio.ts` and they appear, along with the References nav link.
 - **📄 One-click CV download.** A single `Download CV` button in the sticky navbar downloads `public/Ngo_Tran_Quoc_Tuan_CV.pdf`.
 - **🌗 Dark and light mode.** No flicker on load. Both themes meet WCAG AA contrast.
@@ -65,10 +65,11 @@ You do **not** need to touch any layout or HTML to update the portfolio. All con
 | :--- | :--- |
 | **Site metadata** | Page title, description, OG image, site URL |
 | **Personal Info** | Name, roles (typewriter), bio, location, email, phone, avatar, CV path / download file name, socials |
-| **Metrics** | The 4 impact cards below the hero. The first three also feed the hero proof line |
-| **Skills** | Skill groups (same as the CV) |
+| **Metrics** | The 4 impact cards below the hero. `metrics[0]`, `[1]` and `[2]` also feed the hero proof line |
+| **Skills** | Skill groups (same as the CV), plus `languageNote` for the English line |
 | **Projects** | Title, subtitle, company, description, optional highlights, technologies, optional link |
-| **Experience** | Company, role, period, location, achievements (`**text**` renders bold) |
+| **Experience** | Company, role, period, location, optional `note` (e.g. "formerly IGNIFY · promoted Oct 2025"), achievements (`**text**` renders bold) |
+| **Other experience** | Non-software roles, shown compactly under the timeline |
 | **Education** | Degree, institution, period, major |
 | **Certifications** | Empty means hidden. Name, issuer, date, credential URL |
 | **Testimonials (References)** | Empty means hidden. Name, role, company, relationship, quote, contact |
