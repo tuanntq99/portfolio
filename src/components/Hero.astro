@@ -2,21 +2,22 @@
 import { portfolioData } from '../data/portfolio';
 import { withBase } from '../utils/path';
 
-const { personal, skillCategories, experiences, metrics } = portfolioData;
+const { personal, experiences, metrics } = portfolioData;
 const current = experiences.find((e) => e.current) ?? experiences[0];
 
 // ---- Fake REST response shown in the hero "API client" card ----
 const apiResponse = {
   name: personal.name,
   role: personal.role,
-  experience: `${metrics[0]?.value ?? '2+'} years`,
+  position: current.role,
+  experience: `${metrics[0]?.value ?? '2.5+'} years`,
   company: current.company,
-  domain: 'Banking · BIDV Direct',
-  stack: ['Spring Boot', 'Kafka', 'Oracle', 'Redis'],
+  domain: 'Banking & Fintech · BIDV',
+  stack: ['Spring Boot', 'Kafka', 'Oracle', 'PostgreSQL'],
   highlights: {
-    queryLatency: '3s → 0.3s',
-    concurrency: '1k → 5k req',
-    teamEfficiency: '+20%',
+    failedTxAutoResolved: '~99%',
+    transactionsPerDay: '~2,000',
+    projectsOnSchedule: '6/6',
   },
   openToWork: personal.availableForHire,
 };
@@ -44,7 +45,7 @@ const jsonLines = (obj: Record<string, unknown>, depth = 1): string[] => {
 };
 const responseLines = [punct('{'), ...jsonLines(apiResponse), punct('}')];
 // Plain-language version of the JSON for screen readers
-const apiSummary = `${apiResponse.name}, ${apiResponse.role}, ${apiResponse.experience} of experience, currently at ${apiResponse.company} (${apiResponse.domain}). Stack: ${apiResponse.stack.join(', ')}. Query latency ${apiResponse.highlights.queryLatency}, concurrency ${apiResponse.highlights.concurrency}, team efficiency ${apiResponse.highlights.teamEfficiency}. ${apiResponse.openToWork ? 'Open to work.' : ''}`;
+const apiSummary = `${apiResponse.name}, ${apiResponse.role}, ${apiResponse.experience} of experience, currently at ${apiResponse.company} (${apiResponse.domain}). Stack: ${apiResponse.stack.join(', ')}. ${apiResponse.position}. About ${apiResponse.highlights.failedTxAutoResolved} of failed transactions resolved automatically, about ${apiResponse.highlights.transactionsPerDay} transactions per day, ${apiResponse.highlights.projectsOnSchedule} projects on schedule. ${apiResponse.openToWork ? 'Open to work.' : ''}`;
 
 // ---- "Headers" tab: contact & status info dressed up as HTTP response headers ----
 const linkedinShort = personal.socials.linkedin.replace(/^https?:\/\/(www\.)?/, '');
@@ -60,22 +61,20 @@ const responseHeaders: { key: string; value: string; href?: string; id?: string;
 ];
 // Compact evidence line (visible above the fold on mobile). CV facts only.
 const proofLine = [
-  { text: `${metrics[0]?.value ?? '2+'} yrs`, strong: true },
-  { text: 'BIDV Direct', strong: true },
-  { text: `${metrics[1]?.value ?? '10x'} query` },
-  { text: `${metrics[2]?.value ?? '5x'} WebSocket` },
+  { text: `${metrics[0]?.value ?? '2.5+'} yrs`, strong: true },
+  { text: `${current.role} · BIDV`, strong: true },
+  { text: `${metrics[2]?.value ?? '6/6'} projects on time` },
+  { text: `${metrics[1]?.value ?? '~99%'} failed tx auto-resolved` },
 ];
 const [firstName, ...rest] = personal.name.split(' ');
 const lastName = rest.pop() ?? '';
 const middle = rest.join(' ');
 
-// Unique list of technologies for the marquee
+// Technologies for the marquee (short names of the CV skills)
 const marqueeItems = [
-  ...new Set([
-    'Java', 'Spring Boot', 'Spring Security', 'Hibernate', 'Apache Kafka', 'Oracle', 'MySQL',
-    'PostgreSQL', 'MongoDB', 'Redis', 'Quartz', 'WebSocket', 'Docker', 'AWS', 'Linux', 'JUnit', 'SonarQube',
-    ...skillCategories.flatMap((c) => c.skills).filter((s) => !s.includes('(')),
-  ]),
+  'Java 17/21', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'Hibernate', 'Microservices',
+  'Apache Kafka', 'WebSocket', 'Quartz', 'Oracle PL/SQL', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis',
+  'Docker', 'AWS S3', 'AWS ALB', 'Linux', 'Angular', 'JUnit', 'Mockito', 'SonarQube', 'Jira',
 ];
 ---
 
